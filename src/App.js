@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import GiveAwayPaint from './components/GiveAwayPaint';
 import Home from './components/Home';
+import ThankYou from './components/ThankYou';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/home" component={Home} />
         <Route exact path="/giveawaypaint" component={GiveAwayPaint} />
+        <Route exact path="/thankyou" component={ThankYou} />
       </div>
       <div id="modal-root"></div>
     </Router>

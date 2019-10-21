@@ -1,8 +1,14 @@
 import  React, { useState } from 'react';
-import {Redirect} from 'react-router-dom';
-import {RgbDisplay} from './RgbDisplay';
-import { UseForm } from './UseForm';
-import { validateOneField } from './PaintFormValidationRules';
+import {Redirect} from "react-router-dom"
+import { ToggleContent } from './ToggleContent';
+import { ThirdColorProvider } from './ThirdColorContext';
+import ColorPicker from './ColorPicker';
+import Modal from "./Modal";
+import { RgbDisplay } from "./RgbDisplay";
+import { RgbIcon } from './RgbIcon';
+import { UploadPhoto } from './UploadPhoto';
+import { UseForm } from "./UseForm";
+import { validateOneField } from "./PaintFormValidationRules";
 
 const GiveAwayPaint = () => {
 
@@ -93,9 +99,23 @@ const GiveAwayPaint = () => {
     {errors.confirmEmail && <p className="error"><span data-testid="confirm-email-error" >{errors.confirmEmail}</span></p>}
     
     <h4>Either take a picture of something you painted. Maybe a wall?</h4>
-    <p>
-      <RgbDisplay onColorChosen={onColorSelected}/>
-    </p>
+    <UploadPhoto />
+    <h4> - or - use the color picker</h4>
+    <ThirdColorProvider>
+    <ToggleContent
+          toggle={ (show) => (<p>
+          <RgbIcon onClick={(e) => {show()}} ></RgbIcon>
+          <RgbDisplay onColorChosen={onColorSelected}/>
+          </p>)} 
+          content= {(hide) => ( <Modal>
+            <ColorPicker onColorChosen={onColorSelected} />
+            <button onClick={(e) => {
+              e.preventDefault();
+              hide();
+            }}>Close</button>
+          </Modal>)} 
+      />
+    </ThirdColorProvider>
     <p> 
       <label htmlFor="save" className="hidden"> post your paint </label>
       <input type="submit" value="save" id="save" />

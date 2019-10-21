@@ -2,7 +2,7 @@ const scrapPaintUnit = require("../../../models/ScrapPaintUnit");
 
 
 const addPaintCan = async (req, res) => {
-  var paintChip = new PaintCan(req.body);
+  var paintChip = new scrapPaintUnit.PaintCan(req.body);
   const result = await paintChip.save();
   if(result.errors){
     console.info(result.errors);

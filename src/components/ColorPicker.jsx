@@ -1,0 +1,55 @@
+import React, { useContext } from "react";
+import "../App.css";
+import { ColorPixel } from "./ColorPixel";
+import Slider from "./Slider";
+import { ThirdColorContext } from "./ThirdColorContext";
+import { TwoDotAxisLabel } from "./TwoDotAxisLabel";
+
+
+const ColorPicker = (props) => {
+   
+    const COLOR_MAX = 15;
+    const [blueValue, blueValueSet] = useContext(ThirdColorContext); 
+
+    // Each row will have all the possible values of green for the given value of red
+    const rows = [];
+    const onNewValue = (color) => {
+       props.onColorChosen(color);
+    };
+
+    for(let rValue = COLOR_MAX; rValue >= 0 ; rValue--) {
+        let cells = [];
+        for(let gValue = 0; gValue < COLOR_MAX; gValue++) {
+            cells.push(<ColorPixel 
+                        updateSelectedValue={onNewValue}
+                        r={rValue} 
+                        g={gValue} 
+                        b={blueValue.thirdColorLevel}
+                        key={"" + rValue + gValue}  />);
+        }
+        rows.push(<div key={rValue} className="color-row">{cells}</div>);
+    }
+
+    let selectedColorStyle = {
+        backgroundColor: blueValue.selectedHexValue
+    };
+
+    return  <div className="color-picker-container">
+                <div className="color-picker-holder">
+                    <TwoDotAxisLabel color="#f00" />
+                    <div>
+                        <TwoDotAxisLabel orientation="horizontal" color="#0f0" />
+                        <div className="color-picker">{rows}</div>
+                    </div>
+                    <Slider />
+                    <TwoDotAxisLabel color="#00f" />
+                </div>
+                <div className="selected-color" style={selectedColorStyle}>
+                    {blueValue.selectedHexValue}
+                </div>
+              
+            </div>
+
+};
+
+export default ColorPicker;

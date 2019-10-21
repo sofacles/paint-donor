@@ -21,7 +21,6 @@ const Home = () => {
         fetch("/api/paints/1234")
         .then(x => x.text())
         .then(t => {
-            debugger;
             setPaintChips({paintChips : JSON.parse(t)});
             });
         }, [macGuffin]);

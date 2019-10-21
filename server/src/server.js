@@ -16,8 +16,7 @@ app.get("/api/users/:id", (req, res) => {
 
 app.get("/api/paints/:id", paintChipRoute.getPaints);
 
-// // messages
-// app.post("/api/paints", addPaintCan);
+app.post("/api/paints", paintChipRoute.addPaintCan);
 // app.put("/api/messages/:id", putMessage);
 
 // tslint:disable-next-line:no-console
