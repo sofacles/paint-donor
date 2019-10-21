@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/react": "^9.3.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.7.5",
@@ -12,6 +13,7 @@
     "react-scripts": "3.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.1.2",
     "concurrently": "^4.0.1"
   },
   "scripts": {
@@ -19,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon ./server/src/server.js",
+    "server": "nodemon --inspect ./server/src/server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "eslintConfig": {
