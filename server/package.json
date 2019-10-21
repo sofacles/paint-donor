@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "the api for paint chips",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "jest --verbose --detectOpenHandles  --watchAll=false",
+    "jest:clear": "jest --clearCache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofacles/paint-donor.git"
+  },
+  "author": "sofacles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sofacles/paint-donor/issues"
+  },
+  "homepage": "https://github.com/sofacles/paint-donor#readme",
+  "dependencies": {
+    "mongoose": "^5.7.5"
+  }
+}

@@ -2,21 +2,104 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.App nav {
+  display: flex;
+  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.App nav ul {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  list-style-type: none;
+  width: 100%;
 }
 
-.App-link {
-  color: #09d3ac;
+.App nav ul li {
+  flex-grow: 1;
+  padding: 20px;
 }
+
+.App nav ul li a {
+  text-decoration: none;
+}
+
+.App label {
+  display: block;
+}
+
+.App label.hidden {
+  display: none;
+}
+
+.color-picker-container {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 30px;
+}
+
+.color-picker-holder {
+  align-self: center;
+  display: flex;
+}
+
+.color-picker {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-pixel {
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+}
+
+.color-row {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 8px;
+}
+
+
+.selected-color {
+  height: 20px;
+  width: 130px;
+  align-self: center;
+  margin: 10px;
+  border: 1px solid #666;
+}
+
+
+.screen {
+  position: fixed;
+  top: 0;
+  background-color: rgb(0,0,0,0.7);   
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.modal {
+  background-color: #fff;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+.error span {
+  background-color: #e89;
+  padding: 4px 10px;
+} 
