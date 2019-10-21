@@ -98,7 +98,7 @@ const GiveAwayPaint = () => {
     />
     {errors.confirmEmail && <p className="error"><span data-testid="confirm-email-error" >{errors.confirmEmail}</span></p>}
     
-    <h4>Either take a picture of something you painted. Maybe a wall?</h4>
+    <h4>Either take a picture of something you painted. (coming soon)</h4>
     <UploadPhoto />
     <h4> - or - use the color picker</h4>
     <ThirdColorProvider>
