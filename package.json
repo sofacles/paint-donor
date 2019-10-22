@@ -5,6 +5,7 @@
   "dependencies": {
     "@testing-library/react": "^9.3.0",
     "body-parser": "^1.18.3",
+    "cypress": "^3.4.1",
     "express": "^4.16.4",
     "mongoose": "^5.7.5",
     "react": "^16.10.2",
