@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
 const app = express();
 const port = process.env.PORT || 5000;
-const ImageRouter = require('./routes/Image');
 
 const multer = require('multer');
 
@@ -43,11 +42,8 @@ app.get("/api/users/:id", (req, res) => {
 
 app.get("/api/paints/:id", paintChipRoute.getPaints);
 
-app.post("/api/paints", paintChipRoute.addPaintCan);
-app.post('/api/image', upload.single('imageData'), ImageRouter.AddImage);
-// app.put("/api/messages/:id", putMessage);
+app.post("/api/paints", upload.single('imageData'), paintChipRoute.addPaintCan);
 
 app.use('uploads', express.static('uploads'));
 
-// tslint:disable-next-line:no-console
 app.listen(port, () => console.log(`Listening on port ${port}`));

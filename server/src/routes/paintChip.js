@@ -3,6 +3,9 @@ const scrapPaintUnit = require("../../../models/ScrapPaintUnit");
 
 const addPaintCan = async (req, res) => {
   var paintChip = new scrapPaintUnit.PaintCan(req.body);
+  if(req.file) {
+    //set the imageName in the DB document
+  }
   const result = await paintChip.save();
   if(result.errors){
     console.info(result.errors);
@@ -14,7 +17,6 @@ const addPaintCan = async (req, res) => {
 
 
 const getPaints = async (req, res) => {
-  const id = req.params.id;
   let scrapPaintModel = new scrapPaintUnit.ScrapPaintModel("mongodb://127.0.0.1:27017/PaintChip"); 
   // Connect to the db
   let paintCan = await scrapPaintModel.doConnection();

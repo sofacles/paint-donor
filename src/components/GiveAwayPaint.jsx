@@ -1,3 +1,4 @@
+import axios from 'axios';
 import  React, { useState } from 'react';
 import {Redirect} from "react-router-dom"
 import { ToggleContent } from './ToggleContent';
@@ -6,12 +7,10 @@ import ColorPicker from './ColorPicker';
 import Modal from "./Modal";
 import { RgbDisplay } from "./RgbDisplay";
 import { RgbIcon } from './RgbIcon';
-import { UploadPhoto } from './UploadPhoto';
 import { UseForm } from "./UseForm";
 import { validateOneField } from "./PaintFormValidationRules";
 
 const GiveAwayPaint = () => {
-
   const onColorSelected = (color) => {
     setFields({
       ...fields,
@@ -21,19 +20,30 @@ const GiveAwayPaint = () => {
 
   const [paintPosted, setPaintPosted ] = useState(false);
 
-  const callback = async () => {
-    await fetch('/api/paints', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(fields)
+  const onValidationSuccess = async () => {
+    let formObj = new FormData();
+    let fileInput = document.getElementById("uploadPhoto");
+    if(fileInput.files.length > 0) {
+      formObj.append("imageName", "multer-image-" + Date.now());
+      formObj.append("imageData", fileInput.files[0]);
+    }
+
+    Object.keys(fields).forEach((t)=> {
+      formObj.append(t, fields[t])
     });
-    setPaintPosted(true);
-  }; 
-  
-  const { fields, setFields, setField, blurField, errors, handleSubmit } = UseForm(callback, validateOneField);
+
+    axios.post(`/api/paints`, formObj)
+    .then((data) => {
+      if (data.status === 200) {
+        setPaintPosted(true);
+      }
+    })
+    .catch((err) => {
+      debugger;
+    });
+  };
+
+  const { fields, setFields, setField, blurField, errors, handleSubmit } = UseForm(onValidationSuccess, validateOneField);
 
   return paintPosted ? <Redirect to="/ThankYou" /> 
    :
@@ -123,7 +133,7 @@ const GiveAwayPaint = () => {
     <div>Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
   </form>
   <h4>Take a picture of something you painted. </h4>
-    <UploadPhoto />
+  <input type="file" id="uploadPhoto" />
   </div>
 };
 
