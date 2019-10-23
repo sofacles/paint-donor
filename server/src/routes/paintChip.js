@@ -2,11 +2,20 @@ const scrapPaintUnit = require("../../../models/ScrapPaintUnit");
 
 
 const addPaintCan = async (req, res) => {
-  var paintChip = new scrapPaintUnit.PaintCan(req.body);
-  if(req.file) {
+  var paintObj = req.body
+  if(req.file && req.body.imageName) {
     //set the imageName in the DB document
+    paintObj.imageName = req.file.path.slice("uploads/".length);
   }
-  const result = await paintChip.save();
+
+  let result = "unset";
+  try {
+    let paintChip = new scrapPaintUnit.PaintCan(paintObj);
+    result = await paintChip.save();
+  } catch (error) {
+    console.info(error);
+  }
+ 
   if(result.errors){
     console.info(result.errors);
     res.send(result.errors);

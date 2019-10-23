@@ -11,7 +11,13 @@ const storage = multer.diskStorage({
         cb(null, './uploads/');
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + file.originalname);
+        let imageName = req.body.imageName;
+        if(file.mimetype === 'image/jpeg' ) {
+            imageName += ".jpg"
+        } else if(file.mimetype === 'image/png' ) {
+            imageName += ".png"
+        }
+        cb(null, imageName);
     }
 });
 

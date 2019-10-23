@@ -7,8 +7,10 @@ import ColorPicker from './ColorPicker';
 import Modal from "./Modal";
 import { RgbDisplay } from "./RgbDisplay";
 import { RgbIcon } from './RgbIcon';
+
 import { UseForm } from "./UseForm";
 import { validateOneField } from "./PaintFormValidationRules";
+const uuid = require('uuid/v4');
 
 const GiveAwayPaint = () => {
   const onColorSelected = (color) => {
@@ -24,7 +26,7 @@ const GiveAwayPaint = () => {
     let formObj = new FormData();
     let fileInput = document.getElementById("uploadPhoto");
     if(fileInput.files.length > 0) {
-      formObj.append("imageName", "multer-image-" + Date.now());
+      formObj.append("imageName", uuid());
       formObj.append("imageData", fileInput.files[0]);
     }
 
@@ -96,7 +98,6 @@ const GiveAwayPaint = () => {
         }}
     />
     {errors.email && <p className="error"><span >{errors.email}</span></p>}
-    
 
     <label htmlFor="confirmEmail">confirm email:</label>
     <input name="confirmEmail"  id="confirmEmail" 
@@ -108,8 +109,8 @@ const GiveAwayPaint = () => {
         }}
     />
     {errors.confirmEmail && <p className="error"><span data-testid="confirm-email-error" >{errors.confirmEmail}</span></p>}
-    
-   
+    <h4>Take a picture of something you painted </h4>
+    <input type="file" id="uploadPhoto" />
     <h4> - or - use the color picker</h4>
     <ThirdColorProvider>
     <ToggleContent
@@ -132,8 +133,6 @@ const GiveAwayPaint = () => {
     </p>
     <div>Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
   </form>
-  <h4>Take a picture of something you painted. </h4>
-  <input type="file" id="uploadPhoto" />
   </div>
 };
 
