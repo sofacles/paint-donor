@@ -20,6 +20,7 @@
   "dependencies": {
     "@shelf/jest-mongodb": "^1.1.2",
     "jest": "^24.9.0",
-    "mongoose": "^5.7.5"
+    "mongoose": "^5.7.5",
+    "multer": "^1.4.2"
   }
 }

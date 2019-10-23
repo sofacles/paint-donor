@@ -37,6 +37,7 @@ const GiveAwayPaint = () => {
 
   return paintPosted ? <Redirect to="/ThankYou" /> 
    :
+   <div>
   <form onSubmit={(e) => handleSubmit(e)}>
     <h2>I want to give away some paint!</h2>
 
@@ -98,8 +99,7 @@ const GiveAwayPaint = () => {
     />
     {errors.confirmEmail && <p className="error"><span data-testid="confirm-email-error" >{errors.confirmEmail}</span></p>}
     
-    <h4>Either take a picture of something you painted. (coming soon)</h4>
-    <UploadPhoto />
+   
     <h4> - or - use the color picker</h4>
     <ThirdColorProvider>
     <ToggleContent
@@ -122,6 +122,9 @@ const GiveAwayPaint = () => {
     </p>
     <div>Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
   </form>
+  <h4>Take a picture of something you painted. </h4>
+    <UploadPhoto />
+  </div>
 };
 
 export default GiveAwayPaint;

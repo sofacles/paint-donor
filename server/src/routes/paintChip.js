@@ -13,7 +13,6 @@ const addPaintCan = async (req, res) => {
 };
 
 
-
 const getPaints = async (req, res) => {
   const id = req.params.id;
   let scrapPaintModel = new scrapPaintUnit.ScrapPaintModel("mongodb://127.0.0.1:27017/PaintChip"); 

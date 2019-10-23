@@ -1,15 +1,27 @@
-import React, { Component} from 'react';
+import React, { useState } from 'react';
+import axios from 'axios'
 
-class UploadPhoto extends Component {
-    constructor(props) {
-      super(props);
-      this.myRef = React.createRef();
-    }
-    render() {
-      return <div>
-          <input type="file" id="uploadPhoto" ref={this.myRef} />
-          </div>;
-    }
-  }
+const UploadPhoto = () => {
+ 
+  return <form 
+    method="post" encType="multipart/form-data" >
+    <input type="file" id="uploadPhoto"
+      onChange={(f) => {
+        let imageFormObj = new FormData();
+        imageFormObj.append("imageName", "multer-image-" + Date.now());
+        imageFormObj.append("imageData", f.target.files[0]);
+
+        axios.post(`/api/image`, imageFormObj)
+        .then((data) => {
+          if (data.data.ok) {
+            console.log("OK");
+          }
+        })
+        .catch((err) => {
+        debugger;
+        });
+      }} />
+  </form>;
+}
 
 export { UploadPhoto};
