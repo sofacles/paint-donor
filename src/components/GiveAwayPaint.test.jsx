@@ -8,9 +8,23 @@ import {
 
 import { getByLabelText, getByTestId } from "@testing-library/dom";
 import '@testing-library/jest-dom/extend-expect';
+import axios from 'axios';
+const querystring = require('querystring');
+
+jest.mock('axios');
 
 describe("GiveAwayPaint form", () => {
     let useStateSpy;
+    const resp = {data: {
+                          status: 200
+                        }
+                  };
+    axios.post.mockResolvedValue(resp);
+
+    const updateInput = async (container, labelText, newValue, inputName) => {
+      const theField = getByLabelText(container, labelText);  
+      await fireEvent.change(theField, { target: { value: newValue, target: inputName }});
+    };
 
     beforeEach(() => {
       jest.clearAllMocks();
@@ -20,37 +34,11 @@ describe("GiveAwayPaint form", () => {
       }
     });
 
-    const updateInput = async (container, labelText, newValue, inputName) => {
-      const theField = getByLabelText(container, labelText);  
-      await fireEvent.change(theField, { target: { value: newValue, target: inputName }});
-    };
-
-    const setupFetchSpy = () => {
-      const mockJsonPromise = Promise.resolve({});
-      const mockFetchPromise = Promise.resolve({
-        json: () => mockJsonPromise,
-      });
-
-      let fetchSpy = jest.spyOn(window, "fetch").mockImplementation(() => {
-        return mockFetchPromise}
-      );
-
-      return fetchSpy;
-    };
-
     it("renders without throwing exceptions", () => {
         render(<GiveAwayPaint />);
     });
 
     it("POSTs a paint unit when you submit the form", async () => {
-      const mockSuccessResponse = {};
-      const mockJsonPromise = Promise.resolve(mockSuccessResponse);
-      const mockFetchPromise = Promise.resolve({
-        json: () => mockJsonPromise,
-      });
-
-      let fetchSpy = setupFetchSpy();
-
       const someState = {
         brand: 'argentuil',
         quantity: 'half a fathom',
@@ -71,34 +59,25 @@ describe("GiveAwayPaint form", () => {
       fireEvent.change(colorField, { target: { value: someState.rgb, target: "rgbDisplay"  }});
 
       await fireEvent.submit(container.querySelector("form"));
-
-      // It seems like this should work:
-      // expect(fetchSpy).toHaveBeenCalledWith("/api/paints", expect.stringContaining(JSON.stringify(someState)));
-
-      // but I get:
-      // Expected: StringContaining        "{\"rgb\":\"\",\"brand\":\"brandX\",\"name\":\"lime\",\"quantity\":\"lots\",\"email\":\"joe@schmo.com\"}"
-      // Received: "/api/paints", {"body": "{\"rgb\":\"\",\"brand\":\"brandX\",\"name\":\"lime\",\"quantity\":\"lots\",\"email\":\"joe@schmo.com\"}", "headers": {"Accept": "application/json", "Content-Type": "application/json"}, "method": "POST"}
-      // which makes no sense to me
-     
-      let postBody = fetchSpy.mock.calls[0][1].body;
-
-      expect(postBody).toEqual(JSON.stringify(someState));
+      expect(axios.post).toHaveBeenCalledTimes(1);
+      console.log(axios.post.mock.calls[0][0]);
+      expect(axios.post.mock.calls[0][0])
+      .toEqual(`/api/paints?${querystring.encode(someState)}`);
     });
+
+    // TODO figure out how to test photo upload
 
     it("does not POST an empty paint form", async () => {
       const { container } = render(<GiveAwayPaint />);
-      let fetchSpy = setupFetchSpy();
       await fireEvent.submit(container.querySelector("form"));
 
-      expect(fetchSpy.mock.calls.length).toEqual(0);
+      expect(axios.post).toHaveBeenCalledTimes(0);
     });
 
     describe("Error messages when a single field is missing", () => {
       let container;
-      let fetchSpy;
       beforeEach(() => {
         container = render(<GiveAwayPaint />).container;
-        fetchSpy = setupFetchSpy();
       });
       it("shows missing name Errors", async () => {
         updateInput(container, "brand:", "argentuil", "brand");
@@ -107,7 +86,7 @@ describe("GiveAwayPaint form", () => {
         updateInput(container, "confirm email:", "someString", "confirmEmail");
   
         await fireEvent.submit(container.querySelector("form"));
-        expect(fetchSpy.mock.calls.length).toEqual(0);
+        expect(axios.post.mock.calls.length).toEqual(0);
         expect(container.querySelector("p.error span").textContent).toBe("name is required");
       });
   
@@ -118,7 +97,7 @@ describe("GiveAwayPaint form", () => {
         updateInput(container, "confirm email:", "someString", "confirmEmail");
   
         await fireEvent.submit(container.querySelector("form"));
-        expect(fetchSpy.mock.calls.length).toEqual(0);
+        expect(axios.post.mock.calls.length).toEqual(0);
         expect(container.querySelector("p.error span").textContent).toBe("brand is required");
       });
 
@@ -129,7 +108,7 @@ describe("GiveAwayPaint form", () => {
         updateInput(container, "confirm email:", "someString", "confirmEmail");
   
         await fireEvent.submit(container.querySelector("form"));
-        expect(fetchSpy.mock.calls.length).toEqual(0);
+        expect(axios.post.mock.calls.length).toEqual(0);
         expect(container.querySelector("p.error span").textContent).toBe("email is required");
       });
   
@@ -140,13 +119,12 @@ describe("GiveAwayPaint form", () => {
         updateInput(container, "email:", "someString", "email");
   
         await fireEvent.submit(container.querySelector("form"));
-        expect(fetchSpy.mock.calls.length).toEqual(0);
+        expect(axios.post.mock.calls.length).toEqual(0);
         expect(container.querySelector("p.error span").textContent).toBe("confirmEmail is required");
       });
   
     });
-    
-    
+
     it("shows missing brand Error on blur", async () => {
       const { container } = render(<GiveAwayPaint />);
       fireEvent.click(getByLabelText(container, "brand:"));

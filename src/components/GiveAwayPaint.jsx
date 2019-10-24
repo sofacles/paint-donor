@@ -7,10 +7,10 @@ import ColorPicker from './ColorPicker';
 import Modal from "./Modal";
 import { RgbDisplay } from "./RgbDisplay";
 import { RgbIcon } from './RgbIcon';
-
 import { UseForm } from "./UseForm";
 import { validateOneField } from "./PaintFormValidationRules";
 const uuid = require('uuid/v4');
+const querystring = require('querystring');
 
 const GiveAwayPaint = () => {
   const onColorSelected = (color) => {
@@ -19,7 +19,7 @@ const GiveAwayPaint = () => {
       rgb: color
     });
   }
-
+  
   const [paintPosted, setPaintPosted ] = useState(false);
 
   const onValidationSuccess = async () => {
@@ -29,12 +29,9 @@ const GiveAwayPaint = () => {
       formObj.append("imageName", uuid());
       formObj.append("imageData", fileInput.files[0]);
     }
-
-    Object.keys(fields).forEach((t)=> {
-      formObj.append(t, fields[t])
-    });
-
-    axios.post(`/api/paints`, formObj)
+    let qs = querystring.encode(fields);
+    
+    axios.post(`/api/paints?${qs}`, formObj)
     .then((data) => {
       if (data.status === 200) {
         setPaintPosted(true);
