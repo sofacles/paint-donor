@@ -60,7 +60,6 @@ describe("GiveAwayPaint form", () => {
 
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post).toHaveBeenCalledTimes(1);
-      console.log(axios.post.mock.calls[0][0]);
       expect(axios.post.mock.calls[0][0])
       .toEqual(`/api/paints?${querystring.encode(someState)}`);
     });
