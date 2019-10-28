@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import "../App.css";
 import { ColorPixel } from "./ColorPixel";
-import ThirdColorControl from "./ThirdColorControl";
-import { ThirdColorContext } from "./ThirdColorContext";
+import ThirdColorControl from "./ThirdColor/ThirdColorControl";
+import { ThirdColorContext } from "./ThirdColor/ThirdColorContext";
 import { TwoDotAxisLabel } from "./TwoDotAxisLabel";
 
 

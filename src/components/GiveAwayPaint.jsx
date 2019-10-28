@@ -2,7 +2,7 @@ import axios from 'axios';
 import  React, { useState } from 'react';
 import {Redirect} from "react-router-dom"
 import { ToggleContent } from './ToggleContent';
-import { ThirdColorProvider } from './ThirdColorContext';
+import { ThirdColorProvider } from './ThirdColor/ThirdColorContext';
 import ColorPicker from './ColorPicker';
 import Modal from "./Modal";
 import { RgbDisplay } from "./RgbDisplay";

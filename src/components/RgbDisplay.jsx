@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ThirdColorContext } from "./ThirdColorContext";
+import { ThirdColorContext } from "./ThirdColor/ThirdColorContext";
 
 const RgbDisplay = (props) => {
     let spanStyle = {
