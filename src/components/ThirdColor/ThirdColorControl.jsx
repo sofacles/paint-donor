@@ -9,6 +9,9 @@ const ThirdColorControl = (props) => {
     let sliderPosition = ( blueValue.thirdColorLevel / 16) * SLIDER_HEIGHT;
 
     const sliderContainerStyle = {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
         marginLeft: "3px",
         marginRight: "5px",
         marginTop: "24px",
@@ -16,7 +19,8 @@ const ThirdColorControl = (props) => {
     }
 
     return <div style={sliderContainerStyle}>
-            <Arrow />
+            <Arrow direction="up" />
+            <Arrow direction="down" />
             </div>;
 };
 

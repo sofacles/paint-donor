@@ -1,12 +1,20 @@
 import React from "react";
 
-const ArrowButton = () => {
+const ArrowButton = ({direction="up"}) => {
     const arrowButtonStyle = {
         height: "35px",
         width: "12px"
     };
-    
-    let arrowDown = <svg version="1.1" 
+
+    console.log(`direction is ${direction}`);
+
+    let rotation = 180;
+    if(direction === "down") {
+        rotation = 0;
+    }
+
+   
+    return <svg version="1.1" 
                         id="Capa_1" 
                         xmlns="http://www.w3.org/2000/svg" 
                         xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -14,8 +22,8 @@ const ArrowButton = () => {
                         height="292.362px" 
                         viewBox="0 0 292.362 292.362"
                         fill="#00f"
-                        preserveAspectRatio="none"
-                        transform='rotate(0)'
+                        preserveAspectRatio="none" 
+                        transform={`rotate(${rotation})`}
                         style={arrowButtonStyle}
                         xmlSpace="preserve">
                             <g>
@@ -26,7 +34,6 @@ const ArrowButton = () => {
 
                         </svg>
 
-    return arrowDown;
 };
 
 export default ArrowButton; 
