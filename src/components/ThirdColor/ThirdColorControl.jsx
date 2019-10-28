@@ -19,6 +19,18 @@ const ThirdColorControl = (props) => {
         });
     };
 
+    const downClick = () => {
+        setBlueValue(b => {
+            if(b.thirdColorLevel > 0 ) {
+                return {
+                    ...blueValue,
+                    thirdColorLevel: b.thirdColorLevel - 1
+                };
+            }
+            return { ...blueValue };
+        });
+    };
+
     const sliderContainerStyle = {
         display: "flex",
         flexDirection: "column",
@@ -31,7 +43,7 @@ const ThirdColorControl = (props) => {
 
     return <div style={sliderContainerStyle}>
             <Arrow direction="up" onClick={upClick} />
-            <Arrow direction="down" />
+            <Arrow direction="down" onClick={downClick} />
             </div>;
 };
 
