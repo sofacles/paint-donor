@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "../App.css";
 import { ColorPixel } from "./ColorPixel";
-import Slider from "./Slider";
+import ThirdColorControl from "./ThirdColorControl";
 import { ThirdColorContext } from "./ThirdColorContext";
 import { TwoDotAxisLabel } from "./TwoDotAxisLabel";
 
@@ -41,8 +41,7 @@ const ColorPicker = (props) => {
                         <TwoDotAxisLabel orientation="horizontal" color="#0f0" />
                         <div className="color-picker">{rows}</div>
                     </div>
-                    <Slider />
-                    <TwoDotAxisLabel color="#00f" />
+                    <ThirdColorControl />
                 </div>
                 <div className="selected-color" style={selectedColorStyle}>
                     {blueValue.selectedHexValue}
