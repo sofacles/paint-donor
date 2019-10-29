@@ -101,10 +101,13 @@
 .error span {
   background-color: #e89;
   padding: 4px 10px;
-} 
+}
+
+@media screen and (max-width: 600px) {
+
+}
 
 .paint-cell {
-  float: left;
   width: 140px;
   height: 160px;
   padding: 10px;

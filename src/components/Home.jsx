@@ -24,10 +24,15 @@ const Home = () => {
             setPaintChips({paintChips : JSON.parse(t)});
             });
         }, [macGuffin]);
-        
+    const homeStyle = {
+        display: "flex",
+        justifyContent: "space-around",
+        flexWrap: "wrap"
+    };
+
     return <div>
             <h1>Home</h1>
-            <div>
+            <div style={homeStyle}>
             {theTiles}
             </div>
         </div>
