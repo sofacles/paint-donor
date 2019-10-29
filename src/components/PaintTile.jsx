@@ -18,7 +18,8 @@ export const PaintTile = ({paintUnit}) => {
     };
 
     const linkStyle = {
-        textDecoration: "none"
+        textDecoration: "none",
+        color: "#000"
     };
 
     const image = (paintUnit.imageName && paintUnit.imageName.length > 3)
