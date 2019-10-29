@@ -1,17 +1,19 @@
 .App {
   text-align: center;
+  padding: 0;
+  margin: 10px;
 }
 
 .App nav {
   display: flex;
 }
 
-
 .App nav ul {
   display: flex;
   flex-direction: column;
   list-style-type: none;
   width: 100%;
+  padding: 0;
 }
 
 .App nav ul li {
@@ -101,10 +103,6 @@
 .error span {
   background-color: #e89;
   padding: 4px 10px;
-}
-
-@media screen and (max-width: 600px) {
-
 }
 
 .paint-cell {
