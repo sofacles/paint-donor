@@ -1,13 +1,13 @@
 import React from "react";
 export const PaintTile = ({paintUnit}) => {
-    const needHash = paintUnit.rgb && paintUnit.rgb[0] != '#';
+    const needHash = paintUnit.rgb && paintUnit.rgb[0] !== '#';
     const rgbStyle = {
         height: "50px",
         backgroundColor: `${needHash ? '#': ''}${paintUnit.rgb && paintUnit.rgb.length > 0 ? paintUnit.rgb : "#fff"}`
     };
     const image = (paintUnit.imageName && paintUnit.imageName.length > 3) ? 
     <div>
-        <img alt="paint color" src={`/uploads/${paintUnit.imageName}`} />
+        <img alt="paint color" style={rgbStyle} src={`uploads/${paintUnit.imageName}`} />
     </div> : <div style={rgbStyle} ></div>;
 
     return <div className="paint-cell">

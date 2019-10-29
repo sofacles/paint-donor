@@ -3,8 +3,7 @@ const scrapPaintUnit = require("../../../models/ScrapPaintUnit");
 const addPaintCan = async (req, res) => {
   var paintObj = req.query;
   if(req.file && req.body.imageName) {
-    //set the imageName in the DB document
-    paintObj.imageName = req.file.path.slice("uploads/".length);
+    paintObj.imageName = req.file.filename;
   }
 
   let result = "unset";

@@ -8,7 +8,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads/');
+        cb(null, './public/uploads/');
     },
     filename: function (req, file, cb) {
         let imageName = req.body.imageName;
@@ -49,7 +49,5 @@ app.get("/api/users/:id", (req, res) => {
 app.get("/api/paints/:id", paintChipRoute.getPaints);
 
 app.post("/api/paints", upload.single('imageData'), paintChipRoute.addPaintCan);
-
-app.use('uploads', express.static('uploads'));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
