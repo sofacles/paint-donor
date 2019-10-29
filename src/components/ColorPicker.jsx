@@ -9,7 +9,7 @@ import { TwoDotAxisLabel } from "./TwoDotAxisLabel";
 const ColorPicker = (props) => {
    
     const COLOR_MAX = 15;
-    const [blueValue, blueValueSet] = useContext(ThirdColorContext); 
+    const [blueValue] = useContext(ThirdColorContext); 
 
     // Each row will have all the possible values of green for the given value of red
     const rows = [];

@@ -12,16 +12,6 @@ const UseForm = ( submitCallback, validateOneField ) => {
         quantity: ""
     };
     const [errors, setErrors] = useState(emptyErrors);
-
-    const clearErrors = (propName) => {
-        let errorsFomOtherFields = {}; 
-        for(var key in Object.keys(errors)){
-            if(errors.hasOwnProperty(key) && key !== propName) {
-                errorsFomOtherFields[key] = errors[key];
-            }
-        }
-        setErrors(errorsFomOtherFields);
-    };
     
     const clearErrorFor = (propName) => {
         setErrors({
