@@ -27,7 +27,8 @@
     "eject": "react-scripts eject",
     "server": "nodemon --inspect ./server/src/server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "test:nowatch": "cross-env CI=true react-scripts test"
+    "test:nowatch": "cross-env CI=true react-scripts test",
+    "cypress": "./node_modules/cypress/bin/cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
