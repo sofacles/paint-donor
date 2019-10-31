@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
+const emailRoute = require("./routes/Mail");
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -49,5 +51,7 @@ app.get("/api/users/:id", (req, res) => {
 app.get("/api/paints/:id", paintChipRoute.getPaints);
 
 app.post("/api/paints", upload.single('imageData'), paintChipRoute.addPaintCan);
+
+app.post("/api/mail", emailRoute.sendMail);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
