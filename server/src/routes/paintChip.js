@@ -1,4 +1,5 @@
 const scrapPaintUnit = require("../../../models/ScrapPaintUnit");
+const config = require("../../../config")
 
 const addPaintCan = async (req, res) => {
   var paintObj = req.query;
@@ -24,7 +25,8 @@ const addPaintCan = async (req, res) => {
 
 
 const getPaints = async (req, res) => {
-  let scrapPaintModel = new scrapPaintUnit.ScrapPaintModel("mongodb://127.0.0.1:27017/PaintChip"); 
+  let mongoUrl = config.MongoUrl;
+  let scrapPaintModel = new scrapPaintUnit.ScrapPaintModel(mongoUrl); 
   // Connect to the db
   let paintCan = await scrapPaintModel.doConnection();
   if(paintCan instanceof Error) {
