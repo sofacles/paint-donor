@@ -1,5 +1,5 @@
-const env = process.env.NODE_ENV;
-console.log(`********* process.env.NODE_ENV: ${process.env.NODE_ENV}`);
+const env = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : "development";
+console.log(`process.env.NODE_ENV is ${process.env.NODE_ENV}`);
 
 const config = {
     development: {
