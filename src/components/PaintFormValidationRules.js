@@ -52,4 +52,13 @@ const checkMismatches = (fields) => {
     return errors;
 };
 
-export { validateOneField, checkMismatches, validateAll };
+const emptyErrors = {
+    brand: "",
+    name: "",
+    email: "",
+    confirmEmail: "",
+    emailMatch: "",
+    quantity: ""
+};
+
+export { validateOneField, checkMismatches, validateAll, emptyErrors };

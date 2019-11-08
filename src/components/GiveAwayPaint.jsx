@@ -7,8 +7,8 @@ import ColorPicker from './ColorPicker';
 import Modal from "./Modal";
 import { RgbDisplay } from "./RgbDisplay";
 import { RgbIcon } from './RgbIcon';
-import { UseForm } from "./UseForm";
-import { validateOneField } from "./PaintFormValidationRules";
+import UseForm from "./UseGiveAwayPaintForm";
+
 const uuid = require('uuid/v4');
 const querystring = require('querystring');
 
@@ -41,8 +41,8 @@ const GiveAwayPaint = () => {
       debugger;
     });
   };
-
-  const { fields, setFields, setField, blurField, errors, handleSubmit } = UseForm(onValidationSuccess, validateOneField);
+  //TODO: did I have a good reason for passing validateOneField from here instead of importing it into useForm?
+  const { fields, setFields, setField, blurField, errors, handleSubmit } = UseForm(onValidationSuccess);
 
   return paintPosted ? <Redirect to="/ThankYou" /> 
    :

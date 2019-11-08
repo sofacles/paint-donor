@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
-const emailRoute = require("./routes/Mail");
+const emailRoute = require("./routes/sendMail");
 
 const app = express();
 const port = process.env.PORT || 5000;

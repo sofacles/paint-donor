@@ -1,17 +1,8 @@
 import { useState } from "react";
-import { checkMismatches, validateAll } from "./PaintFormValidationRules";
-
-const UseForm = ( submitCallback, validateOneField ) => {
+const UseForm = ( submitCallback, validationRules ) => {
     const [fields, setFields] = useState({});
-    let emptyErrors = {
-        brand: "",
-        name: "",
-        email: "",
-        confirmEmail: "",
-        emailMatch: "",
-        quantity: ""
-    };
-    const [errors, setErrors] = useState(emptyErrors);
+    
+    const [errors, setErrors] = useState(validationRules.emptyErrors);
     
     const clearErrorFor = (propName) => {
         setErrors({
@@ -31,17 +22,17 @@ const UseForm = ( submitCallback, validateOneField ) => {
     const blurField = (inputEvent, handleMatches = false) => {
         const propName = inputEvent.currentTarget.name;
         const propVal = inputEvent.target.value;
-        let errorThisField = validateOneField(propName, propVal);
+        let errorThisField = validationRules.validateOneField(propName, propVal);
         setErrors({...errors, ...errorThisField});
         if(Object.keys(errorThisField).length === 0 && handleMatches) {
-            let matchErrors = checkMismatches(fields);
+            let matchErrors = validationRules.checkMismatches(fields);
             setErrors({...errors, ...matchErrors});
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let formErrors = validateAll(fields);
+        let formErrors = validationRules.validateAll(fields);
         setErrors(formErrors);
         if(Object.keys(formErrors).length === 0) {
             await submitCallback();
