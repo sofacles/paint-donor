@@ -1,8 +1,50 @@
 import { useState } from "react";
+
 const UseForm = ( submitCallback, validationRules ) => {
+
     const [fields, setFields] = useState({});
-    
     const [errors, setErrors] = useState(validationRules.emptyErrors);
+    const { validationMap } = validationRules; 
+
+    const validateOneField = (propName, propVal) => {
+        let errors = {};
+        if(validationMap.requiredFields.hasOwnProperty(propName)) {
+            if(!propVal) {
+                errors[propName] = `${propName} is required`;
+            }
+            else if(validationMap.requiredFields[propName].minLength) {
+                if(propVal.length < validationMap.requiredFields[propName].minLength) {
+                    errors[propName] = 
+                    `${propName} needs to be at least ${validationMap.requiredFields[propName].minLength} characters long`;
+                }
+            }
+        }
+        return errors;
+    }
+
+    const validateAll = (values) => {
+        let errors = {};
+        const requiredFields = Object.keys(validationMap.requiredFields);
+        for(let i=0; i < requiredFields.length; i++) {
+            errors = {...errors, ...validateOneField(requiredFields[i], values[requiredFields[i]])}
+        }
+        return errors;
+    }
+    
+    const checkMismatches = (fields) => {
+        const errors = {};
+        if( validationMap.needToMatch ) {
+            let firstFieldThatNeedsToMatch = validationMap.needToMatch[0];
+            //If they make changes in the confirmEmail field before the email field is touched, no error
+            if(fields[firstFieldThatNeedsToMatch] && fields[firstFieldThatNeedsToMatch].length > 0) {
+                if(fields[validationMap.needToMatch[1]] !== fields[firstFieldThatNeedsToMatch] ) {
+                    errors[validationMap.needToMatch[1]] = `email and confirm email need to match `;
+                }
+            }
+        }
+        return errors;
+    };
+    
     
     const clearErrorFor = (propName) => {
         setErrors({
@@ -22,24 +64,23 @@ const UseForm = ( submitCallback, validationRules ) => {
     const blurField = (inputEvent, handleMatches = false) => {
         const propName = inputEvent.currentTarget.name;
         const propVal = inputEvent.target.value;
-        let errorThisField = validationRules.validateOneField(propName, propVal);
+        let errorThisField = validateOneField(propName, propVal);
         setErrors({...errors, ...errorThisField});
         if(Object.keys(errorThisField).length === 0 && handleMatches) {
-            let matchErrors = validationRules.checkMismatches(fields);
+            let matchErrors = checkMismatches(fields);
             setErrors({...errors, ...matchErrors});
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let formErrors = validationRules.validateAll(fields);
+        let formErrors = validateAll(fields);
         setErrors(formErrors);
         if(Object.keys(formErrors).length === 0) {
-            await submitCallback();
+            await submitCallback(fields);
         }
     };
-
-    return {fields, setFields, setField, blurField, errors, handleSubmit};
+    return {setField, blurField, errors, handleSubmit, validateOneField};
 };
 
-export { UseForm }
+export default UseForm;

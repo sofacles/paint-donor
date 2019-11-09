@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import UseForm from "./UseGiveAwayPaintForm";
+import UseForm from "./UseForm";
 import Axios from "axios";
 
 const querystring = require('querystring');

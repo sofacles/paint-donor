@@ -7,22 +7,15 @@ import ColorPicker from './ColorPicker';
 import Modal from "./Modal";
 import { RgbDisplay } from "./RgbDisplay";
 import { RgbIcon } from './RgbIcon';
-import UseForm from "./UseGiveAwayPaintForm";
+import UseForm from "./UseForm";
+import ValidationRulesObj from "./PaintFormValidationRules";
 
 const uuid = require('uuid/v4');
 const querystring = require('querystring');
 
 const GiveAwayPaint = () => {
-  const onColorSelected = (color) => {
-    setFields({
-      ...fields,
-      rgb: color
-    });
-  }
   
-  const [paintPosted, setPaintPosted ] = useState(false);
-
-  const onValidationSuccess = async () => {
+  const onValidationSuccess = async (fields) => {
     let formObj = new FormData();
     let fileInput = document.getElementById("uploadPhoto");
     if(fileInput.files.length > 0) {
@@ -41,9 +34,17 @@ const GiveAwayPaint = () => {
       debugger;
     });
   };
-  //TODO: did I have a good reason for passing validateOneField from here instead of importing it into useForm?
-  const { fields, setFields, setField, blurField, errors, handleSubmit } = UseForm(onValidationSuccess);
 
+
+  const { setField, blurField, errors, handleSubmit } = UseForm( onValidationSuccess, ValidationRulesObj);
+  const [paintPosted, setPaintPosted ] = useState(false);
+  const onColorSelected = (color) => {
+    setField({ target: {
+      name: "rgb",
+      value: color
+    }});
+  }
+  
   return paintPosted ? <Redirect to="/ThankYou" /> 
    :
    <div>
