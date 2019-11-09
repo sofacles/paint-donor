@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import UseForm from "./UseForm";
+import ValidationRules from "./SendMailValidationRules";
 import Axios from "axios";
 
 const querystring = require('querystring');
@@ -19,10 +20,9 @@ const SendMailForm = props => {
     paint = props.location.state.paintUnit;
   }
 
-  const onValidationSuccess = () => {
-    debugger;
+  const onValidationSuccess = (fields) => {
     let qs = querystring.encode(fields);
-    Axios.post("/api/mail", {
+    Axios.post(`/api/mail?${qs}`, {
       fromEmail: fields,
       paint: paint
     }).then(res => {
@@ -39,7 +39,7 @@ const SendMailForm = props => {
     blurField,
     errors,
     handleSubmit
-  } = UseForm(onValidationSuccess);
+  } = UseForm(onValidationSuccess, ValidationRules);
   return mailSent ? (
     <Redirect to="/thanksForMail" />
   ) : (
