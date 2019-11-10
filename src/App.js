@@ -5,6 +5,7 @@ import Home from './components/Home';
 import ThankYou from './components/ThankYou';
 import ThanksForMail from './components/ThanksForMail';
 import SendMail from './components/SendMail';
+import 'normalize.css';
 import './App.css';
 
 function App() {
