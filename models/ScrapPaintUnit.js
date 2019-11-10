@@ -38,6 +38,7 @@ const PaintCanSchema = new mongoose.Schema({
     name: { type: String, required: true },
     quantity: { type: String, required: true },
     email: { type: String, required: true },
+    sheen: {type: String, requied: false}
 });
 
 const PaintCan = mongoose.model("PaintCan", PaintCanSchema);

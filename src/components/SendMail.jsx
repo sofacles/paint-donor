@@ -4,11 +4,9 @@ import UseForm from "./UseForm";
 import ValidationRules from "./SendMailValidationRules";
 import Axios from "axios";
 
-const querystring = require('querystring');
+const querystring = require("querystring");
 
 const SendMailForm = props => {
-  
-
   const [mailSent, setMailSent] = useState(false);
   let paint = {};
   if (
@@ -20,7 +18,34 @@ const SendMailForm = props => {
     paint = props.location.state.paintUnit;
   }
 
-  const onValidationSuccess = (fields) => {
+  const needHash = paint.rgb && paint.rgb[0] !== "#";
+  const rgbStyle = {
+    height: "50px",
+    backgroundColor: `${needHash ? "#" : ""}${
+      paint.rgb && paint.rgb.length > 0 ? paint.rgb : "#fff"
+    }`,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  };
+
+  const imgStyle = {
+    height: "90%",
+    margin: "5px"
+  };
+
+  const image =
+    paint.imageName && paint.imageName.length > 3 ? (
+      <img
+        alt="paint color"
+        style={imgStyle}
+        src={`uploads/${paint.imageName}`}
+      />
+    ) : (
+      ""
+    );
+
+  const onValidationSuccess = fields => {
     let qs = querystring.encode(fields);
     Axios.post(`/api/mail?${qs}`, {
       fromEmail: fields,
@@ -33,8 +58,6 @@ const SendMailForm = props => {
   };
 
   const {
-    fields,
-    setFields,
     setField,
     blurField,
     errors,
@@ -44,6 +67,13 @@ const SendMailForm = props => {
     <Redirect to="/thanksForMail" />
   ) : (
     <div>
+      <div className="paint-cell">
+        <span>{paint.brand}</span>
+        <span>{paint.name}</span>
+        <span>{paint.quantity}</span>
+
+        <div style={rgbStyle}>{image}</div>
+      </div>
       <h1>Would you like send mail to this person?</h1>
       <p>
         Please enter your email address below. We will set up a temporary email
