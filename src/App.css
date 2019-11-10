@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
   padding: 0;
@@ -16,7 +17,7 @@
   padding: 0;
 }
 
-.App nav ul li {
+.App nav ul li { 
   flex-grow: 1;
   padding: 20px;
 }
@@ -25,12 +26,13 @@
   text-decoration: none;
 }
 
-.App label {
-  display: block;
-}
-
 .App label.hidden {
   display: none;
+}
+
+.donate-paint label,
+.paint-detail label {
+  display: block;
 }
 
 .color-picker-container {
@@ -113,4 +115,18 @@
 
 .paint-cell span {
   display: block;
+}
+
+/* SendEmail / PaintDetails page */
+
+.paint-detail header {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+
+.paint-detail header label {
+  margin-right: 10px;
+  font-weight: bold;
+  display: inline-block;
 }

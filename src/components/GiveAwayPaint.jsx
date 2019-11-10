@@ -47,7 +47,7 @@ const GiveAwayPaint = () => {
   
   return paintPosted ? <Redirect to="/ThankYou" /> 
    :
-   <div>
+   <div className="donate-paint">
   <form onSubmit={(e) => handleSubmit(e)}>
     <h2>I want to give away some paint!</h2>
 

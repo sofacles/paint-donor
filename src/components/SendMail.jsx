@@ -19,14 +19,21 @@ const SendMailForm = props => {
   }
 
   const needHash = paint.rgb && paint.rgb[0] !== "#";
+  const headerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  };
+
   const rgbStyle = {
-    height: "50px",
+    height: "100px",
     backgroundColor: `${needHash ? "#" : ""}${
       paint.rgb && paint.rgb.length > 0 ? paint.rgb : "#fff"
     }`,
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: "10px"
   };
 
   const imgStyle = {
@@ -57,24 +64,38 @@ const SendMailForm = props => {
     });
   };
 
-  const {
-    setField,
-    blurField,
-    errors,
-    handleSubmit
-  } = UseForm(onValidationSuccess, ValidationRules);
+  const { setField, blurField, errors, handleSubmit } = UseForm(
+    onValidationSuccess,
+    ValidationRules
+  );
   return mailSent ? (
     <Redirect to="/thanksForMail" />
   ) : (
-    <div>
-      <div className="paint-cell">
-        <span>{paint.brand}</span>
-        <span>{paint.name}</span>
-        <span>{paint.quantity}</span>
+    <div className="paint-detail">
+      <header style={headerStyle}>
+        <div>
+          <div>
+            <label for="brand">Brand:</label>
+            <span id="brand">{paint.brand}</span>
+          </div>
+          <div>
+            <label for="brand">Name:</label>
+            <span id="name">{paint.name}</span>
+          </div>
+          <div>
+            <label for="sheen">Sheen:</label>
+            <span id="sheen">{paint.sheen}</span>
+          </div>
+          <div>
+            <label for="quantity">Quantity:</label>
+            <span id="quantity">{paint.quantity}</span>
+          </div>
 
-        <div style={rgbStyle}>{image}</div>
-      </div>
-      <h1>Would you like send mail to this person?</h1>
+          <div style={rgbStyle}>{image}</div>
+        </div>
+      </header>
+
+      <h1>Would you like send mail to {paint.email}?</h1>
       <p>
         Please enter your email address below. We will set up a temporary email
         account for you that the paint donor can use to contact you and you can

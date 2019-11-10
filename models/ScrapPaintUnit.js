@@ -38,6 +38,7 @@ const PaintCanSchema = new mongoose.Schema({
     name: { type: String, required: true },
     quantity: { type: String, required: true },
     email: { type: String, required: true },
+    emailConfirmed: { type: Boolean, required: false},
     sheen: {type: String, requied: false}
 });
 
