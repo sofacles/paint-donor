@@ -86,6 +86,25 @@ const GiveAwayPaint = () => {
 
     {errors.quantity && <p className="error"><span >{errors.quantity}</span></p>}
 
+    <label htmlFor="sheen">sheen:</label>
+    <select name="sheen" 
+      id="sheen"
+      onChange={(e) => {
+        setField(e);
+      }} 
+      onBlur={(e) => {
+        blurField(e);
+      }} 
+    >
+      <option value="">--</option>
+      <option value="flat">flat</option>
+      <option value="eggshell">eggshell</option>
+      <option value="semi">semi gloss</option>
+      <option value="gloss">high gloss</option>
+    </select>
+
+    {errors.sheen && <p className="error"><span >{errors.sheen}</span></p>}
+
     <label htmlFor="email">email:</label>
     <input name="email" id="email" 
         onChange={(e) => {
@@ -107,6 +126,18 @@ const GiveAwayPaint = () => {
         }}
     />
     {errors.confirmEmail && <p className="error"><span data-testid="confirm-email-error" >{errors.confirmEmail}</span></p>}
+    
+    <label htmlFor="zipCode">zip code:</label>
+    <input name="zipCode"  id="zipCode" 
+        onChange={(e) => {
+          setField(e);
+        }} 
+        onBlur={(e) => {
+          blurField(e, true);
+        }}
+    />
+    {errors.zipCode && <p className="error"><span data-testid="zip-code-error" >{errors.zipCode}</span></p>}
+    
     <h4>Take a picture of something you painted </h4>
     <input type="file" id="uploadPhoto" />
     <h4> - or - use the color picker</h4>

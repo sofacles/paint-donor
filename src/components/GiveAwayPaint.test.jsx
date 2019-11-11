@@ -17,14 +17,12 @@ describe("GiveAwayPaint form", () => {
       status: 200
     }
   };
+  
   axios.post.mockResolvedValue(resp);
 
-  const updateInput = async (container, labelText, newValue, inputName) => {
-    const theField = getByLabelText(container, labelText);
-    await fireEvent.change(theField, {
-      target: { value: newValue, name: inputName }
-    });
-  };
+  const makeEventArgs = (name, val) => ({
+    target: { value: val, name: name }
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -44,8 +42,10 @@ describe("GiveAwayPaint form", () => {
       quantity: "half a fathom",
       email: "someString",
       confirmEmail: "someString",
+      zipCode: "12121",
       name: "lime",
-      rgb: "#333"
+      rgb: "#333",
+      sheen: ""
     };
 
     const { container, getByLabelText } = render(
@@ -60,11 +60,17 @@ describe("GiveAwayPaint form", () => {
     fireEvent.change(getByLabelText("quantity:"), {
       target: { value: someState.quantity, name: "quantity" }
     });
+    fireEvent.change(getByLabelText("sheen:"), {
+      target: { value: someState.sheen, name: "sheen" }
+    });
     fireEvent.change(getByLabelText("email:"), {
       target: { value: someState.email, name: "email" }
     });
     fireEvent.change(getByLabelText("confirm email:"), {
       target: { value: someState.confirmEmail, name: "confirmEmail" }
+    });
+    fireEvent.change(getByLabelText("zip code:"), {
+      target: { value: someState.zipCode, name: "zipCode" }
     });
     
     const nameField = getByLabelText("color name on can:");
@@ -79,9 +85,16 @@ describe("GiveAwayPaint form", () => {
 
     await fireEvent.submit(container.querySelector("form"));
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post.mock.calls[0][0]).toEqual(
-      `/api/paints?${querystring.encode(someState)}`
-    );
+    const postUrl = decodeURI(axios.post.mock.calls[0][0] + "").replace("%23","#"); //%23 is #, is not decoded by decodeURI
+    //My attempt at a deepEqual for querySting and an object
+    const stateKeys = Object.keys(someState);
+    stateKeys.forEach(k => {
+      expect(postUrl.indexOf(k)).toBeGreaterThan(-1);
+      expect(postUrl.indexOf(someState[k])).toBeGreaterThan( -1 );
+    });
+   
+    expect((axios.post.mock.calls[0][0] + "").length).toEqual(
+      (`/api/paints?${querystring.encode(someState)}`).length);
   });
 
   // TODO figure out how to test photo upload
@@ -94,15 +107,15 @@ describe("GiveAwayPaint form", () => {
   });
 
   describe("Error messages when a single field is missing", () => {
-    let container;
-    beforeEach(() => {
-      container = render(<GiveAwayPaint />).container;
-    });
+   
     it("shows missing name Errors", async () => {
-      updateInput(container, "brand:", "argentuil", "brand");
-      updateInput(container, "quantity:", "half a fathom", "quantity");
-      updateInput(container, "email:", "someString", "email");
-      updateInput(container, "confirm email:", "someString", "confirmEmail");
+      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
 
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
@@ -112,10 +125,12 @@ describe("GiveAwayPaint form", () => {
     });
 
     it("shows missing brand Errors", async () => {
-      updateInput(container, "color name on can:", "savage", "name");
-      updateInput(container, "quantity:", "half a fathom", "quantity");
-      updateInput(container, "email:", "someString", "email");
-      updateInput(container, "confirm email:", "someString", "confirmEmail");
+      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
 
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
@@ -125,11 +140,12 @@ describe("GiveAwayPaint form", () => {
     });
 
     it("shows missing email Errors", async () => {
-      updateInput(container, "color name on can:", "savage", "name");
-      updateInput(container, "brand:", "argentuil", "brand");
-      updateInput(container, "quantity:", "half a fathom", "quantity");
-      updateInput(container, "confirm email:", "someString", "confirmEmail");
-
+      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
       expect(container.querySelector("p.error span").textContent).toBe(
@@ -137,24 +153,39 @@ describe("GiveAwayPaint form", () => {
       );
     });
 
-    it("shows missing brand confirmEmail", async () => {
-      updateInput(container, "color name on can:", "savage", "name");
-      updateInput(container, "brand:", "argentuil", "brand");
-      updateInput(container, "quantity:", "half a fathom", "quantity");
-      updateInput(container, "email:", "someString", "email");
-
+    it("shows missing confirmEmail error", async () => {
+      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
       expect(container.querySelector("p.error span").textContent).toBe(
         "confirmEmail is required"
       );
     });
+
+    it("shows missing zip code error", async () => {
+      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+      await fireEvent.submit(container.querySelector("form"));
+      expect(axios.post.mock.calls.length).toEqual(0);
+      expect(container.querySelector("p.error span").textContent).toBe(
+        "zipCode is required"
+      );
+    });
   });
 
   it("shows missing brand Error on blur", async () => {
-    const { container } = render(<GiveAwayPaint />);
-    fireEvent.click(getByLabelText(container, "brand:"));
-    fireEvent.blur(getByLabelText(container, "brand:"));
+    const { container, getByLabelText } = render(<GiveAwayPaint />);
+    fireEvent.click(getByLabelText("brand:"));
+    fireEvent.blur(getByLabelText( "brand:"));
     expect(container.querySelector("p.error span").textContent).toBe(
       "brand is required"
     );

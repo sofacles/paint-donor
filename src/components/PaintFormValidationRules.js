@@ -9,7 +9,10 @@ const validationMap = {
         },
         quantity: {},
         brand: {},
-        name: {}
+        name: {},
+        zipCode: {
+            minLength: 5
+          }
     },
 };
 
@@ -19,7 +22,8 @@ const emptyErrors = {
     email: "",
     confirmEmail: "",
     emailMatch: "",
-    quantity: ""
+    quantity: "",
+    zipCode: ""
 };
 
 export default { validationMap, emptyErrors };
