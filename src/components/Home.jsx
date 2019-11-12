@@ -1,5 +1,6 @@
 import  React,  { useEffect, useState }  from 'react';
 import { PaintTile } from "./PaintTile";
+import { ImageTile } from "./ImageTile";
 const Home = () => {
     let macGuffin = 0;
     const [paintChips, setPaintChips] = useState({
@@ -15,7 +16,11 @@ const Home = () => {
         ]
     });
     let theTiles = paintChips.paintChips.map((chip) => {
-       return <PaintTile key={chip._id} paintUnit={chip} />
+        if(chip.imageName && chip.imageName.length > 3) {
+            return <ImageTile key={chip._id} paintUnit={chip} />;
+        }
+        return <PaintTile key={chip._id} paintUnit={chip} />
+      
     });
     useEffect(() => {
         fetch("/api/paints/1234")

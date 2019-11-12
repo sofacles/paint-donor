@@ -1,44 +1,44 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import OppositeColor from "../OppositeColor";
 
-export const PaintTile = ({paintUnit}) => {
-    const needHash = paintUnit.rgb && paintUnit.rgb[0] !== '#';
-    const rgbStyle = {
-        height: "50px",
-        backgroundColor: `${needHash ? '#': ''}${paintUnit.rgb && paintUnit.rgb.length > 0 
-            ? paintUnit.rgb : "#fff"}`,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-    };
+// Used when there is no image, just an RGB value for the paint
+//TODO: unit test that makes sure either RGB or image file is in the POST
+export const PaintTile = ({ paintUnit }) => {
+  const bgColor = paintUnit.rgb;
+  const rgbStyle = {
+    height: "100%",
+    width: "100%",
+    backgroundColor: `#${bgColor}`,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center"
+  };
 
-    const imgStyle = {
-        height: "90%",
-        margin: "5px"
-    };
+  const linkStyle = {
+    textDecoration: "none",
+    color: `#${OppositeColor(bgColor)}`
+  };
 
-    const linkStyle = {
-        textDecoration: "none",
-        color: "#000"
-    };
+  const rgbText = {
+    color: `#${OppositeColor(paintUnit.rgb)}`
+  };
 
-    const image = (paintUnit.imageName && paintUnit.imageName.length > 3)
-    ? <img alt="paint color" style={imgStyle} src={`uploads/${paintUnit.imageName}`} /> 
-    : "";
-
-    return <Link to={{
+  return (
+    <Link
+      to={{
         pathname: "/SendMail",
         state: { paintUnit }
-        }} style={linkStyle}>
-        <div className="paint-cell">
-            <span>{paintUnit.brand}</span>
-            <span>{paintUnit.name}</span>
-            <span>{paintUnit.quantity}</span>
-
-            <div style={rgbStyle} >
-                {image}
-            </div>
+      }}
+      style={linkStyle}
+    >
+      <div className="paint-cell">
+        <div style={rgbStyle}>
+          <div>{paintUnit.name}</div>
+          <div>#{paintUnit.rgb}</div>
         </div>
+      </div>
     </Link>
-
+  );
 };

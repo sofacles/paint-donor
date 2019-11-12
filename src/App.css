@@ -108,9 +108,11 @@
 }
 
 .paint-cell {
+  box-sizing: border-box;
   width: 140px;
   height: 160px;
   padding: 10px;
+  margin-bottom: 20px;
   box-shadow: #666 3px 3px 4px;
 }
 

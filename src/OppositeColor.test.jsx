@@ -6,7 +6,6 @@ describe("Opposite Color", () => {
 
     it("should wrap to zero if necessary", () => {
         const compl = OppositeColor("888");
-        console.log(`For 888 we get back ${compl}`);
         expect(compl).toEqual("000");
     });
     
