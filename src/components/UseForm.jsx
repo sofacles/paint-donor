@@ -28,6 +28,20 @@ const UseForm = ( submitCallback, validationRules ) => {
         for(let i=0; i < requiredFields.length; i++) {
             errors = {...errors, ...validateOneField(requiredFields[i], values[requiredFields[i]])}
         }
+
+        if(validationMap.oneOf) {
+            let atLeastOneItemExistsInOneOf = false;
+            validationMap.oneOf.forEach(f => {
+                if(fields[f] !== undefined) atLeastOneItemExistsInOneOf = true;
+                return;
+            })
+            if(!atLeastOneItemExistsInOneOf) {
+                errors = {
+                    ...errors, 
+                    atLeastOne: `Please provide at least one of ${validationMap.oneOf.join(", ")}`}
+            } 
+        }
+       
         return errors;
     }
     
@@ -57,6 +71,9 @@ const UseForm = ( submitCallback, validationRules ) => {
         const propName = inputEvent.target.name;
         const propVal = inputEvent.target.value;
         clearErrorFor(propName);
+        if(validationMap.oneOf.indexOf(propName) >= 0) {
+            clearErrorFor("atLeastOne");
+        }
         setFields({...fields, [propName]: propVal})
     };
 

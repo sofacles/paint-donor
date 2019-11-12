@@ -21,10 +21,6 @@ export const PaintTile = ({ paintUnit }) => {
     color: `#${OppositeColor(bgColor)}`
   };
 
-  const rgbText = {
-    color: `#${OppositeColor(paintUnit.rgb)}`
-  };
-
   return (
     <Link
       to={{

@@ -203,4 +203,70 @@ describe("GiveAwayPaint form", () => {
       document.getElementsByClassName("color-picker-container").length
     ).toBeGreaterThan(0);
   });
+
+  it("Shows error and does not POST if no file uploaded nor RGB", async () => {
+    const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
+    fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
+    fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
+    fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+    fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+
+    await fireEvent.submit(container.querySelector("form"));
+   
+    expect(axios.post.mock.calls.length).toEqual(0);
+    expect(container.querySelector("p.error span").textContent).toBe(
+      "Please provide at least one of rgb, uploadPhoto"
+    );
+  });
+
+  it("POSTs if file is uploaded, but no RGB", async () => {
+    const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
+    fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
+    fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
+    fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+    fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+
+    const fileInput = document.getElementById("uploadPhoto");
+    const fileContents       = 'file contents';
+    const file               = new Blob([fileContents], {type : 'multipart/form-data'});
+    
+    Object.defineProperty(fileInput, "files", {
+      value: [file]
+    });
+
+    fireEvent.change(fileInput, file);
+
+    await fireEvent.submit(container.querySelector("form"));
+   
+    expect(axios.post.mock.calls.length).toEqual(1);
+    expect(container.querySelector("p.error span")).toBe(null);
+    
+  });
+
+  it("POSTs if RGB is set but no file is uploaded, ", async () => {
+    const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
+    fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
+    fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
+    fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+    fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+
+    const colorField = getByTestId("rgbDisplay");
+    fireEvent.change(colorField, {
+      target: { value: "333", target: "rgbDisplay" }
+    });
+
+    await fireEvent.submit(container.querySelector("form"));
+   
+    expect(axios.post.mock.calls.length).toEqual(1);
+    expect(container.querySelector("p.error span")).toBe(null);
+    
+  });
+
+  
 });

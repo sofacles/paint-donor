@@ -14,6 +14,7 @@ const validationMap = {
             minLength: 5
           }
     },
+    oneOf: ["rgb", "uploadPhoto"],
 };
 
 const emptyErrors = {
