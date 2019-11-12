@@ -111,6 +111,7 @@
   width: 140px;
   height: 160px;
   padding: 10px;
+  box-shadow: #666 3px 3px 4px;
 }
 
 .paint-cell span {

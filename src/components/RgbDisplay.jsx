@@ -23,6 +23,9 @@ const RgbDisplay = (props) => {
                     }
                 }
                 onChange={(e) => {
+                    if(e.preventDefault) {
+                        e.preventDefault();
+                    }
                     setThirdColorContext({...thirdColorContext,
                     selectedHexValue: e.target.value});
                     props.onColorChosen(e.target.value)

@@ -4,5 +4,6 @@
     "quantity": "200",
     "rgb": "#788",
     "email": "aosdin@cox.org",
-    "confirmEmail": "aosdin@cox.org"
+    "confirmEmail": "aosdin@cox.org",
+    "zipCode": "12345"
 }

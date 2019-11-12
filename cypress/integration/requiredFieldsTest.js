@@ -9,6 +9,7 @@ describe("navigates..", () => {
             cy.get("#email").type(json.email);
             cy.get("#confirmEmail").type(json.confirmEmail);
             cy.get("#rgbDisplay").type(json.rgb);
+            cy.get("#zipCode").type(json.zipCode);
             cy.get("#save").click();
             cy.url().should('include', '/ThankYou')
             cy.get("div").should('contain', 'Thanks for posting your paint');
