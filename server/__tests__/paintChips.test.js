@@ -1,4 +1,4 @@
-
+//TODO, what?  Do I want to test this route or not?  Figure out if I still need this.
 
 const getPaints = require( "../src/routes/paintChip");
 const express = require("express");

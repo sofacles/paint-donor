@@ -1,4 +1,6 @@
-const PaintChip = require( "../../../models/PaintChip");
+const mongooseConnection = require("../mongooseConnection");
+const model = require( "../../../models/PaintChip");
+const { PaintCanSchema, PaintCan} = model(mongooseConnection);
 
 const addPaintCan = async (req, res) => {
   var paintObj = req.query;
@@ -8,7 +10,7 @@ const addPaintCan = async (req, res) => {
 
   let result = "unset";
   try {
-    let paintChip = new PaintChip(paintObj);
+    let paintChip = new PaintCan(paintObj);
     result = await paintChip.save();
   } catch (error) {
     console.info(error);
@@ -24,7 +26,7 @@ const addPaintCan = async (req, res) => {
 
 
 const getPaints = async (req, res) => {
-  PaintChip.find({}, (err, paints) => {
+  PaintCan.find({}, (err, paints) => {
     if(err) {
       res.send(err);
     }

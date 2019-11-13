@@ -25,7 +25,7 @@ describe("Color Picker", () => {
     const selectedColor = getNodeText(selectedColorElement);
     expect(selectedColor).toBe("#F80");
 
-    expect(colorPassedToCallback).toBe("#F80");
+    expect(colorPassedToCallback).toBe("F80");
   });
 
   it("considers the third color value when it updates the selected color", () => {
@@ -53,6 +53,6 @@ describe("Color Picker", () => {
     // expect the blue component to be half way to max (8)
     expect(selectedColor).toBe("#F88");
 
-    expect(colorPassedToCallback).toBe("#F88");
+    expect(colorPassedToCallback).toBe("F88");
   });
 });
