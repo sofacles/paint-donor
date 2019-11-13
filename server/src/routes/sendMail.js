@@ -1,12 +1,10 @@
-const scrapPaintUnit = require("../../../models/ScrapPaintUnit");
+const PaintChip = require( "../../../models/PaintChip");
 
 const sendMail = (req, res) => {
-    console.log("Hey we are in the Mail route");
     const paintObj = req.body.paint;
-    console.info(paintObj);
     const fromEmail = req.body.fromEmail;
     try {
-        let paintChip = new scrapPaintUnit.PaintCan(paintObj);
+        let paintChip = new PaintChip(paintObj);
         res.send({fakeEmailSent: true});
     } catch (error) {
         console.info(error);

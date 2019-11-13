@@ -31,7 +31,7 @@ const ColorPicker = (props) => {
     }
 
     let selectedColorStyle = {
-        backgroundColor: blueValue.selectedHexValue
+        backgroundColor: "#" + blueValue.selectedHexValue
     };
 
     return  <div className="color-picker-container">
@@ -44,7 +44,7 @@ const ColorPicker = (props) => {
                     <ThirdColorControl />
                 </div>
                 <div className="selected-color" style={selectedColorStyle}>
-                    {blueValue.selectedHexValue}
+                    {blueValue.selectedHexValue !== "choose color" && "#"}{blueValue.selectedHexValue}
                 </div>
               
             </div>

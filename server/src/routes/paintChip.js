@@ -1,5 +1,4 @@
-const scrapPaintUnit = require("../../../models/ScrapPaintUnit");
-const config = require("../../../config")
+const PaintChip = require( "../../../models/PaintChip");
 
 const addPaintCan = async (req, res) => {
   var paintObj = req.query;
@@ -9,7 +8,7 @@ const addPaintCan = async (req, res) => {
 
   let result = "unset";
   try {
-    let paintChip = new scrapPaintUnit.PaintCan(paintObj);
+    let paintChip = new PaintChip(paintObj);
     result = await paintChip.save();
   } catch (error) {
     console.info(error);
@@ -25,20 +24,12 @@ const addPaintCan = async (req, res) => {
 
 
 const getPaints = async (req, res) => {
-  let mongoUrl = config.MongoUrl;
-  let scrapPaintModel = new scrapPaintUnit.ScrapPaintModel(mongoUrl); 
-  // Connect to the db
-  let paintCan = await scrapPaintModel.doConnection();
-  if(paintCan instanceof Error) {
-    res.send("Error while getting paintcan");
-  } else {
-    paintCan.find({}, (err, paints) => {
-      if(err) {
-        res.send(err);
-      }
-      res.send(paints);
-    });
-  }
+  PaintChip.find({}, (err, paints) => {
+    if(err) {
+      res.send(err);
+    }
+    res.send(paints);
+  });
 }
 
 module.exports = {

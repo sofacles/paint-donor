@@ -71,7 +71,7 @@ const UseForm = ( submitCallback, validationRules ) => {
         const propName = inputEvent.target.name;
         const propVal = inputEvent.target.value;
         clearErrorFor(propName);
-        if(validationMap.oneOf.indexOf(propName) >= 0) {
+        if(validationMap.oneOf && validationMap.oneOf.indexOf(propName) >= 0) {
             clearErrorFor("atLeastOne");
         }
         setFields({...fields, [propName]: propVal})
