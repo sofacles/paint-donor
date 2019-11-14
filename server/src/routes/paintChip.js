@@ -4,6 +4,9 @@ const { PaintCanSchema, PaintCan} = model(mongooseConnection);
 
 const addPaintCan = async (req, res) => {
   var paintObj = req.query;
+  //I want to force validation of rgb or imageName to occur on this posted object, so setting them to 
+  paintObj.rgb = paintObj.rgb ? paintObj.rgb : "";
+  paintObj.imageName = "";
   if(req.file && req.body.imageName) {
     paintObj.imageName = req.file.filename;
   }

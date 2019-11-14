@@ -20,6 +20,8 @@ describe("Need to have either RGB or image name", () => {
       brand: "Miller",
       zipCode: "11777",
       name: "avocado",
+      rgb: "",
+      imageName: "",
       quantity: "1 gal",
       email: "beyonce@gmail.com"
     });
