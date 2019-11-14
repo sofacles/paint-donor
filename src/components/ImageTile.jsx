@@ -32,7 +32,7 @@ export const ImageTile = ({ paintUnit }) => {
           <img
             alt="paint color"
             style={imgStyle}
-            src={`uploads/${paintUnit.imageName}`}
+            src={`uploads/resized/${paintUnit.imageName}`}
           />
         </div>
       </div>

@@ -1,4 +1,7 @@
+const fs = require("fs");
+const path = require("path");
 const { PaintCan } = require("../../../models");
+const sharp = require("sharp");
 
 const addPaintCan = async (req, res) => {
   var paintObj = req.query;
@@ -6,7 +9,20 @@ const addPaintCan = async (req, res) => {
   paintObj.rgb = paintObj.rgb ? paintObj.rgb : "";
   paintObj.imageName = "";
   if(req.file && req.body.imageName) {
-    paintObj.imageName = req.file.filename;
+
+    const { filename: image } = req.file;
+    let newPath = path.resolve(req.file.destination,'resized', image).replace(".jpg", ".png");
+
+    //Obviously, I should figure out how to offload this work to another service, but let me deploy just once...
+    await sharp(req.file.path)
+    .resize(256)
+    .png()
+    .toFile(newPath);
+    
+    //delete the large file
+    fs.unlinkSync(req.file.path);
+    
+    paintObj.imageName = req.file.filename.replace(".jpg", ".png");;
   }
 
   let result = "unset";

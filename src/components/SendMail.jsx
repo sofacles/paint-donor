@@ -46,7 +46,7 @@ const SendMailForm = props => {
       <img
         alt="paint color"
         style={imgStyle}
-        src={`uploads/${paint.imageName}`}
+        src={`uploads/resized/${paint.imageName}`}
       />
     ) : (
       ""
@@ -75,19 +75,19 @@ const SendMailForm = props => {
       <header style={headerStyle}>
         <div>
           <div>
-            <label for="brand">Brand:</label>
+            <label htmlFor="brand">Brand:</label>
             <span id="brand">{paint.brand}</span>
           </div>
           <div>
-            <label for="brand">Name:</label>
+            <label htmlFor="brand">Name:</label>
             <span id="name">{paint.name}</span>
           </div>
           <div>
-            <label for="sheen">Sheen:</label>
+            <label htmlFor="sheen">Sheen:</label>
             <span id="sheen">{paint.sheen}</span>
           </div>
           <div>
-            <label for="quantity">Quantity:</label>
+            <label htmlFor="quantity">Quantity:</label>
             <span id="quantity">{paint.quantity}</span>
           </div>
 
