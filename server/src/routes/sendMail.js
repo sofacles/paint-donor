@@ -1,4 +1,4 @@
-const { PaintCan } = require( "../../../models/PaintChip");
+const { PaintCan } = require("../../../models");
 
 const sendMail = (req, res) => {
     const paintObj = req.body.paint;

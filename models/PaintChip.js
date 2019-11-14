@@ -7,7 +7,7 @@ module.exports = function(mongoose) {
         validator: function(r) {
           let rgbResult =
             (this.imageName !== undefined && this.imageName.length > 3) ||
-            (r !== undefined && r.length > 3);
+            (r !== undefined && r.length >= 3);
           return rgbResult;
         }
       }
@@ -18,7 +18,7 @@ module.exports = function(mongoose) {
       validate: {
         validator: function(r) {
           let imgNameResult =
-            (this.rgb !== undefined && this.rgb.length > 3) ||
+            (this.rgb !== undefined && this.rgb.length >= 3) ||
             (r !== undefined && r.length > 3);
           return imgNameResult;
         }

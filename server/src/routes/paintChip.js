@@ -1,10 +1,8 @@
-const mongooseConnection = require("../mongooseConnection");
-const model = require( "../../../models/PaintChip");
-const { PaintCanSchema, PaintCan} = model(mongooseConnection);
+const { PaintCan } = require("../../../models");
 
 const addPaintCan = async (req, res) => {
   var paintObj = req.query;
-  //I want to force validation of rgb or imageName to occur on this posted object, so setting them to 
+  //I want to force validation of rgb or imageName to occur on this posted object, so setting them to empty strings
   paintObj.rgb = paintObj.rgb ? paintObj.rgb : "";
   paintObj.imageName = "";
   if(req.file && req.body.imageName) {
