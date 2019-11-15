@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import GiveAwayPaint from './components/GiveAwayPaint';
-import Home from './components/Home';
+import Home from './components/Home' 
+import BrowsePaint from './components/BrowsePaint';
 import ThankYou from './components/ThankYou';
 import ThanksForMail from './components/ThanksForMail';
 import SendMail from './components/SendMail';
@@ -15,7 +16,7 @@ function App() {
         <nav>
           <ul>
           <li>
-              <Link to="/home">Get Some Paint</Link>
+              <Link to="/browsePaint">Get Some Paint</Link>
             </li>
             <li>
               <Link to="/giveawaypaint">Give away paint</Link>
@@ -24,8 +25,9 @@ function App() {
         </nav>
 
         <hr />
-        <Route exact path="/" component={Home} />
-        <Route path="/home" component={Home} />
+        <Route exact path="/" component={BrowsePaint} />
+        <Route exact path="/home" component={Home} />
+        <Route path="/browsePaint" component={BrowsePaint} />
         <Route exact path="/giveawaypaint" component={GiveAwayPaint} />
         <Route exact path="/sendMail" component={ SendMail } />
         <Route exact path="/thankyou" component={ThankYou} />
