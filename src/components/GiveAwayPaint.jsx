@@ -219,7 +219,7 @@ const GiveAwayPaint = () => {
             <span data-testid="confirm-email-error">{errors.atLeastOne}</span>
           </p>
         )}
-        
+
         <p>
           <label htmlFor="save" className="hidden">
             {" "}
@@ -239,6 +239,16 @@ const GiveAwayPaint = () => {
           <a href="https://www.flaticon.com/" title="Flaticon">
             www.flaticon.com
           </a>
+          <div>
+            Icons made by{" "}
+            <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+              Freepik
+            </a>{" "}
+            from{" "}
+            <a href="https://www.flaticon.com/" title="Flaticon">
+              www.flaticon.com
+            </a>
+          </div>
         </div>
       </form>
     </div>
