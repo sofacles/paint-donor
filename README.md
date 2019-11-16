@@ -21,4 +21,4 @@ An app for getting rid of your scrap paint.  I plan to add an email redirection 
 
 ## Run the app locally
 1. `cd` to the root of the application and run `yarn dev`
-2. Click "give away paint"  (don't miss the color picker, click the icon next to "choose color)
+2. Click "give away paint"  (don't miss the color picker, click the icon next to "pick color)

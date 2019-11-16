@@ -56,7 +56,7 @@ const GiveAwayPaint = () => {
       <form onSubmit={e => handleSubmit(e)}>
         <h2>I want to give away some paint!</h2>
 
-        <label htmlFor="brand">brand:</label>
+        <label htmlFor="brand">Brand:</label>
         <input
           name="brand"
           id="brand"
@@ -73,7 +73,7 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-        <label htmlFor="name">color name on can:</label>
+        <label htmlFor="name">Color Name:</label>
         <input
           name="name"
           id="name"
@@ -90,7 +90,7 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-        <label htmlFor="quantity">quantity:</label>
+        <label htmlFor="quantity">Quantity:</label>
         <input
           name="quantity"
           id="quantity"
@@ -108,7 +108,7 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-        <label htmlFor="sheen">sheen:</label>
+        <label htmlFor="sheen">Sheen:</label>
         <select
           name="sheen"
           id="sheen"
@@ -126,7 +126,7 @@ const GiveAwayPaint = () => {
           <option value="gloss">high gloss</option>
         </select>
 
-        <label htmlFor="email">email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           name="email"
           id="email"
@@ -143,7 +143,7 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-        <label htmlFor="confirmEmail">confirm email:</label>
+        <label htmlFor="confirmEmail">Confirm Email:</label>
         <input
           name="confirmEmail"
           id="confirmEmail"
@@ -160,7 +160,7 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-        <label htmlFor="zipCode">zip code:</label>
+        <label htmlFor="zipCode">Zip Code:</label>
         <input
           name="zipCode"
           id="zipCode"

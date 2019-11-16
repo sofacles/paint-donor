@@ -53,27 +53,27 @@ describe("GiveAwayPaint form", () => {
         <GiveAwayPaint />
       </BrowserRouter>
     );
-    const brandField = getByLabelText("brand:");
+    const brandField = getByLabelText("Brand:");
     fireEvent.change(brandField, {
       target: { value: someState.brand, name: "brand" }
     });
-    fireEvent.change(getByLabelText("quantity:"), {
+    fireEvent.change(getByLabelText("Quantity:"), {
       target: { value: someState.quantity, name: "quantity" }
     });
-    fireEvent.change(getByLabelText("sheen:"), {
+    fireEvent.change(getByLabelText("Sheen:"), {
       target: { value: someState.sheen, name: "sheen" }
     });
-    fireEvent.change(getByLabelText("email:"), {
+    fireEvent.change(getByLabelText("Email:"), {
       target: { value: someState.email, name: "email" }
     });
-    fireEvent.change(getByLabelText("confirm email:"), {
+    fireEvent.change(getByLabelText("Confirm Email:"), {
       target: { value: someState.confirmEmail, name: "confirmEmail" }
     });
-    fireEvent.change(getByLabelText("zip code:"), {
+    fireEvent.change(getByLabelText("Zip Code:"), {
       target: { value: someState.zipCode, name: "zipCode" }
     });
     
-    const nameField = getByLabelText("color name on can:");
+    const nameField = getByLabelText("Color Name:");
     await fireEvent.change(nameField, {
       target: { value: "lime", name: "name" }
     });
@@ -110,12 +110,11 @@ describe("GiveAwayPaint form", () => {
    
     it("shows missing name Errors", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
-      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
-      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
-      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
+      fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
 
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
@@ -126,11 +125,11 @@ describe("GiveAwayPaint form", () => {
 
     it("shows missing brand Errors", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
-      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
-      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
-      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+      fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
+      fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
 
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
@@ -141,11 +140,11 @@ describe("GiveAwayPaint form", () => {
 
     it("shows missing email Errors", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
-      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
-      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+      fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
+      fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
       expect(container.querySelector("p.error span").textContent).toBe(
@@ -155,11 +154,11 @@ describe("GiveAwayPaint form", () => {
 
     it("shows missing confirmEmail error", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
-      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
-      fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+      fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
       expect(container.querySelector("p.error span").textContent).toBe(
@@ -169,11 +168,11 @@ describe("GiveAwayPaint form", () => {
 
     it("shows missing zip code error", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
-      fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-      fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
-      fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
+      fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
+      fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
       await fireEvent.submit(container.querySelector("form"));
       expect(axios.post.mock.calls.length).toEqual(0);
       expect(container.querySelector("p.error span").textContent).toBe(
@@ -184,8 +183,8 @@ describe("GiveAwayPaint form", () => {
 
   it("shows missing brand Error on blur", async () => {
     const { container, getByLabelText } = render(<GiveAwayPaint />);
-    fireEvent.click(getByLabelText("brand:"));
-    fireEvent.blur(getByLabelText( "brand:"));
+    fireEvent.click(getByLabelText("Brand:"));
+    fireEvent.blur(getByLabelText( "Brand:"));
     expect(container.querySelector("p.error span").textContent).toBe(
       "brand is required"
     );
@@ -206,12 +205,12 @@ describe("GiveAwayPaint form", () => {
 
   it("Shows error and does not POST if no file uploaded nor RGB", async () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
-    fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
-    fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-    fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-    fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
-    fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
-    fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+    fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
+    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
+    fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
+    fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
 
     await fireEvent.submit(container.querySelector("form"));
    
@@ -223,12 +222,12 @@ describe("GiveAwayPaint form", () => {
 
   it("POSTs if file is uploaded, but no RGB", async () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
-    fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
-    fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-    fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-    fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
-    fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
-    fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+    fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
+    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
+    fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
+    fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
 
     const fileInput = document.getElementById("uploadPhoto");
     const fileContents       = 'file contents';
@@ -249,12 +248,12 @@ describe("GiveAwayPaint form", () => {
 
   it("POSTs if RGB is set but no file is uploaded, ", async () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
-    fireEvent.change(getByLabelText("color name on can:"), makeEventArgs("name", "savage"));
-    fireEvent.change(getByLabelText("quantity:"), makeEventArgs("quantity", "half a fathom"));
-    fireEvent.change(getByLabelText("brand:"), makeEventArgs("brand", "argentuil"));
-    fireEvent.change(getByLabelText("email:"), makeEventArgs("email", "someString"));
-    fireEvent.change(getByLabelText("confirm email:"), makeEventArgs("confirmEmail", "someString"));
-    fireEvent.change(getByLabelText("zip code:"), makeEventArgs("zipCode", "99999"));
+    fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
+    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
+    fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
+    fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
 
     const colorField = getByTestId("rgbDisplay");
     fireEvent.change(colorField, {
