@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { ToggleContent } from "./ToggleContent";
 import { ThirdColorProvider } from "./ThirdColor/ThirdColorContext";
+import SelectOtherInput from "./select-other-input/SelectOtherInput";
 import ColorPicker from "./ColorPicker";
 import Modal from "./Modal";
 import { RgbDisplay } from "./RgbDisplay";
@@ -56,22 +57,40 @@ const GiveAwayPaint = () => {
       <form onSubmit={e => handleSubmit(e)}>
         <h2>I want to give away some paint!</h2>
 
-        <label htmlFor="brand">Brand:</label>
-        <input
-          name="brand"
+        <SelectOtherInput
           id="brand"
-          onChange={e => {
-            setField(e);
+          onNewValue={newValue => {
+            setField({
+              target: {
+                name: "brand",
+                value: newValue
+              }
+            });
           }}
-          onBlur={e => {
+          onBlur={(e) => {
+            debugger;
             blurField(e);
           }}
+          initialValues={[
+            "- choose -",
+            "Sherwin-Williams",
+            "Farrow & Ball",
+            "Miller",
+            "Behr",
+            "Dunn-Edwards",
+            "Glidden",
+            "Rodda",
+            "Benjamin Moore",
+            "other"
+          ]}
+          label="Brand:"
         />
         {errors.brand && (
           <p className="error">
             <span>{errors.brand}</span>
           </p>
         )}
+
 
         <label htmlFor="name">Color Name:</label>
         <input

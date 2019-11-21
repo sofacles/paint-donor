@@ -38,7 +38,7 @@ describe("GiveAwayPaint form", () => {
 
   it("POSTs a paint unit when you submit the form", async () => {
     const someState = {
-      brand: "argentuil",
+      brand: "Behr",
       quantity: "half a fathom",
       email: "someString",
       confirmEmail: "someString",
@@ -55,7 +55,7 @@ describe("GiveAwayPaint form", () => {
     );
     const brandField = getByLabelText("Brand:");
     fireEvent.change(brandField, {
-      target: { value: someState.brand, name: "brand" }
+      target: { value: "Behr", name: "brand" }
     });
     fireEvent.change(getByLabelText("Quantity:"), {
       target: { value: someState.quantity, name: "quantity" }
@@ -89,7 +89,14 @@ describe("GiveAwayPaint form", () => {
     //My attempt at a deepEqual for querySting and an object
     const stateKeys = Object.keys(someState);
     stateKeys.forEach(k => {
+      if(postUrl.indexOf(k) === -1) {
+        console.log("******** problem with: " + k);
+      }
       expect(postUrl.indexOf(k)).toBeGreaterThan(-1);
+
+      if(postUrl.indexOf(someState[k]) === -1) {
+        console.log(`******** problem with k: ${k}  + someState[k]: ${someState[k]}`);
+      }
       expect(postUrl.indexOf(someState[k])).toBeGreaterThan( -1 );
     });
    
@@ -110,7 +117,7 @@ describe("GiveAwayPaint form", () => {
    
     it("shows missing name Errors", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
-      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
       fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
@@ -142,7 +149,7 @@ describe("GiveAwayPaint form", () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
       fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
       await fireEvent.submit(container.querySelector("form"));
@@ -156,7 +163,7 @@ describe("GiveAwayPaint form", () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
       fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
       await fireEvent.submit(container.querySelector("form"));
@@ -170,7 +177,7 @@ describe("GiveAwayPaint form", () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
-      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+      fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
       fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
       await fireEvent.submit(container.querySelector("form"));
@@ -207,7 +214,7 @@ describe("GiveAwayPaint form", () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
     fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
-    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
     fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
     fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
     fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
@@ -224,7 +231,7 @@ describe("GiveAwayPaint form", () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
     fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
-    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
     fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
     fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
     fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
@@ -250,7 +257,7 @@ describe("GiveAwayPaint form", () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
     fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
-    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "argentuil"));
+    fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
     fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
     fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
     fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));

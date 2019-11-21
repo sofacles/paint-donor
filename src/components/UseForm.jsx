@@ -17,6 +17,11 @@ const UseForm = ( submitCallback, validationRules ) => {
                     errors[propName] = 
                     `${propName} needs to be at least ${validationMap.requiredFields[propName].minLength} characters long`;
                 }
+            } else if(validationMap.requiredFields[propName].not) {
+                if(propVal.trim() ===  validationMap.requiredFields[propName].not) {
+                    errors[propName] = 
+                    `${propName} is required`;
+                }
             }
         }
         return errors;

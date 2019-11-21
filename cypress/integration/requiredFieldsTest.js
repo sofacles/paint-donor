@@ -3,7 +3,7 @@ describe("navigates..", () => {
     it('Posts and goes to thank you if all fields are valid', function() {
         cy.fixture('paint/happyPath').then((json) => {
             cy.visit('http://localhost:3000/giveawaypaint')
-            cy.get("#brand").type(json.brand);
+            cy.get("#brand").select(json.brand);
             cy.get("#name").type(json.name);
             cy.get("#quantity").type(json.quantity);
             cy.get("#email").type(json.email);
@@ -19,7 +19,7 @@ describe("navigates..", () => {
     it('Informs you that emails need to match', function() {
         cy.fixture('paint/happyPath').then((json) => {
             cy.visit('http://localhost:3000/giveawaypaint')
-            cy.get("#brand").type(json.brand);
+            cy.get("#brand").select(json.brand);
             cy.get("#name").type(json.name);
             cy.get("#quantity").type(json.quantity);
             cy.get("#email").type(json.email);

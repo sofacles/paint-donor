@@ -8,7 +8,9 @@ const validationMap = {
             minLength: 5
         },
         quantity: {},
-        brand: {},
+        brand: {
+            not: "- choose -"
+        },
         name: {},
         zipCode: {
             minLength: 5
