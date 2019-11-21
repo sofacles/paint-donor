@@ -7,7 +7,9 @@ const validationMap = {
         confirmEmail: {
             minLength: 5
         },
-        quantity: {},
+        quantity: {
+            not: "- choose -"
+        },
         brand: {
             not: "- choose -"
         },

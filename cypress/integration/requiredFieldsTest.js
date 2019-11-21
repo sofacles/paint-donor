@@ -5,7 +5,7 @@ describe("navigates..", () => {
             cy.visit('http://localhost:3000/giveawaypaint')
             cy.get("#brand").select(json.brand);
             cy.get("#name").type(json.name);
-            cy.get("#quantity").type(json.quantity);
+            cy.get("#quantity").select(json.quantity);
             cy.get("#email").type(json.email);
             cy.get("#confirmEmail").type(json.confirmEmail);
             cy.get("#rgbDisplay").type(json.rgb);
@@ -21,7 +21,7 @@ describe("navigates..", () => {
             cy.visit('http://localhost:3000/giveawaypaint')
             cy.get("#brand").select(json.brand);
             cy.get("#name").type(json.name);
-            cy.get("#quantity").type(json.quantity);
+            cy.get("#quantity").select(json.quantity);
             cy.get("#email").type(json.email);
             cy.get("#confirmEmail").type("notTheSame");
             cy.get("#rgbDisplay").click();

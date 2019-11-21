@@ -68,7 +68,6 @@ const GiveAwayPaint = () => {
             });
           }}
           onBlur={(e) => {
-            debugger;
             blurField(e);
           }}
           initialValues={[
@@ -109,16 +108,28 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-        <label htmlFor="quantity">Quantity:</label>
-        <input
-          name="quantity"
+<SelectOtherInput
           id="quantity"
-          onChange={e => {
-            setField(e);
+          onNewValue={newValue => {
+            setField({
+              target: {
+                name: "quantity",
+                value: newValue
+              }
+            });
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e);
           }}
+          initialValues={[
+            "- choose -",
+           "about a quart",
+           "less than a gallon",
+           "less than two gallons",
+           "less than five gallons",
+           "other"
+          ]}
+        label="Quantity:"
         />
 
         {errors.quantity && (

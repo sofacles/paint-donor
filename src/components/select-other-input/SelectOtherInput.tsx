@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import FlexSelect from "./FlexSelect";
-import { tsPropertySignature } from '@babel/types';
 
 interface eventArgs {
     target: {

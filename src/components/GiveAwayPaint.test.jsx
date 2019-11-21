@@ -39,7 +39,7 @@ describe("GiveAwayPaint form", () => {
   it("POSTs a paint unit when you submit the form", async () => {
     const someState = {
       brand: "Behr",
-      quantity: "half a fathom",
+      quantity: "less than a gallon",
       email: "someString",
       confirmEmail: "someString",
       zipCode: "12121",
@@ -118,7 +118,7 @@ describe("GiveAwayPaint form", () => {
     it("shows missing name Errors", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
-      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
       fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
       fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
@@ -133,7 +133,7 @@ describe("GiveAwayPaint form", () => {
     it("shows missing brand Errors", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
       fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
       fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
@@ -148,7 +148,7 @@ describe("GiveAwayPaint form", () => {
     it("shows missing email Errors", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
       fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
@@ -162,7 +162,7 @@ describe("GiveAwayPaint form", () => {
     it("shows missing confirmEmail error", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
       fireEvent.change(getByLabelText("Zip Code:"), makeEventArgs("zipCode", "99999"));
@@ -176,7 +176,7 @@ describe("GiveAwayPaint form", () => {
     it("shows missing zip code error", async () => {
       const {container, getByLabelText} = render(<GiveAwayPaint />);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
-      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+      fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
       fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
@@ -213,7 +213,7 @@ describe("GiveAwayPaint form", () => {
   it("Shows error and does not POST if no file uploaded nor RGB", async () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
-    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
     fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
     fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
     fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
@@ -230,7 +230,7 @@ describe("GiveAwayPaint form", () => {
   it("POSTs if file is uploaded, but no RGB", async () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
-    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
     fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
     fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
     fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
@@ -256,7 +256,7 @@ describe("GiveAwayPaint form", () => {
   it("POSTs if RGB is set but no file is uploaded, ", async () => {
     const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
-    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "half a fathom"));
+    fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
     fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
     fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
     fireEvent.change(getByLabelText("Confirm Email:"), makeEventArgs("confirmEmail", "someString"));
