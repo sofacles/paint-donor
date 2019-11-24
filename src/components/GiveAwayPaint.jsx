@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import { ToggleContent } from "./ToggleContent";
 import { ThirdColorProvider } from "./ThirdColor/ThirdColorContext";
@@ -56,7 +57,9 @@ const GiveAwayPaint = () => {
     <div className="donate-paint">
       <form onSubmit={e => handleSubmit(e)}>
         <h2>I want to give away some paint!</h2>
-
+        <aside>
+        <Link to="/browsePaint">Back to Paints</Link>
+        </aside>
         <SelectOtherInput
           id="brand"
           onNewValue={newValue => {
@@ -257,6 +260,7 @@ const GiveAwayPaint = () => {
           </label>
           <input type="submit" value="save" id="save" />
         </p>
+
         <div>
           Icons made by{" "}
           <a

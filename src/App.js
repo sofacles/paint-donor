@@ -13,18 +13,6 @@ function App() {
   return (
       <Router>
       <div className="App">
-        <nav>
-          <ul>
-          <li>
-              <Link to="/browsePaint">Get Some Paint</Link>
-            </li>
-            <li>
-              <Link to="/giveawaypaint">Give away paint</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <hr />
         <Route exact path="/" component={BrowsePaint} />
         <Route exact path="/home" component={Home} />
         <Route path="/browsePaint" component={BrowsePaint} />

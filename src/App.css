@@ -35,6 +35,11 @@
   display: block;
 }
 
+.donate-paint aside {
+  position: relative;
+  left: 200px;
+}
+
 .color-picker-container {
   background-color: #fff;
   display: flex;

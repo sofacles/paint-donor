@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { PaintTile } from "./PaintTile";
 import { ImageTile } from "./ImageTile";
 
@@ -39,7 +39,7 @@ const BrowsePaint = () => {
 
     return abortController.abort();
   }, [abortController, isRedirectingToHome]);
-  
+
   const homeStyle = {
     display: "flex",
     justifyContent: "space-around",
@@ -52,6 +52,10 @@ const BrowsePaint = () => {
     <div>
       <h1>Available Paint</h1>
       <div style={homeStyle}>{theTiles}</div>
+
+      <div>
+        <Link to="/giveAwayPaint">I have paint to donate</Link>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import UseForm from "./UseForm";
 import ValidationRules from "./SendMailValidationRules";
@@ -74,12 +75,16 @@ const SendMailForm = props => {
     <div className="paint-detail">
       <header style={headerStyle}>
         <div>
+        <div>
+            <label htmlFor="email">Paint Donor:</label>
+            <span id="email">{paint.email}</span>
+          </div>
           <div>
             <label htmlFor="brand">Brand:</label>
             <span id="brand">{paint.brand}</span>
           </div>
           <div>
-            <label htmlFor="brand">Name:</label>
+            <label htmlFor="name">Name:</label>
             <span id="name">{paint.name}</span>
           </div>
           <div>
@@ -95,12 +100,12 @@ const SendMailForm = props => {
         </div>
       </header>
 
-      <h1>Would you like send mail to {paint.email}?</h1>
+      <h2>Would you like to connect to {paint.email} about this paint?</h2>
       <p>
         Please enter your email address below. We will set up a temporary email
         account for you that the paint donor can use to contact you and you can
         cancel it with a link that we will send to your inbox. All
-        communications with blah@randomemail will go through this relay.
+        communications with {paint.email} will go through this relay.
       </p>
 
       <form
@@ -144,6 +149,7 @@ const SendMailForm = props => {
           <input type="submit" value="send email"></input>
         </p>
       </form>
+      <Link to="/browsePaint">Back to Paints</Link>
     </div>
   );
 };
