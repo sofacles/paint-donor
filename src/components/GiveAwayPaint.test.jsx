@@ -33,7 +33,7 @@ describe("GiveAwayPaint form", () => {
   });
 
   it("renders without throwing exceptions", () => {
-    render(<GiveAwayPaint />);
+    render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
   });
 
   it("POSTs a paint unit when you submit the form", async () => {
@@ -107,7 +107,7 @@ describe("GiveAwayPaint form", () => {
   // TODO figure out how to test photo upload
 
   it("does not POST an empty paint form", async () => {
-    const { container } = render(<GiveAwayPaint />);
+    const { container } = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
     await fireEvent.submit(container.querySelector("form"));
 
     expect(axios.post).toHaveBeenCalledTimes(0);
@@ -116,7 +116,7 @@ describe("GiveAwayPaint form", () => {
   describe("Error messages when a single field is missing", () => {
    
     it("shows missing name Errors", async () => {
-      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      const {container, getByLabelText} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
@@ -131,7 +131,7 @@ describe("GiveAwayPaint form", () => {
     });
 
     it("shows missing brand Errors", async () => {
-      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      const {container, getByLabelText} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Email:"), makeEventArgs("email", "someString"));
@@ -146,7 +146,7 @@ describe("GiveAwayPaint form", () => {
     });
 
     it("shows missing email Errors", async () => {
-      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      const {container, getByLabelText} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
@@ -160,7 +160,7 @@ describe("GiveAwayPaint form", () => {
     });
 
     it("shows missing confirmEmail error", async () => {
-      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      const {container, getByLabelText} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
@@ -174,7 +174,7 @@ describe("GiveAwayPaint form", () => {
     });
 
     it("shows missing zip code error", async () => {
-      const {container, getByLabelText} = render(<GiveAwayPaint />);
+      const {container, getByLabelText} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
       fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
       fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
       fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
@@ -189,7 +189,7 @@ describe("GiveAwayPaint form", () => {
   });
 
   it("shows missing brand Error on blur", async () => {
-    const { container, getByLabelText } = render(<GiveAwayPaint />);
+    const { container, getByLabelText } = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
     fireEvent.click(getByLabelText("Brand:"));
     fireEvent.blur(getByLabelText( "Brand:"));
     expect(container.querySelector("p.error span").textContent).toBe(
@@ -201,7 +201,7 @@ describe("GiveAwayPaint form", () => {
     const { container } = render(
       <div>
         <div id="modal-root"></div>
-        <GiveAwayPaint />
+        <BrowserRouter><GiveAwayPaint /></BrowserRouter>
       </div>
     );
     fireEvent.click(getByTestId(container, "rgbIconLink"));
@@ -211,7 +211,7 @@ describe("GiveAwayPaint form", () => {
   });
 
   it("Shows error and does not POST if no file uploaded nor RGB", async () => {
-    const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
+    const {container, getByLabelText, getByTestId} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
     fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
     fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
@@ -228,7 +228,7 @@ describe("GiveAwayPaint form", () => {
   });
 
   it("POSTs if file is uploaded, but no RGB", async () => {
-    const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
+    const {container, getByLabelText, getByTestId} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
     fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
     fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));
@@ -254,7 +254,7 @@ describe("GiveAwayPaint form", () => {
   });
 
   it("POSTs if RGB is set but no file is uploaded, ", async () => {
-    const {container, getByLabelText, getByTestId} = render(<GiveAwayPaint />);
+    const {container, getByLabelText, getByTestId} = render(<BrowserRouter><GiveAwayPaint /></BrowserRouter>);
     fireEvent.change(getByLabelText("Color Name:"), makeEventArgs("name", "savage"));
     fireEvent.change(getByLabelText("Quantity:"), makeEventArgs("quantity", "less than a gallon"));
     fireEvent.change(getByLabelText("Brand:"), makeEventArgs("brand", "Behr"));

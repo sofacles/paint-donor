@@ -12,7 +12,7 @@ describe("navigates..", () => {
             cy.get("#zipCode").type(json.zipCode);
             cy.get("#save").click();
             cy.url().should('include', '/ThankYou')
-            cy.get("div").should('contain', 'Thanks for posting your paint');
+            cy.get("div").should('contain', 'Hey, Thanks for making your paint available!');
         })
     })
 
