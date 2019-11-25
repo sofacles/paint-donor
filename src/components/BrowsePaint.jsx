@@ -24,11 +24,12 @@ const BrowsePaint = () => {
     return <PaintTile key={chip._id} paintUnit={chip} />;
   });
 
-  const abortController = new AbortController();
+  
   const [isRedirectingToHome] = useState(
     document.cookie.indexOf("HasSeenHomeScreen=true") === -1
   );
   useEffect(() => {
+    const abortController = new AbortController();
     if (!isRedirectingToHome) {
       fetch("/api/paints/1234")
         .then(x => x.text())
@@ -38,7 +39,7 @@ const BrowsePaint = () => {
     }
 
     return abortController.abort();
-  }, [abortController, isRedirectingToHome]);
+  }, [ isRedirectingToHome]);
 
   const homeStyle = {
     display: "flex",
