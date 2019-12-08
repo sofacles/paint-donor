@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const config = require("../../config");
 const dbURI = config.MongoUrl;
+const dbOptions = config.options;
 
 function handleNonInitialConnectionError(error) {
   console.log("Error with connection to MongoDB.. not initial connection:");
@@ -27,7 +28,7 @@ mongoose.connection.on('connected', function () {
     console.log('Mongoose default connection disconnected'); 
   });
 
-mongoose.connect(dbURI, { useNewUrlParser: true });
+mongoose.connect(dbURI, dbOptions);
 
 module.exports = mongoose;
 
