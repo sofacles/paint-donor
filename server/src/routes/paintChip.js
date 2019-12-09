@@ -2,9 +2,13 @@ const fs = require("fs");
 const path = require("path");
 const { PaintCan } = require("../../../models");
 const sharp = require("sharp");
+const {encrypt} = require("../../src/cryptoService");
 
 const addPaintCan = async (req, res) => {
-  var paintObj = req.query;
+  const postedPaint = req.query;
+  let paintObj = Object.assign({}, req.query);
+  paintObj.email = encrypt(postedPaint.email);
+
   //I want to force validation of rgb or imageName to occur on this posted object, so setting them to empty strings
   paintObj.rgb = paintObj.rgb ? paintObj.rgb : "";
   paintObj.imageName = "";
