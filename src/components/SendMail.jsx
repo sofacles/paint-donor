@@ -75,10 +75,6 @@ const SendMailForm = props => {
     <div className="paint-detail">
       <header style={headerStyle}>
         <div>
-        <div>
-            <label htmlFor="email">Paint Donor:</label>
-            <span id="email">{paint.email}</span>
-          </div>
           <div>
             <label htmlFor="brand">Brand:</label>
             <span id="brand">{paint.brand}</span>
@@ -100,7 +96,7 @@ const SendMailForm = props => {
         </div>
       </header>
 
-      <h2>Would you like to connect to {paint.email} about this paint?</h2>
+      <h2>Would you like to send a message to the donor of this paint?</h2>
       <p>
         Please enter your email address below. We will set up a temporary email
         account for you that the paint donor can use to contact you and you can

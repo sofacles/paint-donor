@@ -47,7 +47,16 @@ const getPaints = async (req, res) => {
     if(err) {
       res.send(err);
     }
-    res.send(paints);
+    const paintsWithoutEmails = paints.map(p => ({
+      rgb: p.rgb,
+        brand: p.brand,
+        name: p.brand,
+        quantity: p.quantity,
+        sheen: p.sheen,
+        imageName: p.imageName,
+        _id: p._id
+    }));
+    res.send(paintsWithoutEmails);
   });
 }
 
