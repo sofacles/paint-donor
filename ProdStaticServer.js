@@ -1,3 +1,19 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+
+const bodyParser = require("body-parser");
+const paintChipRoute = require("./server/src/routes/paintChip");
+const emailRoute = require("./server/src/routes/sendMail");
+
+const port = process.env.PORT || 3000;
+
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'test.html'));
+});
+
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -35,10 +51,6 @@ const upload = multer({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// user
-app.get("/api/users/:id", (req, res) => {
-    res.send({ok: true});
-});
 
 app.get("/api/paints/:id", paintChipRoute.getPaints);
 
@@ -46,4 +58,4 @@ app.post("/api/paints", upload.single('imageData'), paintChipRoute.addPaintCan);
 
 app.post("/api/mail", emailRoute.sendMail);
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port);

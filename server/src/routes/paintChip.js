@@ -47,6 +47,8 @@ const addPaintCan = async (req, res) => {
 
 
 const getPaints = async (req, res) => {
+  console.log("**** top of getPaints route");
+  console.info(PaintCan);
   PaintCan.find({}, (err, paints) => {
     if(err) {
       res.send(err);
