@@ -32,7 +32,7 @@ const BrowsePaint = () => {
     const abortController = new AbortController();
     debugger;
     if (!isRedirectingToHome) {
-      fetch("/api/paints/1234")
+      fetch("/api/paints?zip=12345")
         .then(x => x.text())
         .then(t => {
           debugger;

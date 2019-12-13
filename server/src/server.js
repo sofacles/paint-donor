@@ -1,3 +1,11 @@
+  
+const express = require("express");
+const bodyParser = require("body-parser");
+const paintChipRoute = require("./routes/paintChip");
+const emailRoute = require("./routes/sendMail");
+
+const app = express();
+const port = process.env.PORT || 5000;
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -40,7 +48,7 @@ app.get("/api/users/:id", (req, res) => {
     res.send({ok: true});
 });
 
-app.get("/api/paints/:id", paintChipRoute.getPaints);
+app.get("/api/paints/", paintChipRoute.getPaints);
 
 app.post("/api/paints", upload.single('imageData'), paintChipRoute.addPaintCan);
 
