@@ -11,6 +11,7 @@ import { RgbDisplay } from "./RgbDisplay";
 import { RgbIcon } from "./RgbIcon";
 import UseForm from "./UseForm";
 import ValidationRulesObj from "./PaintFormValidationRules";
+import Config from "../ClientConfig";
 
 const uuid = require("uuid/v4");
 const querystring = require("querystring");
@@ -26,7 +27,7 @@ const GiveAwayPaint = () => {
     let qs = querystring.encode(fields);
 
     axios
-      .post(`/api/paints?${qs}`, formObj)
+      .post(`${Config.BASE_API_URL}/api/paints/?${qs}`, formObj)
       .then(data => {
         if (data.status === 200) {
           setPaintPosted(true);

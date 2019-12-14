@@ -50,7 +50,7 @@ app.get("/api/users/:id", (req, res) => {
 
 app.get("/api/paints/", paintChipRoute.getPaints);
 
-app.post("/api/paints", upload.single('imageData'), paintChipRoute.addPaintCan);
+app.post("/api/paints/", upload.single('imageData'), paintChipRoute.addPaintCan);
 
 app.post("/api/mail", emailRoute.sendMail);
 
