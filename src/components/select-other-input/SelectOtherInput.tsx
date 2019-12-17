@@ -83,7 +83,6 @@ const SelectOtherInput: React.FC<props> = ({ onNewValue, onBlur, initialValues, 
                     onNewValue(v);
                 }}
                 onBlur={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                    debugger;
                     onBlur(e);
                 }}
                 userWantsToCreateCustomValue={(showInputBox: boolean) => {

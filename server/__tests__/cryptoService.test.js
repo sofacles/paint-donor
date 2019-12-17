@@ -8,12 +8,4 @@ describe("crypto service", () => {
         const decryptedString = decrypt(encryptedString);
         expect(decryptedString).toEqual("odoacer@huns.gov");
     });
-
-    it("can encrypt a short string and then decrypt it", () => {
-
-        const encryptedString = encrypt("doodoo");
-        console.log(encryptedString);
-        const decryptedString = decrypt(encryptedString);
-        expect(decryptedString).toEqual("doodoo");
-    });
 });

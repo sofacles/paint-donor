@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
 const emailRoute = require("./routes/sendMail");
+const config = require("../../config")
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -10,8 +11,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/uploads/');
-        ///home/steve/websites/paint-donor/public/uploads
+        cb(null, config.uploadsFolder);
     },
     filename: function (req, file, cb) {
         let imageName = req.body.imageName;
@@ -43,11 +43,6 @@ const upload = multer({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// user
-app.get("/api/users/:id", (req, res) => {
-    res.send({ok: true});
-});
 
 app.get("/api/paints/", paintChipRoute.getPaints);
 

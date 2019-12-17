@@ -101,7 +101,7 @@ describe("GiveAwayPaint form", () => {
     });
    
     expect((axios.post.mock.calls[0][0] + "").length).toEqual(
-      (`/api/paints?${querystring.encode(someState)}`).length);
+      (`/api/paints/?${querystring.encode(someState)}`).length);
   });
 
   // TODO figure out how to test photo upload
