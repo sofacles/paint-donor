@@ -11,6 +11,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads/');
+        ///home/steve/websites/paint-donor/public/uploads
     },
     filename: function (req, file, cb) {
         let imageName = req.body.imageName;

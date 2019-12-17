@@ -7,7 +7,7 @@ const Home = () => {
   document.cookie = "HasSeenHomeScreen=true";
   return (
     <>
-      <h1>Scrap Paint Exchange</h1>
+      <h1>Do not use this site! It is under construction and highly dangerous.</h1>
 
       <BucketIcon />
       <p>

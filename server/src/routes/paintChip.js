@@ -59,7 +59,7 @@ const getPaints = async (req, res) => {
     const paintsWithoutEmails = paints.map(p => ({
       rgb: p.rgb,
         brand: p.brand,
-        name: p.brand,
+        name: p.name,
         quantity: p.quantity,
         sheen: p.sheen,
         imageName: p.imageName,
