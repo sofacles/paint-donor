@@ -8,7 +8,7 @@ const config = {
         BASE_API_URL: ""
     },
     production: {
-        BASE_API_URL: "http://thegerm.us"
+        BASE_API_URL: "http://paint.thegerm.us"
     }
 }
 
