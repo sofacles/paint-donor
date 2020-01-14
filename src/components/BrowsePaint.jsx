@@ -31,7 +31,7 @@ const BrowsePaint = () => {
   useEffect(() => {
     const abortController = new AbortController();
     if (!isRedirectingToHome) {
-      fetch("http://localhost:5000/api/paints?id=1234")
+      fetch("/api/paints?id=1234")
         .then(x => x.text())
         .then(t => {
           setPaintChips({ paintChips: JSON.parse(t) });
@@ -48,14 +48,14 @@ const BrowsePaint = () => {
   };
 
   return isRedirectingToHome ? (
-    <Redirect to="/Home" />
+    <Redirect to="/home" />
   ) : (
     <div>
       <h1>Available Paint</h1>
       <div style={homeStyle}>{theTiles}</div>
 
       <div>
-        <Link to="/giveAwayPaint">I have paint to donate</Link>
+        <Link to="/giveawaypaint">I have paint to donate</Link>
       </div>
     </div>
   );
