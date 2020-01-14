@@ -31,7 +31,7 @@ const BrowsePaint = () => {
   useEffect(() => {
     const abortController = new AbortController();
     if (!isRedirectingToHome) {
-      fetch("/api/paints/1234")
+      fetch("http://localhost:5000/api/paints?id=1234")
         .then(x => x.text())
         .then(t => {
           setPaintChips({ paintChips: JSON.parse(t) });

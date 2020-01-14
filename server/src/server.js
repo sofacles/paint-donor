@@ -1,3 +1,4 @@
+  
 const express = require("express");
 const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
@@ -5,12 +6,13 @@ const emailRoute = require("./routes/sendMail");
 
 const app = express();
 const port = process.env.PORT || 5000;
-
 const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/uploads/');
+        //cb(null, './public/uploads/');
+        cb(null, '/home/steve/websites/paint-donor/public/uploads/');
+        ///home/steve/websites/paint-donor/public/uploads
     },
     filename: function (req, file, cb) {
         let imageName = req.body.imageName;
@@ -40,17 +42,17 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit:"50mb"}));
+app.use(bodyParser.urlencoded({ extended: true, limit:"50mb" }));
 
 // user
 app.get("/api/users/:id", (req, res) => {
     res.send({ok: true});
 });
 
-app.get("/api/paints/:id", paintChipRoute.getPaints);
+app.get("/api/paints/", paintChipRoute.getPaints);
 
-app.post("/api/paints", upload.single('imageData'), paintChipRoute.addPaintCan);
+app.post("/api/paints/", upload.single('imageData'), paintChipRoute.addPaintCan);
 
 app.post("/api/mail", emailRoute.sendMail);
 
