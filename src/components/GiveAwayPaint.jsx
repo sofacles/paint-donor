@@ -59,7 +59,7 @@ const GiveAwayPaint = () => {
       <form onSubmit={e => handleSubmit(e)}>
         <h2>I want to give away some paint!</h2>
         <aside>
-        <Link to="/browsePaint">Back to Paints</Link>
+        <Link to="/browsepaint">Back to Paints</Link>
         </aside>
         <SelectOtherInput
           id="brand"

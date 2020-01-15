@@ -49,14 +49,14 @@ const BrowsePaint = () => {
   };
 
   return isRedirectingToHome ? (
-    <Redirect to="/Home" />
+    <Redirect to="/home" />
   ) : (
     <div>
       <h1>Available Paint</h1>
       <div style={homeStyle}>{theTiles}</div>
 
       <div>
-        <Link to="/giveAwayPaint">I have paint to donate</Link>
+        <Link to="/giveawaypaint">I have paint to donate</Link>
       </div>
     </div>
   );

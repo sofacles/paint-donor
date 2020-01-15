@@ -50,7 +50,6 @@ const addPaintCan = async (req, res) => {
 
 
 const getPaints = async (req, res) => {
-
   PaintCan.find({}, (err, paints) => {
     if(err) {
       res.send(err);
