@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const { PaintCan } = require("../../../models");
 const sharp = require("sharp");
-const {encrypt} = require("../../src/cryptoService");
+const { encrypt } = require("../../src/cryptoService");
+const { Logger } = require("../logger");
 
 const addPaintCan = async (req, res) => {
   const postedPaint = req.query;
@@ -22,8 +23,7 @@ const addPaintCan = async (req, res) => {
     .png()
     .toFile(newPath);
     } catch (error) {
-      console.log("Exception caught resizing");
-      console.info(error);
+      Logger.error("Exception caught resizing", JSON.stringify(error));
     }
 
     //delete the large file
@@ -34,15 +34,15 @@ const addPaintCan = async (req, res) => {
 
   let result = "unset";
   try {
+    Logger.info(JSON.stringify(paintObj));
     let paintChip = new PaintCan(paintObj);
     result = await paintChip.save();
   } catch (error) {
-    console.info(error);
+    Logger.info(JSON.stringify(error));
   }
  
   if(result.errors){
-    console.info(result.errors);
-    res.send(result.errors);
+    Logger.info("Saved without throwing, but there are errors:", JSON.stringify(result.errors));
   } else {
     res.send(result);
   }
@@ -50,7 +50,6 @@ const addPaintCan = async (req, res) => {
 
 
 const getPaints = async (req, res) => {
-
   PaintCan.find({}, (err, paints) => {
     if(err) {
       res.send(err);
