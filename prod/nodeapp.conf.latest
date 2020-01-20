@@ -1,0 +1,23 @@
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name 1lesscan.us;
+  client_max_body_size 10M;
+
+  location / { 
+      proxy_pass http://localhost:3000/;
+   }
+
+   location /giveawaypaint {
+     proxy_pass http://localhost:3000/;
+   }
+
+   location /browsepaint {
+      proxy_pass http://localhost:3000/;
+   }
+  
+   location /api/paints/ {
+       proxy_pass http://localhost:5000/api/paints/;  
+  }
+}
