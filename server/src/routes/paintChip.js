@@ -6,6 +6,8 @@ const { encrypt } = require("../../src/cryptoService");
 const { Logger } = require("../logger");
 
 const addPaintCan = async (req, res) => {
+  Logger.info("At top of addPaintCan");
+  Logger.info(`process.env.NODE_ENV is: ${process.env.NODE_ENV}`)
   const postedPaint = req.query;
   let paintObj = Object.assign({}, req.query);
   paintObj.email = encrypt(postedPaint.email);
@@ -15,8 +17,8 @@ const addPaintCan = async (req, res) => {
   if(req.file && req.body.imageName) {
     const { filename: image } = req.file;
     let newPath = path.resolve(req.file.destination,'resized', image).replace(".jpg", ".png");
-
-    //Obviously, I should figure out how to offload this work to another service, but let me deploy just once...
+    Logger.info(`resized photo upload path: ${newPath}`);
+    //I should figure out how to offload this work to another service
     try {
       await sharp(req.file.path)
     .resize(256)

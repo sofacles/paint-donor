@@ -55,7 +55,7 @@ const SendMailForm = props => {
 
   const onValidationSuccess = fields => {
     let qs = querystring.encode(fields);
-    Axios.post(`/api/mail?${qs}`, {
+    Axios.post(`/api/mail/?${qs}`, {
       fromEmail: fields,
       paint: paint
     }).then(res => {

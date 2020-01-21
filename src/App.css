@@ -157,3 +157,9 @@
   height: 60px;
   background-color: lime;
 }
+
+.warning {
+  background-color: #E22;
+  padding: 20px;
+  font-weight: bold;
+}

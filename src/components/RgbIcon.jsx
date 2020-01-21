@@ -20,7 +20,7 @@ const RgbIcon = (props) => {
     const Style783089 = { fill: "#783089" };
    
     
-    return (<a href="/" data-testid="rgbIconLink" title="color picker"
+    return (<a href="/" data-testid="rgbIconLink" title="Click to use the color picker!"
         onClick={(e) => { 
             e.preventDefault();
             props.onClick(e);
