@@ -20,7 +20,7 @@ const ColorPicker = (props) => {
 
     for(let rValue = COLOR_MAX; rValue >= 0 ; rValue--) {
         let cells = [];
-        for(let gValue = 0; gValue < COLOR_MAX; gValue++) {
+        for(let gValue = 0; gValue <= COLOR_MAX; gValue++) {
             cells.push(<ColorPixel 
                         updateSelectedValue={onNewValue}
                         r={rValue} 
