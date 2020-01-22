@@ -6,7 +6,9 @@ const ThirdColorControl = () => {
   const [blueValue, setBlueValue] = useContext(ThirdColorContext);
 
   const MAX_COLOR = 15;
-  const upClick = () => {
+  const upClick = (event) => {
+    console.info(event);
+    event.preventDefault();
     setBlueValue(b => {
       if (b.thirdColorLevel < MAX_COLOR) {
         return {
@@ -16,9 +18,13 @@ const ThirdColorControl = () => {
       }
       return { ...blueValue };
     });
+
+    return false;
   };
 
-  const downClick = () => {
+  const downClick = (event) => {
+    console.info(event);
+    event.preventDefault();
     setBlueValue(b => {
       if (b.thirdColorLevel > 0) {
         return {
@@ -28,6 +34,8 @@ const ThirdColorControl = () => {
       }
       return { ...blueValue };
     });
+
+    return false;
   };
 
   const sliderContainerStyle = {
@@ -42,10 +50,11 @@ const ThirdColorControl = () => {
 
   return (
     <div style={sliderContainerStyle}>
-      <div title="increase blue" onClick={upClick}>
+      <div title="increase blue" onMouseDown={upClick} onTouchStart={upClick}>
         <Arrow direction="up"  />
       </div>
-      <div title="decrease blue" onClick={downClick}>
+      
+      <div title="decrease blue" onMouseDown={downClick} onTouchStart={downClick}>
         <Arrow direction="down" />
       </div>
     </div>

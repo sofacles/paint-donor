@@ -6,11 +6,11 @@ const ArrowButton = ({onClick, direction="up"}) => {
         width: "12px"
     };
 
-    let rotation = 180;
+    let rotation = 180.1;
     if(direction === "down") {
-        rotation = 0;
+        rotation = 0.1;
     }
-
+// Adding .1 to rotation to workaround Safari rotation bug:  https://stackoverflow.com/questions/40363916/svg-transform-rotate-by-90-180-or-270-degrees-not-working-on-circle-in-safari-i 
     return <svg version="1.1" 
             xmlns="http://www.w3.org/2000/svg" 
             xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
