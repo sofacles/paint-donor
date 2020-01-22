@@ -9,7 +9,12 @@ const ColorPixel = (props) => {
     const hexValue =  HexValues[props.r] + HexValues[props.g] + HexValues[props.b];
     const [blueValue, blueValueSet] = useContext(ThirdColorContext);
     let style = {
-        backgroundColor: "#" + hexValue
+        backgroundColor: "#" + hexValue,
+        border: `1px solid #${hexValue}`
+    }
+
+    if(blueValue.selectedHexValue === hexValue + "") {
+        style.border = "1px solid lime";
     }
 
     return (<div className="color-pixel" 

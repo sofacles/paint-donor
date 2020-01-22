@@ -60,6 +60,7 @@
 
 .color-pixel {
   display: inline-block;
+  box-sizing: border-box;
   height: 8px;
   width: 8px;
 }

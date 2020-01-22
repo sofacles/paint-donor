@@ -10,10 +10,15 @@ const ThirdColorControl = () => {
     console.info(event);
     event.preventDefault();
     setBlueValue(b => {
+      
       if (b.thirdColorLevel < MAX_COLOR) {
+        const oldBlu = parseInt(b.selectedHexValue[2], 16);
+        let newBlu = oldBlu + 1;
+
         return {
           ...blueValue,
-          thirdColorLevel: b.thirdColorLevel + 1
+          thirdColorLevel: b.thirdColorLevel + 1,
+          selectedHexValue: (b.selectedHexValue.substring(0,2) + newBlu.toString(16)).toUpperCase()
         };
       }
       return { ...blueValue };
@@ -27,9 +32,13 @@ const ThirdColorControl = () => {
     event.preventDefault();
     setBlueValue(b => {
       if (b.thirdColorLevel > 0) {
+        const oldBlu = parseInt(b.selectedHexValue[2], 16);
+        let newBlu = oldBlu - 1;
+
         return {
           ...blueValue,
-          thirdColorLevel: b.thirdColorLevel - 1
+          thirdColorLevel: b.thirdColorLevel - 1,
+          selectedHexValue: (b.selectedHexValue.substring(0,2) + newBlu.toString(16)).toUpperCase()
         };
       }
       return { ...blueValue };

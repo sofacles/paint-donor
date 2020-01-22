@@ -9,7 +9,7 @@ const ThirdColorContext = createContext([{}, () => {}]);
 const ThirdColorProvider = (props) => {
     const [state, setState ] = useState({
         thirdColorLevel: 0,
-        selectedHexValue: "pick color"
+        selectedHexValue: "770"
     });
     return <ThirdColorContext.Provider value={[state, setState]}>
         {props.children}
