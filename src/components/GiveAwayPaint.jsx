@@ -59,7 +59,7 @@ const GiveAwayPaint = () => {
       <form onSubmit={e => handleSubmit(e)}>
         <h2>I want to give away some paint!</h2>
         <aside>
-        <Link to="/browsePaint">Back to Paints</Link>
+          <Link to="/browsePaint">Back to Paints</Link>
         </aside>
         <SelectOtherInput
           id="brand"
@@ -71,7 +71,7 @@ const GiveAwayPaint = () => {
               }
             });
           }}
-          onBlur={(e) => {
+          onBlur={e => {
             blurField(e);
           }}
           initialValues={[
@@ -94,7 +94,6 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-
         <label htmlFor="name">Color Name:</label>
         <input
           name="name"
@@ -112,7 +111,7 @@ const GiveAwayPaint = () => {
           </p>
         )}
 
-<SelectOtherInput
+        <SelectOtherInput
           id="quantity"
           onNewValue={newValue => {
             setField({
@@ -122,18 +121,18 @@ const GiveAwayPaint = () => {
               }
             });
           }}
-          onBlur={(e) => {
+          onBlur={e => {
             blurField(e);
           }}
           initialValues={[
             "- choose -",
-           "about a quart",
-           "less than a gallon",
-           "less than two gallons",
-           "less than five gallons",
-           "other"
+            "about a quart",
+            "less than a gallon",
+            "less than two gallons",
+            "less than five gallons",
+            "other"
           ]}
-        label="Quantity:"
+          label="Quantity:"
         />
 
         {errors.quantity && (
@@ -220,8 +219,35 @@ const GiveAwayPaint = () => {
             setField(e);
           }}
         />
-        <h4> - or - use the color picker</h4>
+
         <ThirdColorProvider>
+          <h4>
+           You can also use the 
+            <ToggleContent
+              toggle={show => (
+                <span className="emphasize-on-hover" onClick={e => {
+                  show();
+                }}
+                >
+                  color picker    
+                </span>
+                  
+              )}
+              content={hide => (
+                <Modal>
+                  <ColorPicker onColorChosen={onColorSelected} />
+                  <button
+                    onClick={e => {
+                      e.preventDefault();
+                      hide();
+                    }}
+                  >
+                    Close
+                  </button>
+                </Modal>
+              )}
+            />
+          </h4>
           <ToggleContent
             toggle={show => (
               <p>
