@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../App.css";
 import { ThirdColorContext } from "./ThirdColor/ThirdColorContext";
+import OppositeColor from "../OppositeColor";
 
 const HexValues = ['0', '1', '2', '3','4', '5', '6','7', '8',
 '9', 'A','B','C','D','E','F' ];
@@ -14,7 +15,7 @@ const ColorPixel = (props) => {
     }
 
     if(blueValue.selectedHexValue === hexValue + "") {
-        style.border = "1px solid lime";
+        style.border = `1px solid #${OppositeColor(hexValue)}`;
     }
 
     return (<div className="color-pixel" 

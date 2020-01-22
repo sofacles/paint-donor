@@ -4,6 +4,7 @@ import { ColorPixel } from "./ColorPixel";
 import ThirdColorControl from "./ThirdColor/ThirdColorControl";
 import { ThirdColorContext } from "./ThirdColor/ThirdColorContext";
 import { TwoDotAxisLabel } from "./TwoDotAxisLabel";
+import OppositeColor from "../OppositeColor";
 
 
 const ColorPicker = (props) => {
@@ -31,7 +32,8 @@ const ColorPicker = (props) => {
     }
 
     let selectedColorStyle = {
-        backgroundColor: "#" + blueValue.selectedHexValue
+        backgroundColor: "#" + blueValue.selectedHexValue,
+        color: "#" + OppositeColor(blueValue.selectedHexValue)
     };
 
     return  <div className="color-picker-container">
