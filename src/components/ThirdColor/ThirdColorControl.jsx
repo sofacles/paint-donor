@@ -7,7 +7,6 @@ const ThirdColorControl = () => {
 
   const MAX_COLOR = 15;
   const upClick = (event) => {
-    console.info(event);
     event.preventDefault();
     setBlueValue(b => {
       
@@ -28,7 +27,6 @@ const ThirdColorControl = () => {
   };
 
   const downClick = (event) => {
-    console.info(event);
     event.preventDefault();
     setBlueValue(b => {
       if (b.thirdColorLevel > 0) {
