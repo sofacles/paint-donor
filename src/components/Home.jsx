@@ -33,7 +33,8 @@ const Home = () => {
       </p>
 
       <p className="warning">
-        1lesscan.us may be down for maintenance between 6:00 PM and Midnight PST on any given night during January of 2020.
+        1lesscan.us will frequently be down for while I figure out how to get SSL working and dockerize this thing. So, I will try to not mess with it too much on weekdays
+        between 9:00 AM and 5:00 PM PST, but outside of those hours, the site might be "closed". 
       </p>
 
       <div className="home-button-holder">
