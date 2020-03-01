@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { PaintCan } = require("../../../models");
+const { PaintCan } = require("../../models");
 const sharp = require("sharp");
 const { encrypt } = require("../../src/cryptoService");
 const { Logger } = require("../logger");

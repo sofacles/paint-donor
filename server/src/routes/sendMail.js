@@ -1,4 +1,4 @@
-const { PaintCan } = require("../../../models");
+const { PaintCan } = require("../../models");
 const { decrypt } = require("../../src/cryptoService");
 const { Logger } = require("../logger");
 
