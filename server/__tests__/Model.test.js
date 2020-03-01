@@ -1,4 +1,4 @@
-const PaintChip = require("../../models/PaintCan");
+const PaintChip = require("../models/PaintCan");
 const mongoose = require("mongoose");
 const { PaintCanSchema, PaintCan } = PaintChip(mongoose);
 
