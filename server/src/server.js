@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
 const emailRoute = require("./routes/sendMail");
+const healthCheckRoute = require("./routes/healthCheck");
 const config = require("../../config")
 
 const app = express();
@@ -43,11 +44,9 @@ const upload = multer({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.get("/api/healthCheck", healthCheckRoute.healthCheck);
 app.get("/api/paints/", paintChipRoute.getPaints);
-
 app.post("/api/paints/", upload.single('imageData'), paintChipRoute.addPaintCan);
-
 app.post("/api/mail", emailRoute.sendMail);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
