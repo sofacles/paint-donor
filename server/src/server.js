@@ -1,10 +1,9 @@
-  
 const express = require("express");
 const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
 const emailRoute = require("./routes/sendMail");
 const healthCheckRoute = require("./routes/healthCheck");
-const config = require("../../config")
+const config = require("../config")
 
 const app = express();
 const port = process.env.PORT || 5000;

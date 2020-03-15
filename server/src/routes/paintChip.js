@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { PaintCan } = require("../../models");
 const sharp = require("sharp");
-const { encrypt } = require("../../src/cryptoService");
+const { encrypt } = require("../cryptoService");
 const { Logger } = require("../logger");
 
 const addPaintCan = async (req, res) => {

@@ -21,6 +21,9 @@
     "@shelf/jest-mongodb": "^1.1.2",
     "jest": "^24.9.0",
     "multer": "^1.4.2",
-    "sharp": "^0.24.0"
+    "sharp": "^0.24.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.7.5",
+    "winston": "^3.2.1"
   }
 }
