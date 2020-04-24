@@ -3,6 +3,7 @@ const { decrypt } = require("../../src/cryptoService");
 const { Logger } = require("../logger");
 
 const sendMail = async (req, res) => {
+    Logger.info("Top of sendMail")
     const paintObj = req.body.paint;
 
     const thisPaint = await PaintCan.findOne({_id: paintObj._id});
@@ -18,7 +19,7 @@ const sendMail = async (req, res) => {
         let paintChip = new PaintCan(paintObj);
         res.send({fakeEmailSent: true});
     } catch (error) {
-        console.info(error);
+        Logger.info(error);
         res.send({status: "error"})
     }
 };

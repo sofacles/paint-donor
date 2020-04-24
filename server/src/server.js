@@ -4,6 +4,7 @@ const paintChipRoute = require("./routes/paintChip");
 const emailRoute = require("./routes/sendMail");
 const healthCheckRoute = require("./routes/healthCheck");
 const config = require("../config")
+const pageViewRoute = require("./routes/pageView");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -47,5 +48,5 @@ app.get("/api/healthCheck", healthCheckRoute.healthCheck);
 app.get("/api/paints/", paintChipRoute.getPaints);
 app.post("/api/paints/", upload.single('imageData'), paintChipRoute.addPaintCan);
 app.post("/api/mail", emailRoute.sendMail);
-
+app.get("api/pageView", pageViewRoute.homePage);
 app.listen(port, () => console.log(`Listening on port ${port}`));

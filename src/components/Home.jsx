@@ -32,11 +32,6 @@ const Home = () => {
         to the donor of that paint. I recommend using fake email addresses until I set up a real SSL certificate and integrate with an email service.
       </p>
 
-      <p className="warning">
-        1lesscan.us will frequently be down for while I figure out how to get SSL working and dockerize this thing. So, I will try to not mess with it too much on weekdays
-        between 9:00 AM and 5:00 PM PST, but outside of those hours, the site might be "closed". 
-      </p>
-
       <div className="home-button-holder">
         <Link to="/giveawaypaint" className="jumbo-button">
           <span> I want to give away paint </span>
@@ -46,6 +41,7 @@ const Home = () => {
           <span> I'm looking for paint</span>
         </Link>
       </div>
+      <img src="api/pageView" />
     </>
   );
 };
