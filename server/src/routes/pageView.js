@@ -1,10 +1,12 @@
 const { Logger } = require("../logger");
+const path = require('path');
 
 const homePage = async (req, res) => {
-  const logMsg = `HomePage requested ${new Date()} from ${request.connection.remoteAddress}` 
-   + ` Fwd4: ${request.headers['x-forwarded-for']}`;
+  const logMsg = `HomePage requested ${new Date()} from ${req.connection.remoteAddress}` 
+   + ` Fwd4: ${req.headers['x-forwarded-for']}`;
    Logger.info(logMsg);
-   res.sendFile('1x1.png');
+   res.setHeader('Content-Type','image/png');
+   res.sendFile(path.join(__dirname, '../../images/1x1.png'));
 };
 
 module.exports = {
