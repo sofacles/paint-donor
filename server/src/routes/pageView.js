@@ -1,7 +1,7 @@
 const { Logger } = require("../logger");
 const path = require('path');
 
-const get = async (req, res) => {
+const pageView = async (req, res) => {
   const knownUrls = ['home', 'browse', 'colorPicker', 'donate'];
   if(!req.query['pg'] || knownUrls.indexOf(req.query['pg']) === -1) {
     Logger.error(`Somebody is requesting something with a weird qs: ${JSON.stringify(req.query)}`);
@@ -16,6 +16,4 @@ const get = async (req, res) => {
    res.sendFile(path.join(__dirname, '../../images/1x1.png'));
 };
 
-module.exports = {
-  get 
-}
+module.exports = pageView;
