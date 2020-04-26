@@ -57,6 +57,7 @@ const BrowsePaint = () => {
 
       <div>
         <Link to="/giveAwayPaint">I have paint to donate</Link>
+        <img src="api/pageView?pg=browse" />
       </div>
     </div>
   );

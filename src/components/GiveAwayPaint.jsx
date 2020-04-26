@@ -312,6 +312,7 @@ const GiveAwayPaint = () => {
           </div>
         </div>
       </form>
+      <img src="api/pageView?pg=donate" />
     </div>
   );
 };

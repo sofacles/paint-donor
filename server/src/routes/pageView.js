@@ -1,8 +1,15 @@
 const { Logger } = require("../logger");
 const path = require('path');
 
-const homePage = async (req, res) => {
-  const logMsg = `HomePage requested ${new Date()} from ${req.connection.remoteAddress}` 
+const get = async (req, res) => {
+  const knownUrls = ['home', 'browse', 'colorPicker', 'donate'];
+  if(!req.query['pg'] || knownUrls.indexOf(req.query['pg']) === -1) {
+    Logger.error(`Somebody is requesting something with a weird qs: ${JSON.stringify(req.query)}`);
+    res.send("{bar:'gooskis'}");
+    return;
+  } 
+  console.log(`pageView for ${req.query['pg']}`);
+  const logMsg = `${req.query['pg']} requested: ${new Date()} from: ${req.connection.remoteAddress}` 
    + ` Fwd4: ${req.headers['x-forwarded-for']}`;
    Logger.info(logMsg);
    res.setHeader('Content-Type','image/png');
@@ -10,5 +17,5 @@ const homePage = async (req, res) => {
 };
 
 module.exports = {
-  homePage 
+  get 
 }

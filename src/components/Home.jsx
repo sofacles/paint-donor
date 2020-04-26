@@ -41,7 +41,7 @@ const Home = () => {
           <span> I'm looking for paint</span>
         </Link>
       </div>
-      <img src="api/pageView" />
+      <img src="api/pageView?pg=home" />
     </>
   );
 };
