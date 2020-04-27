@@ -44,9 +44,9 @@ const upload = multer({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get("/api/healthCheck", healthCheckRoute.healthCheck);
+app.get("/api/healthcheck", healthCheckRoute.healthCheck);
 app.get("/api/paints/", paintChipRoute.getPaints);
 app.post("/api/paints/", upload.single('imageData'), paintChipRoute.addPaintCan);
 app.post("/api/mail", emailRoute.sendMail);
-app.get("/api/pageView", pageViewRoute);
+app.get("/api/pageview", pageViewRoute);
 app.listen(port, () => console.log(`Listening on port ${port}`));

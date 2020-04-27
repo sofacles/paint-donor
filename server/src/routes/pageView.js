@@ -8,7 +8,7 @@ const pageView = async (req, res) => {
     res.send("{bar:'gooskis'}");
     return;
   } 
-  console.log(`pageView for ${req.query['pg']}`);
+  
   const logMsg = `${req.query['pg']} requested: ${new Date()} from: ${req.connection.remoteAddress}` 
    + ` Fwd4: ${req.headers['x-forwarded-for']}`;
    Logger.info(logMsg);

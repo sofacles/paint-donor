@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { PaintTile } from "./PaintTile";
 import { ImageTile } from "./ImageTile";
-import Config from "../ClientConfig";
 
 const BrowsePaint = () => {
   const [paintChips, setPaintChips] = useState({
@@ -25,14 +24,13 @@ const BrowsePaint = () => {
     return <PaintTile key={chip._id} paintUnit={chip} />;
   });
 
-  
   const [isRedirectingToHome] = useState(
     document.cookie.indexOf("HasSeenHomeScreen=true") === -1
   );
   useEffect(() => {
     const abortController = new AbortController();
     if (!isRedirectingToHome) {
-      fetch(`${Config.BASE_API_URL}/api/paints?zip=12345`)
+      fetch(`/api/paints?zip=12345`)
         .then(x => x.text())
         .then(t => {
           setPaintChips({ paintChips: JSON.parse(t) });
@@ -57,7 +55,7 @@ const BrowsePaint = () => {
 
       <div>
         <Link to="/giveAwayPaint">I have paint to donate</Link>
-        <img src="api/pageView?pg=browse" />
+        <img src="/api/pageview?pg=browse" />
       </div>
     </div>
   );

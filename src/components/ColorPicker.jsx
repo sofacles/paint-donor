@@ -48,7 +48,7 @@ const ColorPicker = (props) => {
                 <div className="selected-color" style={selectedColorStyle}>
                     {blueValue.selectedHexValue !== "choose color" && "#"}{blueValue.selectedHexValue}
                 </div>
-                <img src="api/pageView?pg=colorPicker" /> 
+                <img src="/api/pageview?pg=colorPicker" /> 
             </div>
 
 };
