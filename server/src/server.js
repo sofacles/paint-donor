@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const paintChipRoute = require("./routes/paintChip");
 const emailRoute = require("./routes/sendMail");
+const oauthCallbackRoute = require("./routes/oauth2callback");
 const healthCheckRoute = require("./routes/healthCheck");
 const config = require("../config")
 const pageViewRoute = require("./routes/pageView");
@@ -48,5 +49,6 @@ app.get("/api/healthcheck", healthCheckRoute.healthCheck);
 app.get("/api/paints/", paintChipRoute.getPaints);
 app.post("/api/paints/", upload.single('imageData'), paintChipRoute.addPaintCan);
 app.post("/api/mail", emailRoute.sendMail);
+app.post("/api/oauth2callback", oauthCallbackRoute.oauth2callback);
 app.get("/api/pageview", pageViewRoute);
 app.listen(port, () => console.log(`Listening on port ${port}`));

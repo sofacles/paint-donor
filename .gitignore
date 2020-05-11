@@ -28,3 +28,7 @@ config.js
 
 **/*.log
 
+#gmail api key
+/server/lesscanproject1-37f3797dd45e.json
+
+
