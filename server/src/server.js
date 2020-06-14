@@ -6,6 +6,7 @@ const oauthCallbackRoute = require("./routes/oauth2callback");
 const healthCheckRoute = require("./routes/healthCheck");
 const config = require("../config")
 const pageViewRoute = require("./routes/pageView");
+const confirmEmailRoute = require('./routes/confirmEmail');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -50,5 +51,6 @@ app.get("/api/paints/", paintChipRoute.getPaints);
 app.post("/api/paints/", upload.single('imageData'), paintChipRoute.addPaintCan);
 app.post("/api/mail", emailRoute.sendMail);
 app.post("/api/oauth2callback", oauthCallbackRoute.oauth2callback);
-app.get("/api/pageview", pageViewRoute);
+app.get("/api/pageview", pageViewRoute)
+app.post("/api/confirm_email", confirmEmailRoute);
 app.listen(port, () => console.log(`Listening on port ${port}`));

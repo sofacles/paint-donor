@@ -1,11 +1,12 @@
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
+
 const OAuth2 = google.auth.OAuth2;
 
 const config = require("../config");
 const { Logger } = require("./logger");
 
-function sendGMail(brand, name) {
+function sendGMail(to, slug) {
   const oauth2Client = new OAuth2(
     config.gmail.clientId,
     config.gmail.clientSecret,
@@ -28,12 +29,13 @@ function sendGMail(brand, name) {
     },
   });
 
+
   const mailOptions = {
     from: config.gmail.user,
-    to: "somebody.sparkly@gmail.com",
-    subject: "Somebody is interested in your paint",
+    to: to,
+    subject: "Thanks for posting your paint",
     generateTextFromHTML: true,
-    html: `<b>Somebody would like to adopt your ${brand}:${name} paint! </b><div>Do not touch the subject line.  That's how we track which paint is which.</div><img alt="header" src="https://1lesscan.us/apple-icon-144x144.png" />`,
+    html: `<div>Please follow this link to verify your email. <a href="${config.baseUrl}confirm_email?mn=${slug}" >verify</a></div>`,
   };
 
   try {
@@ -42,8 +44,7 @@ function sendGMail(brand, name) {
       smtpTransport.close();
     });
   } catch (err) {
-    Logger.error("error caught in sendGmail!");
-    Logger.error(err);
+    Logger.error({topCall : "error caught in gmailService.sendMail!", err});
   }
 }
 
