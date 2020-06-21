@@ -9,7 +9,7 @@ const ConfirmEmail = (props) => {
   axios
     .post(`/api/confirm_email${loc.search}`)
     .then((res) => {
-      if (res.data.confirmationResult === "emailConfirmwed") {
+      if (res.data.confirmationResult === "emailConfirmed") {
         setEmailConfirmed(true);
       } else {
         setStatusMessage(res.data.confirmationResult);

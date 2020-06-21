@@ -5,7 +5,7 @@ const { PaintCan, PersonWithEmailModel } = require("../../models");
 const sharp = require("sharp");
 const { encrypt } = require("../cryptoService");
 const { Logger } = require("../logger");
-const { sendGMail } = require ("../gmailService");
+const { sendGMailToConfirmDonorsAddress } = require ("../gmailService");
 
 const addPaintCan = async (req, res) => {
   const postedPaint = req.query;
@@ -61,7 +61,7 @@ const addPaintCan = async (req, res) => {
     return res.send({msg: "Unable to save paint."})
   }
 
-  sendGMail(paintObj.brand, paintObj.name, postedPaint.email, personWithEmailObj.secret);
+  sendGMailToConfirmDonorsAddress(postedPaint.email, personWithEmailObj.secret);
   res.send(pweResult);
   
 };
