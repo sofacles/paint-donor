@@ -9,5 +9,5 @@
             "restart": true,
             "protocol": "inspector",
         },
-    ]
+    ],
 }

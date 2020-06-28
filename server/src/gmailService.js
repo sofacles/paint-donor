@@ -1,17 +1,16 @@
-const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 const OAuth2 = google.auth.OAuth2;
 
-const config = require("../config");
-const { Logger } = require("./logger");
-
+const config = require('../config');
+const { Logger } = require('./logger');
 
 function sendGMailToConfirmDonorsAddress(to, slug) {
   const oauth2Client = new OAuth2(
     config.gmail.clientId,
     config.gmail.clientSecret,
-    "https://developers.google.com/oauthplayground" // Redirect URL
+    'https://developers.google.com/oauthplayground' // Redirect URL
   );
 
   oauth2Client.setCredentials({
@@ -19,9 +18,9 @@ function sendGMailToConfirmDonorsAddress(to, slug) {
   });
   const accessToken = oauth2Client.getAccessToken();
   const smtpTransport = nodemailer.createTransport({
-    service: "gmail",
+    service: 'gmail',
     auth: {
-      type: "OAuth2",
+      type: 'OAuth2',
       user: config.gmail.user,
       clientId: config.gmail.clientId,
       clientSecret: config.gmail.clientSecret,
@@ -30,11 +29,10 @@ function sendGMailToConfirmDonorsAddress(to, slug) {
     },
   });
 
-
   const mailOptions = {
     from: config.gmail.user,
     to: to,
-    subject: "Thanks for posting your paint",
+    subject: 'Thanks for posting your paint',
     generateTextFromHTML: true,
     html: `<div>Please follow this link to verify your email. <a href="${config.baseUrl}confirm_email?mn=${slug}" >verify</a></div>`,
   };
@@ -45,7 +43,7 @@ function sendGMailToConfirmDonorsAddress(to, slug) {
       smtpTransport.close();
     });
   } catch (err) {
-    Logger.error({topCall : "error caught in gmailService.sendMail!", err});
+    Logger.error({ topCall: 'error caught in gmailService.sendMail!', err });
   }
 }
 
@@ -53,18 +51,17 @@ function emailDonorToSignalInterest(donorEmail, brand, name) {
   const oauth2Client = new OAuth2(
     config.gmail.clientId,
     config.gmail.clientSecret,
-    "https://developers.google.com/oauthplayground" // Redirect URL
+    'https://developers.google.com/oauthplayground' // Redirect URL
   );
-  
 
   oauth2Client.setCredentials({
     refresh_token: config.gmail.refreshToken,
   });
   const accessToken = oauth2Client.getAccessToken();
   const smtpTransport = nodemailer.createTransport({
-    service: "gmail",
+    service: 'gmail',
     auth: {
-      type: "OAuth2",
+      type: 'OAuth2',
       user: config.gmail.user,
       clientId: config.gmail.clientId,
       clientSecret: config.gmail.clientSecret,
@@ -73,11 +70,10 @@ function emailDonorToSignalInterest(donorEmail, brand, name) {
     },
   });
 
-
   const mailOptions = {
     from: config.gmail.user,
     to: donorEmail,
-    subject: "Hey, do you still have that paint?",
+    subject: 'Hey, do you still have that paint?',
     generateTextFromHTML: true,
     html: `<div>Somebody is interested in your ${brand} ${name}</div>`,
   };
@@ -88,6 +84,10 @@ function emailDonorToSignalInterest(donorEmail, brand, name) {
       smtpTransport.close();
     });
   } catch (err) {
-    Logger.error({topCall : "error caught in gmailService.sendMail!", err});
+    Logger.error({ topCall: 'error caught in gmailService.sendMail!', err });
   }
-}module.exports = { emailDonorToSignalInterest, sendGMailToConfirmDonorsAddress };
+}
+module.exports = {
+  emailDonorToSignalInterest,
+  sendGMailToConfirmDonorsAddress,
+};

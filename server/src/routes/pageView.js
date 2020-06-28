@@ -13,10 +13,9 @@ const pageView = async (req, res) => {
     return;
   }
 
-  const logMsg =
-    `${req.query["pg"]} requested: ${new Date()} from: ${
-      req.connection.remoteAddress
-    }` + ` Fwd4: ${req.headers["x-forwarded-for"]}`;
+  const logMsg = `${req.query["pg"]} requested: ${new Date()} from: ${
+    req.connection.remoteAddress
+  } Fwd4: ${req.headers["x-forwarded-for"]}`;
   Logger.info(logMsg);
   res.setHeader("Content-Type", "image/png");
   res.sendFile(path.join(__dirname, "../../images/1x1.png"));
