@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { PaintTile } from "./PaintTile";
-import { ImageTile } from "./ImageTile";
+import React, { useEffect, useState } from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import { PaintTile } from './PaintTile';
+import { ImageTile } from './ImageTile';
 
 const BrowsePaint = () => {
   const [paintChips, setPaintChips] = useState({
     paintChips: [
       {
-        rgb: "",
-        brand: "",
-        name: "",
-        quantity: "",
-        email: "",
-        _id: "1"
-      }
-    ]
+        rgb: '',
+        brand: '',
+        name: '',
+        quantity: '',
+        email: '',
+        _id: '1',
+      },
+    ],
   });
 
-  let theTiles = paintChips.paintChips.map(chip => {
+  let theTiles = paintChips.paintChips.map((chip) => {
     if (chip.imageName && chip.imageName.length > 3) {
       return <ImageTile key={chip._id} paintUnit={chip} />;
     }
@@ -25,25 +25,25 @@ const BrowsePaint = () => {
   });
 
   const [isRedirectingToHome] = useState(
-    document.cookie.indexOf("HasSeenHomeScreen=true") === -1
+    document.cookie.indexOf('HasSeenHomeScreen=true') === -1
   );
   useEffect(() => {
     const abortController = new AbortController();
     if (!isRedirectingToHome) {
       fetch(`/api/paints?zip=12345`)
-        .then(x => x.text())
-        .then(t => {
+        .then((x) => x.text())
+        .then((t) => {
           setPaintChips({ paintChips: JSON.parse(t) });
         });
     }
 
     return abortController.abort();
-  }, [ isRedirectingToHome]);
+  }, [isRedirectingToHome]);
 
   const homeStyle = {
-    display: "flex",
-    justifyContent: "space-around",
-    flexWrap: "wrap"
+    display: 'flex',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
   };
 
   return isRedirectingToHome ? (
