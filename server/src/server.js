@@ -7,6 +7,7 @@ const healthCheckRoute = require('./routes/healthCheck');
 const config = require('../config');
 const pageViewRoute = require('./routes/pageView');
 const confirmEmailRoute = require('./routes/confirmEmail');
+const paintAdminRoute = require('./routes/admin/PaintCan');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -57,4 +58,5 @@ app.post('/api/mail', emailRoute.sendMail);
 app.post('/api/oauth2callback', oauthCallbackRoute.oauth2callback);
 app.get('/api/pageview', pageViewRoute);
 app.post('/api/confirm_email', confirmEmailRoute);
+app.delete('/api/admin/PaintCan', paintAdminRoute.deletePaint);
 app.listen(port, () => console.log(`Listening on port ${port}`));
