@@ -7,6 +7,7 @@ import ThankYou from './components/ThankYou';
 import ThanksForMail from './components/ThanksForMail';
 import { ConfirmEmail } from './components/ConfirmEmail';
 import PaintChipAdmin from './components/admin/ActivePaints';
+import AdminLogin from './components/admin/Login';
 import SendMail from './components/SendMail';
 import 'normalize.css';
 import './App.css';
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/thanksForMail" component={ThanksForMail} />
         <Route exact path="/confirm_email" component={ConfirmEmail} />
         <Route exact path="/admin/active-paints" component={PaintChipAdmin} />
+        <Route exact path="/admin/login" component={AdminLogin} />
       </div>
       <div id="modal-root"></div>
     </Router>

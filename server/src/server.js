@@ -59,4 +59,5 @@ app.post('/api/oauth2callback', oauthCallbackRoute.oauth2callback);
 app.get('/api/pageview', pageViewRoute);
 app.post('/api/confirm_email', confirmEmailRoute);
 app.delete('/api/admin/PaintCan', paintAdminRoute.deletePaint);
+app.post('/api/admin/login', paintAdminRoute.adminLogin);
 app.listen(port, () => console.log(`Listening on port ${port}`));
