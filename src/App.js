@@ -11,6 +11,7 @@ import AdminLogin from './components/admin/Login';
 import SendMail from './components/SendMail';
 import 'normalize.css';
 import './App.css';
+import RedirectIfNoToken from './components/admin/RedirectIfNoToken';
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
         <Route exact path="/thankyou" component={ThankYou} />
         <Route exact path="/thanksForMail" component={ThanksForMail} />
         <Route exact path="/confirm_email" component={ConfirmEmail} />
-        <Route exact path="/admin/active-paints" component={PaintChipAdmin} />
+        <RedirectIfNoToken
+          path="/admin/active-paints"
+          component={PaintChipAdmin}
+        />
         <Route exact path="/admin/login" component={AdminLogin} />
       </div>
       <div id="modal-root"></div>

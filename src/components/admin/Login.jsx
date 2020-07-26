@@ -1,16 +1,23 @@
 import React from 'react';
 import UseForm from '../UseForm';
 import formRules from './AdminFormRules';
+const msecInHour = 60 * 60 * 1000;
 
-const AdminLogin = () => {
+const AdminLogin = (props) => {
   const sendLoginInfo = async (fields) => {
-    await fetch('api/admin/login', {
+    const response = await fetch('api/admin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(fields),
     });
+    if (response.status === 200) {
+      localStorage.setItem(
+        'adminTokenExpires',
+        new Date().valueOf() + msecInHour
+      );
+    }
   };
   const { setField, blurField, errors, handleSubmit } = UseForm(
     sendLoginInfo,
