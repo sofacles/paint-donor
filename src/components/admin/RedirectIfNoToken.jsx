@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-const RedirectIfNoToken = ({ componentToProtect: Component, ...rest }) => {
+const RedirectIfNoToken = ({ children, ...rest }) => {
   const tokenExpiry = localStorage.getItem('adminTokenExpires');
   const currentMsec = new Date().valueOf();
   if (tokenExpiry && Number.parseInt(tokenExpiry) > currentMsec) {
@@ -9,7 +9,7 @@ const RedirectIfNoToken = ({ componentToProtect: Component, ...rest }) => {
       <Route
         {...rest}
         render={({ props }) => {
-          return <Component {...props} />;
+          return <children {...props} />;
         }}
       />
     );
