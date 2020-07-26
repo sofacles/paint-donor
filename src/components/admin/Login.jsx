@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UseForm from '../UseForm';
 import formRules from './AdminFormRules';
 const msecInHour = 60 * 60 * 1000;
 
 const AdminLogin = (props) => {
+  const [loginErrors, setLoginErrors] = useState(false);
   const sendLoginInfo = async (fields) => {
     const response = await fetch('api/admin/login', {
       method: 'POST',
@@ -11,12 +12,17 @@ const AdminLogin = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(fields),
+    }).catch((e) => {
+      errors.loginFailed = true;
     });
-    if (response.status === 200) {
+
+    if (response.ok) {
       localStorage.setItem(
         'adminTokenExpires',
         new Date().valueOf() + msecInHour
       );
+    } else {
+      setLoginErrors(true);
     }
   };
   const { setField, blurField, errors, handleSubmit } = UseForm(
@@ -41,6 +47,7 @@ const AdminLogin = (props) => {
         {errors.userName || errors.password
           ? 'Username and password are required'
           : ''}
+        {loginErrors ? 'Login failed, try again' : ''}
       </div>
     </form>
   );
