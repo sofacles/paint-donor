@@ -25,10 +25,9 @@ function App() {
         <Route exact path="/thankyou" component={ThankYou} />
         <Route exact path="/thanksForMail" component={ThanksForMail} />
         <Route exact path="/confirm_email" component={ConfirmEmail} />
-        <RedirectIfNoToken
-          path="/admin/active-paints"
-          component={PaintChipAdmin}
-        />
+        <RedirectIfNoToken path="/admin/active-paints">
+          <PaintChipAdmin />
+        </RedirectIfNoToken>
         <Route exact path="/admin/login" component={AdminLogin} />
       </div>
       <div id="modal-root"></div>

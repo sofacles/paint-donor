@@ -4,22 +4,24 @@ import { Redirect, Route } from 'react-router-dom';
 const RedirectIfNoToken = ({ children, ...rest }) => {
   const tokenExpiry = localStorage.getItem('adminTokenExpires');
   const currentMsec = new Date().valueOf();
-  if (tokenExpiry && Number.parseInt(tokenExpiry) > currentMsec) {
-    return (
-      <Route
-        {...rest}
-        render={({ props }) => {
-          return <children {...props} />;
-        }}
-      />
-    );
-  }
+  const probablyAuthorized =
+    tokenExpiry !== null && Number.parseInt(tokenExpiry) > currentMsec;
 
   return (
-    <Redirect
-      to={{
-        pathname: '/admin/login',
-      }}
+    <Route
+      {...rest}
+      render={({ location }) =>
+        probablyAuthorized ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/admin/login',
+              state: { from: location },
+            }}
+          />
+        )
+      }
     />
   );
 };
