@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import UseForm from '../UseForm';
 import formRules from './AdminFormRules';
 const msecInHour = 60 * 60 * 1000;
 
 const AdminLogin = (props) => {
+  let history = useHistory();
   const [loginErrors, setLoginErrors] = useState(false);
   const sendLoginInfo = async (fields) => {
     const response = await fetch('api/admin/login', {
@@ -21,6 +23,7 @@ const AdminLogin = (props) => {
         'adminTokenExpires',
         new Date().valueOf() + msecInHour
       );
+      history.goBack();
     } else {
       setLoginErrors(true);
     }

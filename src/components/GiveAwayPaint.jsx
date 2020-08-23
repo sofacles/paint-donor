@@ -1,38 +1,38 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-import { ToggleContent } from "./ToggleContent";
-import { ThirdColorProvider } from "./ThirdColor/ThirdColorContext";
-import SelectOtherInput from "./select-other-input/SelectOtherInput";
-import ColorPicker from "./ColorPicker";
-import Modal from "./Modal";
-import { RgbDisplay } from "./RgbDisplay";
-import { RgbIcon } from "./RgbIcon";
-import UseForm from "./UseForm";
-import ValidationRulesObj from "./PaintFormValidationRules";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { ToggleContent } from './ToggleContent';
+import { ThirdColorProvider } from './ThirdColor/ThirdColorContext';
+import SelectOtherInput from './select-other-input/SelectOtherInput';
+import ColorPicker from './ColorPicker';
+import Modal from './Modal';
+import { RgbDisplay } from './RgbDisplay';
+import { RgbIcon } from './RgbIcon';
+import UseForm from './UseForm';
+import ValidationRulesObj from './PaintFormValidationRules';
 
-const uuid = require("uuid/v4");
-const querystring = require("querystring");
+const uuid = require('uuid/v4');
+const querystring = require('querystring');
 
 const GiveAwayPaint = () => {
-  const onValidationSuccess = async fields => {
+  const onValidationSuccess = async (fields) => {
     let formObj = new FormData();
-    let fileInput = document.getElementById("uploadPhoto");
+    let fileInput = document.getElementById('uploadPhoto');
     if (fileInput.files.length > 0) {
-      formObj.append("imageName", uuid());
-      formObj.append("imageData", fileInput.files[0]);
+      formObj.append('imageName', uuid());
+      formObj.append('imageData', fileInput.files[0]);
     }
     let qs = querystring.encode(fields);
 
     axios
       .post(`/api/paints/?${qs}`, formObj)
-      .then(data => {
+      .then((data) => {
         if (data.status === 200) {
           setPaintPosted(true);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         debugger;
       });
   };
@@ -42,12 +42,12 @@ const GiveAwayPaint = () => {
     ValidationRulesObj
   );
   const [paintPosted, setPaintPosted] = useState(false);
-  const onColorSelected = color => {
+  const onColorSelected = (color) => {
     setField({
       target: {
-        name: "rgb",
-        value: color
-      }
+        name: 'rgb',
+        value: color,
+      },
     });
   };
 
@@ -55,35 +55,35 @@ const GiveAwayPaint = () => {
     <Redirect to="/ThankYou" />
   ) : (
     <div className="donate-paint">
-      <form onSubmit={e => handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <h2>I want to give away some paint!</h2>
         <aside>
           <Link to="/browsePaint">Back to Paints</Link>
         </aside>
         <SelectOtherInput
           id="brand"
-          onNewValue={newValue => {
+          onNewValue={(newValue) => {
             setField({
               target: {
-                name: "brand",
-                value: newValue
-              }
+                name: 'brand',
+                value: newValue,
+              },
             });
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e);
           }}
           initialValues={[
-            "- choose -",
-            "Sherwin-Williams",
-            "Farrow & Ball",
-            "Miller",
-            "Behr",
-            "Dunn-Edwards",
-            "Glidden",
-            "Rodda",
-            "Benjamin Moore",
-            "other"
+            '- choose -',
+            'Sherwin-Williams',
+            'Farrow & Ball',
+            'Miller',
+            'Behr',
+            'Dunn-Edwards',
+            'Glidden',
+            'Rodda',
+            'Benjamin Moore',
+            'other',
           ]}
           label="Brand:"
         />
@@ -97,10 +97,10 @@ const GiveAwayPaint = () => {
         <input
           name="name"
           id="name"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e);
           }}
         />
@@ -112,24 +112,24 @@ const GiveAwayPaint = () => {
 
         <SelectOtherInput
           id="quantity"
-          onNewValue={newValue => {
+          onNewValue={(newValue) => {
             setField({
               target: {
-                name: "quantity",
-                value: newValue
-              }
+                name: 'quantity',
+                value: newValue,
+              },
             });
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e);
           }}
           initialValues={[
-            "- choose -",
-            "about a quart",
-            "less than a gallon",
-            "less than two gallons",
-            "less than five gallons",
-            "other"
+            '- choose -',
+            'about a quart',
+            'less than a gallon',
+            'less than two gallons',
+            'less than five gallons',
+            'other',
           ]}
           label="Quantity:"
         />
@@ -144,10 +144,10 @@ const GiveAwayPaint = () => {
         <select
           name="sheen"
           id="sheen"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e);
           }}
         >
@@ -162,10 +162,10 @@ const GiveAwayPaint = () => {
         <input
           name="email"
           id="email"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e);
           }}
         />
@@ -179,10 +179,10 @@ const GiveAwayPaint = () => {
         <input
           name="confirmEmail"
           id="confirmEmail"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e, true);
           }}
         />
@@ -196,10 +196,10 @@ const GiveAwayPaint = () => {
         <input
           name="zipCode"
           id="zipCode"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e, true);
           }}
         />
@@ -214,29 +214,30 @@ const GiveAwayPaint = () => {
           type="file"
           id="uploadPhoto"
           name="uploadPhoto"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
         />
 
         <ThirdColorProvider>
           <h4>
-           You can also use the 
+            You can also use the
             <ToggleContent
-              toggle={show => (
-                <span className="emphasize-on-hover" onClick={e => {
-                  show();
-                }}
+              toggle={(show) => (
+                <span
+                  className="emphasize-on-hover"
+                  onClick={(e) => {
+                    show();
+                  }}
                 >
-                  color picker    
+                  color picker
                 </span>
-                  
               )}
-              content={hide => (
+              content={(hide) => (
                 <Modal>
                   <ColorPicker onColorChosen={onColorSelected} />
                   <button
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       hide();
                     }}
@@ -248,21 +249,21 @@ const GiveAwayPaint = () => {
             />
           </h4>
           <ToggleContent
-            toggle={show => (
+            toggle={(show) => (
               <p>
                 <RgbIcon
-                  onClick={e => {
+                  onClick={(e) => {
                     show();
                   }}
                 ></RgbIcon>
                 <RgbDisplay onColorChosen={onColorSelected} />
               </p>
             )}
-            content={hide => (
+            content={(hide) => (
               <Modal>
                 <ColorPicker onColorChosen={onColorSelected} />
                 <button
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     hide();
                   }}
@@ -281,30 +282,30 @@ const GiveAwayPaint = () => {
 
         <p>
           <label htmlFor="save" className="hidden">
-            {" "}
-            post your paint{" "}
+            {' '}
+            post your paint{' '}
           </label>
           <input type="submit" value="save" id="save" />
         </p>
 
         <div>
-          Icons made by{" "}
+          Icons made by{' '}
           <a
             href="https://www.flaticon.com/authors/roundicons"
             title="Roundicons"
           >
             Roundicons
-          </a>{" "}
-          from{" "}
+          </a>{' '}
+          from{' '}
           <a href="https://www.flaticon.com/" title="Flaticon">
             www.flaticon.com
           </a>
           <div>
-            Icons made by{" "}
+            Icons made by{' '}
             <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
               Freepik
-            </a>{" "}
-            from{" "}
+            </a>{' '}
+            from{' '}
             <a href="https://www.flaticon.com/" title="Flaticon">
               www.flaticon.com
             </a>
