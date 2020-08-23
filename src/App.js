@@ -18,18 +18,36 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/" component={BrowsePaint} />
-          <Route exact path="/home" component={Home} />
-          <Route path="/browsePaint" component={BrowsePaint} />
-          <Route exact path="/giveawaypaint" component={GiveAwayPaint} />
-          <Route exact path="/sendMail" component={SendMail} />
-          <Route exact path="/thankyou" component={ThankYou} />
-          <Route exact path="/thanksForMail" component={ThanksForMail} />
-          <Route exact path="/confirm_email" component={ConfirmEmail} />
+          <Route exact path="/">
+            <BrowsePaint />
+          </Route>
+          <Route exact path="/browsePaint">
+            <BrowsePaint />
+          </Route>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/giveawaypaint">
+            <GiveAwayPaint />
+          </Route>
+          <Route exact path="/sendMail">
+            <SendMail />
+          </Route>
+          <Route exact path="/thankyou">
+            <ThankYou />
+          </Route>
+          <Route exact path="/thanksForMail">
+            <ThanksForMail />
+          </Route>
+          <Route exact path="/confirm_email">
+            <ConfirmEmail />
+          </Route>
           <RedirectIfNoToken path="/admin/active-paints">
             <PaintChipAdmin />
           </RedirectIfNoToken>
-          <Route exact path="/admin/login" component={AdminLogin} />
+          <Route exact path="/admin/login">
+            <AdminLogin />
+          </Route>
         </Switch>
       </div>
       <div id="modal-root"></div>
