@@ -1,12 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import BucketIcon from "./BucketIcon";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import BucketIcon from './BucketIcon';
 
 const Home = () => {
   //OK, they will have seen this once, I can set a cookie so the default page is BrowsePaint
-  document.cookie = "HasSeenHomeScreen=true";
+  document.cookie = 'HasSeenHomeScreen=true';
 
-  
   return (
     <>
       <h1>Site under construction</h1>
@@ -30,8 +29,11 @@ const Home = () => {
       </p>
 
       <p>
-        You're welcome to test out the site: browse the (currently fake) data, post a new paint and click on an existing paint to simulate sending an email
-        to the donor of that paint. I recommend using fake email addresses until I set up a real SSL certificate and integrate with an email service.
+        You're welcome to test out the site: browse the (currently fake) data,
+        post a new paint and click on an existing paint to simulate sending an
+        email to the donor of that paint. I recommend using fake email addresses
+        until I set up a real SSL certificate and integrate with an email
+        service.
       </p>
 
       <div className="home-button-holder">
@@ -43,7 +45,7 @@ const Home = () => {
           <span> I'm looking for paint</span>
         </Link>
       </div>
-      <img src="/api/pageview?pg=home" />
+      <img alt="" src="/api/pageview?pg=home" />
     </>
   );
 };

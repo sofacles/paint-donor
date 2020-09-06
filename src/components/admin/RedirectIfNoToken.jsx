@@ -14,7 +14,6 @@ const RedirectIfNoToken = ({ children, ...rest }) => {
 
   return (
     <Route
-      {...rest}
       render={({ location }) =>
         probablyAuthorized ? (
           children
@@ -22,7 +21,6 @@ const RedirectIfNoToken = ({ children, ...rest }) => {
           <Redirect
             to={{
               pathname: '/admin/login',
-              state: { from: location },
             }}
           />
         )

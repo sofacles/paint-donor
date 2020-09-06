@@ -312,7 +312,7 @@ const GiveAwayPaint = () => {
           </div>
         </div>
       </form>
-      <img src="/api/pageview?pg=donate" />
+      <img alt="" src="/api/pageview?pg=donate" />
     </div>
   );
 };
