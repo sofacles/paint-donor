@@ -5,6 +5,7 @@ import formRules from './AdminFormRules';
 const msecInHour = 60 * 60 * 1000;
 
 const AdminLogin = (props) => {
+  debugger;
   let history = useHistory();
   const [loginErrors, setLoginErrors] = useState(false);
   const sendLoginInfo = async (fields) => {
@@ -34,7 +35,7 @@ const AdminLogin = (props) => {
   );
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => handleSubmit(e)} data-testid="redirect">
       <div>
         <label>user name</label>
         <input name="userName" onChange={setField} onBlur={blurField} />
