@@ -1,6 +1,8 @@
 import RedirectIfNoToken from './RedirectIfNoToken';
+import AdminLogin from './Login';
 import DumbComponent from './DumbComponent';
 import { Router } from 'react-router';
+import { Route } from 'react-router-dom';
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -38,6 +40,9 @@ fdescribe('RedirectIfNoToken', () => {
           <RedirectIfNoToken path="/admin/active-paints">
             <DumbComponent />
           </RedirectIfNoToken>
+          <Route exact path="/admin/login">
+            <AdminLogin />
+          </Route>
         </Router>
       );
 
@@ -72,6 +77,9 @@ fdescribe('RedirectIfNoToken', () => {
           <RedirectIfNoToken path="/admin/active-paints">
             <DumbComponent />
           </RedirectIfNoToken>
+          <Route exact path="/admin/login">
+            <AdminLogin />
+          </Route>
         </Router>
       );
       const getByTestId = renderResult.getByTestId;
