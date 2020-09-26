@@ -5,7 +5,6 @@ import formRules from './AdminFormRules';
 const msecInHour = 60 * 60 * 1000;
 
 const AdminLogin = (props) => {
-  debugger;
   let history = useHistory();
   const [loginErrors, setLoginErrors] = useState(false);
   const sendLoginInfo = async (fields) => {
