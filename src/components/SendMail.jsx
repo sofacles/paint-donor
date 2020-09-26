@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-import UseForm from "./UseForm";
-import ValidationRules from "./SendMailValidationRules";
-import Axios from "axios";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import UseForm from './UseForm';
+import ValidationRules from './SendMailValidationRules';
+import Axios from 'axios';
 
-const querystring = require("querystring");
+const querystring = require('querystring');
 
-const SendMailForm = props => {
+const SendMailForm = (props) => {
   const [mailSent, setMailSent] = useState(false);
   let paint = {};
   if (
@@ -19,27 +19,27 @@ const SendMailForm = props => {
     paint = props.location.state.paintUnit;
   }
 
-  const needHash = paint.rgb && paint.rgb[0] !== "#";
+  const needHash = paint.rgb && paint.rgb[0] !== '#';
   const headerStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   };
 
   const rgbStyle = {
-    height: "100px",
-    backgroundColor: `${needHash ? "#" : ""}${
-      paint.rgb && paint.rgb.length > 0 ? paint.rgb : "#fff"
+    height: '100px',
+    backgroundColor: `${needHash ? '#' : ''}${
+      paint.rgb && paint.rgb.length > 0 ? paint.rgb : '#fff'
     }`,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "10px"
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '10px',
   };
 
   const imgStyle = {
-    height: "90%",
-    margin: "5px"
+    height: '90%',
+    margin: '5px',
   };
 
   const image =
@@ -50,15 +50,15 @@ const SendMailForm = props => {
         src={`uploads/resized/${paint.imageName}`}
       />
     ) : (
-      ""
+      ''
     );
 
-  const onValidationSuccess = fields => {
+  const onValidationSuccess = (fields) => {
     let qs = querystring.encode(fields);
     Axios.post(`/api/mail/?${qs}`, {
       fromEmail: fields,
-      paint: paint
-    }).then(res => {
+      paint: paint,
+    }).then((res) => {
       if (res.data.fakeEmailSent === true) {
         setMailSent(true);
       }
@@ -105,7 +105,7 @@ const SendMailForm = props => {
       </p>
 
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
@@ -113,10 +113,10 @@ const SendMailForm = props => {
         <input
           name="email"
           id="email"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e);
           }}
         />
@@ -129,10 +129,10 @@ const SendMailForm = props => {
         <input
           name="confirmEmail"
           id="confirmEmail"
-          onChange={e => {
+          onChange={(e) => {
             setField(e);
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             blurField(e, true);
           }}
         />
