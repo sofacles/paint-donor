@@ -30,9 +30,12 @@ function App() {
           <Route exact path="/giveawaypaint">
             <GiveAwayPaint />
           </Route>
-          <Route exact path="/sendMail">
-            <SendMail />
-          </Route>
+          <Route
+            exact
+            path="/sendMail"
+            render={(props) => <SendMail {...props} />}
+          />
+
           <Route exact path="/thankyou">
             <ThankYou />
           </Route>
