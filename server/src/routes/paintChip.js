@@ -6,8 +6,16 @@ const sharp = require('sharp');
 const { encrypt } = require('../cryptoService');
 const { Logger } = require('../logger');
 const { sendGMailToConfirmDonorsAddress } = require('../gmailService');
+const config = require('../../config');
 
 const addPaintCan = async (req, res) => {
+  res.type('json');
+  if (config.readOnlyMode) {
+    return res.send({
+      msg:
+        "sorry, the site is under construction, I'm still ironing out some bugs",
+    });
+  }
   const postedPaint = req.query;
   let paintObj = Object.assign({}, req.query);
   paintObj.email = encrypt(postedPaint.email);

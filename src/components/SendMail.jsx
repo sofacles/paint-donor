@@ -8,7 +8,9 @@ import Axios from 'axios';
 const querystring = require('querystring');
 
 const SendMailForm = (props) => {
+  debugger;
   const [mailSent, setMailSent] = useState(false);
+  const [readOnlyMode] = useState(props.readOnlyMode);
   let paint = {};
   if (
     props &&
@@ -141,9 +143,18 @@ const SendMailForm = (props) => {
             <span data-testid="confirm-email-error">{errors.confirmEmail}</span>
           </p>
         )}
-        <p>
-          <input type="submit" value="send email"></input>
-        </p>
+
+        {readOnlyMode ? (
+          <p>
+            {' '}
+            Sorry, the site is undergoing some work right now. Check back later
+            to contact the donor.
+          </p>
+        ) : (
+          <p>
+            <input type="submit" value="send email"></input>
+          </p>
+        )}
       </form>
       <Link to="/browsePaint">Back to Paints</Link>
     </div>

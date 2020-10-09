@@ -14,6 +14,7 @@ import './App.css';
 import RedirectIfNoToken from './components/admin/RedirectIfNoToken';
 
 function App() {
+  const readOnlyMode = true;
   return (
     <Router>
       <div className="App">
@@ -21,9 +22,13 @@ function App() {
           <Route exact path="/">
             <BrowsePaint />
           </Route>
-          <Route exact path="/browsePaint">
-            <BrowsePaint />
-          </Route>
+          <Route
+            exact
+            path="/browsePaint"
+            render={(props, readOnlyMode) => {
+              return <BrowsePaint readOnlyMode />;
+            }}
+          />
           <Route exact path="/home">
             <Home />
           </Route>
@@ -33,7 +38,9 @@ function App() {
           <Route
             exact
             path="/sendMail"
-            render={(props) => <SendMail {...props} />}
+            render={(props, readOnlyMode) => (
+              <SendMail {...props} readOnlyMode />
+            )}
           />
 
           <Route exact path="/thankyou">
