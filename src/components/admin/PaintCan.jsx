@@ -42,6 +42,14 @@ export const PaintCan = ({ paintUnit, onDelete }) => {
       <td>
         <button onClick={deletePaint}>delete</button>
       </td>
+
+      <td>
+        {paintUnit.emailConfirmed === true ? (
+          <input type="checkbox" defaultChecked />
+        ) : (
+          <input type="checkbox" />
+        )}
+      </td>
     </tr>
   );
 };

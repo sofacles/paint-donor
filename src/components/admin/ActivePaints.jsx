@@ -9,12 +9,13 @@ const PaintChipAdmin = () => {
       name: '',
       quantity: '',
       email: '',
+      emailConfirmed: '',
       _id: '1',
     },
   ]);
 
   useEffect(() => {
-    fetch(`/api/paints?zip=12345`)
+    fetch(`/api/admin/paints?zip=12345`)
       .then((x) => x.text())
       .then((t) => {
         setPaintChips(JSON.parse(t));
@@ -35,6 +36,7 @@ const PaintChipAdmin = () => {
           <th>Name</th>
           <th>Image</th>
           <th>Commands</th>
+          <th>Email confirmed?</th>
         </tr>
       </thead>
       <tbody>{thePaints}</tbody>

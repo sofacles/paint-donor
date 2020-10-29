@@ -44,4 +44,22 @@ const adminLogin = async (req, res) => {
   res.cookie('token', token).sendStatus(200);
 };
 
-module.exports = { adminLogin, deletePaint };
+const getPaints = (req, res) => {
+  PaintCan.find({}, (err, paints) => {
+    if (err) {
+      res.send(err);
+    }
+    const paintsWithoutEmails = paints.map((p) => ({
+      emailConfirmed: p.emailConfirmed,
+      rgb: p.rgb,
+      brand: p.brand,
+      name: p.name,
+      quantity: p.quantity,
+      sheen: p.sheen,
+      imageName: p.imageName,
+      _id: p._id,
+    }));
+    res.send(paintsWithoutEmails);
+  });
+};
+module.exports = { adminLogin, deletePaint, getPaints };
