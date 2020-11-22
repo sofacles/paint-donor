@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { PaintCan } from './PaintCan';
 
+import './AdminStyle.css';
+
 const PaintChipAdmin = () => {
   const [paintChips, setPaintChips] = useState([
     {

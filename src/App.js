@@ -6,6 +6,7 @@ import BrowsePaint from './components/BrowsePaint';
 import ThankYou from './components/ThankYou';
 import ThanksForMail from './components/ThanksForMail';
 import { ConfirmEmail } from './components/ConfirmEmail';
+import { ConfirmEmailResult } from './components/ConfirmEmailResult';
 import PaintChipAdmin from './components/admin/ActivePaints';
 import AdminLogin from './components/admin/Login';
 import SendMail from './components/SendMail';
@@ -49,9 +50,16 @@ function App() {
           <Route exact path="/thanksForMail">
             <ThanksForMail />
           </Route>
-          <Route exact path="/confirm_email">
-            <ConfirmEmail />
-          </Route>
+          <Route
+            exact
+            path="/confirm_email"
+            render={(props) => <ConfirmEmail {...props} />}
+          />
+          <Route
+            exact
+            path="/confirmEmailResult"
+            render={(props) => <ConfirmEmailResult {...props} />}
+          />
           <RedirectIfNoToken path="/admin/active-paints">
             <PaintChipAdmin />
           </RedirectIfNoToken>

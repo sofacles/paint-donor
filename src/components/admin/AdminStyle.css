@@ -1,0 +1,8 @@
+table {
+  border: 1px solid;
+}
+
+table tr td,
+table tr th {
+  border: 1px solid;
+}
