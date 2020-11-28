@@ -1,7 +1,7 @@
 const fs = require('fs');
 const uuid = require('uuid/v4');
 const path = require('path');
-const { PaintCan, PersonWithEmailModel } = require('../../models');
+const { PaintCan } = require('../../models');
 const sharp = require('sharp');
 const { encrypt } = require('../cryptoService');
 const { Logger } = require('../logger');
@@ -19,6 +19,7 @@ const addPaintCan = async (req, res) => {
   const postedPaint = req.query;
   let paintObj = Object.assign({}, req.query);
   paintObj.email = encrypt(postedPaint.email);
+  paintObj.secret = uuid();
 
   //I want to force validation of rgb or imageName to occur on this posted object, so setting them to empty strings
   paintObj.rgb = paintObj.rgb ? paintObj.rgb : '';
@@ -59,23 +60,8 @@ const addPaintCan = async (req, res) => {
     return res.send({ msg: 'Unable to save paint.' });
   }
 
-  const personWithEmailObj = {
-    email: paintObj.email,
-    secret: uuid(),
-  };
-  let personWithEmail = new PersonWithEmailModel(personWithEmailObj);
-  let pweResult = personWithEmail.save();
-
-  if (pweResult.errors) {
-    Logger.info(
-      'Error while saving personWithEmailObj:',
-      JSON.stringify(result.errors)
-    );
-    return res.send({ msg: 'Unable to save paint.' });
-  }
-
-  sendGMailToConfirmDonorsAddress(postedPaint.email, personWithEmailObj.secret);
-  res.send(pweResult);
+  sendGMailToConfirmDonorsAddress(postedPaint.email, paintObj.secret);
+  res.send({ ok: 'awesome' });
 };
 
 const getPaints = (req, res) => {
