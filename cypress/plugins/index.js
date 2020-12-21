@@ -11,7 +11,16 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-module.exports = (on, config) => {
+module.exports = (on) => {
   // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-}
+  on('task', {
+    'db:teardown': () => {
+      const teardown = require('./mongoDb/teardown.js');
+      return teardown();
+    },
+    'db:seed': () => {
+      const Seed = require('./mongoDb/seed.js');
+      return Seed();
+    },
+  });
+};
