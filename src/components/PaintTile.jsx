@@ -30,7 +30,7 @@ export const PaintTile = ({ paintUnit }) => {
     >
       <div className="paint-cell">
         <div style={rgbStyle}>
-          <div>{paintUnit.name}</div>
+          <div data-testid={paintUnit._id}>{paintUnit.name}</div>
           <div>#{paintUnit.rgb}</div>
         </div>
       </div>

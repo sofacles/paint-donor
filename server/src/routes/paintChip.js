@@ -65,7 +65,7 @@ const addPaintCan = async (req, res) => {
 };
 
 const getPaints = (req, res) => {
-  PaintCan.find({}, (err, paints) => {
+  PaintCan.find({ emailConfirmed: true }, (err, paints) => {
     if (err) {
       res.send(err);
     }

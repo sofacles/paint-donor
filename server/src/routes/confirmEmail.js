@@ -16,10 +16,16 @@ const confirm_email = async (req, res) => {
       confirmationResult: "we can't find your information, sorry",
     });
   }
-
-  ourNewPaint.emailConfirmed = true;
-  ourNewPaint.save();
-  return res.send({ confirmationResult: 'emailConfirmed' });
+  let result;
+  try {
+    ourNewPaint.emailConfirmed = true;
+    const result = await ourNewPaint.save();
+    //maybe something about setting id as an objectID?
+    return res.send({ confirmationResult: 'emailConfirmed' });
+  } catch (err) {
+    //"No document found for query "{ _id: 5df8f82568aca435b9abed7f }" on model "PaintCan""
+    result.error = err;
+  }
 };
 
 module.exports = confirm_email;

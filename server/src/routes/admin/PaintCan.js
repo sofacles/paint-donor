@@ -2,16 +2,26 @@ const jwt = require('jsonwebtoken');
 const { PaintCan } = require('../../../models');
 const config = require('../../../config');
 const { logRequest } = require('../../logger');
+var ObjectID = require('mongodb').ObjectID;
 
 const deletePaint = async (req, res) => {
-  let deleteResult = await PaintCan.deleteOne({ _id: req.query.id });
-  res.send({
-    status: 200,
-    data: {
-      result:
-        deleteResult.deletedCount === 1 ? 'delete succeeded' : 'deleteFailed',
-    },
-  });
+  debugger;
+  let deleteResult = { deletedCount: 0, error: 'no error' };
+  try {
+    const _id = new ObjectID(req.query.id);
+    deleteResult = await PaintCan.deleteOne({ _id: _id });
+  } catch (ex) {
+    deleteResult.error = ex;
+  } finally {
+    res.send({
+      status: 200,
+      data: {
+        result:
+          deleteResult.deletedCount === 1 ? 'delete succeeded' : 'deleteFailed',
+        error: deleteResult.error,
+      },
+    });
+  }
 };
 
 const adminLogin = async (req, res) => {
