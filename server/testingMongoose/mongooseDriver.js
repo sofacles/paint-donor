@@ -11,7 +11,10 @@
 
 // So  I'm going to see if I can just use these mongoose models to populate the db from a regular node script.
 
-const { PaintCan } = require('./models');
+const mongoose = require('mongoose');
+const config = require('../config.js');
+const dbURI = config.mongoUri;
+const { PaintCan } = require('../models');
 
 const docs = [
   {
@@ -42,11 +45,41 @@ const docs = [
 ];
 
 const mongooseDriver = async () => {
-  let result0;
-  let paintChip0 = new PaintCan(docs[0]);
-  result0 = await paintChip0.save();
+  return new Promise((resolve) => {
+    mongoose.connect(dbURI);
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function () {
+      console.log('ok, the mongoose connection is open');
+      PaintCan.deleteMany({ name: docs[0].name }, function (err, theCan) {
+        if (err) return console.error(err);
+        console.log('inside the deleteAll() callback *****');
+        console.info(theCan);
+        resolve(theCan);
+      });
+    });
+  });
+};
+
+const insertAPaint = async () => {
+  return new Promise((resolve) => {
+    mongoose.connect(dbURI);
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function () {
+      console.log('ok, the mongoose connection is open');
+      let paintCan = new PaintCan(docs[0]);
+      paintCan.save(function (err, theCan) {
+        if (err) return console.error(err);
+        console.log('inside the save() callback *****');
+        console.info(theCan);
+        resolve(theCan);
+      });
+    });
+  });
 };
 
 mongooseDriver().catch((err) => {
+  console.log('inside the catch after running mongooseDriver fxion');
   console.info(err);
 });

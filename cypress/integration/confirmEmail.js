@@ -4,8 +4,9 @@ describe('when you try to confirm your email for a posted paint', () => {
     cy.task('db:teardown');
     cy.task('db:seed');
   });
+
   it(' publishes the paint if you confirm email with a secret', function () {
-    let secret = 'malva877ardjqvguq';
+    let secret = '9a933639-c7a5-4a3f-8f32-2a51041866b8';
     cy.request(
       'POST',
       `http://localhost:5000/api/confirm_email?mn=${secret}`
@@ -23,9 +24,9 @@ describe('when you get the paints again', () => {
     cy.setCookie('HasSeenHomeScreen', 'true');
     cy.visit('http://localhost:3000/');
   });
-  //TODO - this should fail until email is confirmed
+
   it('shows the paint I just added', function () {
     cy.get('h1').contains('Available Paint').should('exist');
-    cy.get('[data-testid="5df8f82568aca435b9abed7f"]').should('exist');
+    cy.get(`[data-testid="WithoutConfirmedEmail"]`).should('exist');
   });
 });

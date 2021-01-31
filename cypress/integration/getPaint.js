@@ -6,7 +6,7 @@ describe('when browsing paints', () => {
     cy.visit('http://localhost:3000/');
   });
   it('only shows paints whose emails are confirmed', function () {
-    cy.get('[data-testid="4df8f82568aca435b9abed7e"]')
+    cy.get('[data-testid="WithConfirmedEmail"]')
       .contains('WithConfirmedEmail')
       .should('exist');
 
