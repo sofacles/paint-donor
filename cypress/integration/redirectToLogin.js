@@ -1,5 +1,8 @@
 describe('when trying to access an admin page like active-paints', () => {
-  beforeEach(() => {});
+  beforeEach(() => {
+    cy.task('db:teardown');
+    cy.task('db:seed');
+  });
 
   it('redirects to the log in page', function () {
     cy.visit('http://localhost:3000/admin/active-paints');
