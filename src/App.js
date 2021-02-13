@@ -15,7 +15,7 @@ import './App.css';
 import RedirectIfNoToken from './components/admin/RedirectIfNoToken';
 
 function App() {
-  const chickenSwitchOn = false;
+  const chickenSwitchOn = true;
   return (
     <Router>
       <div className="App">
@@ -37,9 +37,15 @@ function App() {
           <Route exact path="/home">
             <Home />
           </Route>
-          <Route exact path="/giveawaypaint">
-            <GiveAwayPaint />
-          </Route>
+          <Route
+            exact
+            path="/giveawaypaint"
+            render={(routeProps) => {
+              return (
+                <GiveAwayPaint {...routeProps} readOnlyMode={chickenSwitchOn} />
+              );
+            }}
+          />
           <Route
             exact
             path="/sendMail"
