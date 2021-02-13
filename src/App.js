@@ -15,20 +15,24 @@ import './App.css';
 import RedirectIfNoToken from './components/admin/RedirectIfNoToken';
 
 function App() {
-  const readOnlyMode = true;
+  const chickenSwitchOn = false;
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/">
-            <BrowsePaint />
-          </Route>
+          <Route
+            exact
+            path="/"
+            render={(routeProps) => (
+              <BrowsePaint {...routeProps} readOnlyMode={chickenSwitchOn} />
+            )}
+          />
           <Route
             exact
             path="/browsePaint"
-            render={(props, readOnlyMode) => {
-              return <BrowsePaint readOnlyMode />;
-            }}
+            render={(routeProps) => (
+              <BrowsePaint {...routeProps} readOnlyMode={chickenSwitchOn} />
+            )}
           />
           <Route exact path="/home">
             <Home />
@@ -39,8 +43,8 @@ function App() {
           <Route
             exact
             path="/sendMail"
-            render={(props, readOnlyMode) => (
-              <SendMail {...props} readOnlyMode />
+            render={(routeProps) => (
+              <SendMail {...routeProps} readOnlyMode={chickenSwitchOn} />
             )}
           />
 

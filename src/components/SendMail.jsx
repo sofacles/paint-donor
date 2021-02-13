@@ -8,7 +8,6 @@ import Axios from 'axios';
 const querystring = require('querystring');
 
 const SendMailForm = (props) => {
-  debugger;
   const [mailSent, setMailSent] = useState(false);
   const [readOnlyMode] = useState(props.readOnlyMode);
   let paint = {};
@@ -71,6 +70,65 @@ const SendMailForm = (props) => {
     onValidationSuccess,
     ValidationRules
   );
+
+  const formContent = (
+    <form
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
+      <h2>Would you like to send a message to the donor of this paint?</h2>
+      <p>
+        Please enter your email address below. We will set up a temporary email
+        account for you that the paint donor can use to contact you and you can
+        cancel it with a link that we will send to your inbox. All
+        communications with {paint.email} will go through this relay.
+      </p>
+      <label htmlFor="email">email:</label>
+      <input
+        name="email"
+        id="email"
+        onChange={(e) => {
+          setField(e);
+        }}
+        onBlur={(e) => {
+          blurField(e);
+        }}
+      />
+      {errors.email && (
+        <p className="error">
+          <span>{errors.email}</span>
+        </p>
+      )}
+      <label htmlFor="confirmEmail">confirm email:</label>
+      <input
+        name="confirmEmail"
+        id="confirmEmail"
+        onChange={(e) => {
+          setField(e);
+        }}
+        onBlur={(e) => {
+          blurField(e, true);
+        }}
+      />
+      {errors.confirmEmail && (
+        <p className="error">
+          <span data-testid="confirm-email-error">{errors.confirmEmail}</span>
+        </p>
+      )}
+
+      {readOnlyMode ? (
+        <p>
+          Sorry, the site is undergoing some work right now. Check back later to
+          contact the donor.
+        </p>
+      ) : (
+        <p>
+          <input type="submit" value="send email"></input>
+        </p>
+      )}
+    </form>
+  );
   return mailSent ? (
     <Redirect to="/thanksForMail" />
   ) : (
@@ -98,64 +156,13 @@ const SendMailForm = (props) => {
         </div>
       </header>
 
-      <h2>Would you like to send a message to the donor of this paint?</h2>
-      <p>
-        Please enter your email address below. We will set up a temporary email
-        account for you that the paint donor can use to contact you and you can
-        cancel it with a link that we will send to your inbox. All
-        communications with {paint.email} will go through this relay.
-      </p>
-
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <label htmlFor="email">email:</label>
-        <input
-          name="email"
-          id="email"
-          onChange={(e) => {
-            setField(e);
-          }}
-          onBlur={(e) => {
-            blurField(e);
-          }}
-        />
-        {errors.email && (
-          <p className="error">
-            <span>{errors.email}</span>
-          </p>
-        )}
-        <label htmlFor="confirmEmail">confirm email:</label>
-        <input
-          name="confirmEmail"
-          id="confirmEmail"
-          onChange={(e) => {
-            setField(e);
-          }}
-          onBlur={(e) => {
-            blurField(e, true);
-          }}
-        />
-        {errors.confirmEmail && (
-          <p className="error">
-            <span data-testid="confirm-email-error">{errors.confirmEmail}</span>
-          </p>
-        )}
-
-        {readOnlyMode ? (
-          <p>
-            {' '}
-            Sorry, the site is undergoing some work right now. Check back later
-            to contact the donor.
-          </p>
-        ) : (
-          <p>
-            <input type="submit" value="send email"></input>
-          </p>
-        )}
-      </form>
+      {readOnlyMode ? (
+        <div>
+          Sorry, we are not relaying mail while we're updating the site.
+        </div>
+      ) : (
+        formContent
+      )}
       <Link to="/browsePaint">Back to Paints</Link>
     </div>
   );
