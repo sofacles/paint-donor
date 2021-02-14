@@ -15,7 +15,7 @@ import ValidationRulesObj from './PaintFormValidationRules';
 const uuid = require('uuid/v4');
 const querystring = require('querystring');
 
-const GiveAwayPaint = () => {
+const GiveAwayPaint = (props) => {
   const onValidationSuccess = async (fields) => {
     let formObj = new FormData();
     let fileInput = document.getElementById('uploadPhoto');
@@ -50,6 +50,16 @@ const GiveAwayPaint = () => {
       },
     });
   };
+  if (props.readOnlyMode) {
+    return (
+      <>
+        <h1 data-testid="closed-heading">
+          Sorry, we're not accepting new paint right now.
+        </h1>
+        <img alt="closed sign" src="1lessCanClosedForCleaning.png" />
+      </>
+    );
+  }
 
   return paintPosted ? (
     <Redirect to="/ThankYou" />

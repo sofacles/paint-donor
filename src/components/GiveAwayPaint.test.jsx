@@ -1,9 +1,9 @@
 import GiveAwayPaint from './GiveAwayPaint';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 
-import { getByLabelText, getByTestId } from '@testing-library/dom';
+import { getByTestId } from '@testing-library/dom';
 import '@testing-library/jest-dom/extend-expect';
 import axios from 'axios';
 const querystring = require('querystring');
@@ -441,5 +441,35 @@ describe('GiveAwayPaint form', () => {
 
     expect(axios.post.mock.calls.length).toEqual(1);
     expect(container.querySelector('p.error span')).toBe(null);
+  });
+
+  it('Does not render a form when readOnlyMode is true', async () => {
+    const { container, getByTestId } = render(
+      <BrowserRouter>
+        <Route
+          render={(routeProps) => {
+            return <GiveAwayPaint {...routeProps} readOnlyMode={true} />;
+          }}
+        />
+      </BrowserRouter>
+    );
+
+    expect(container.querySelector('form')).toBeNull();
+    expect(getByTestId('closed-heading')).toHaveTextContent('Sorry');
+  });
+
+  it('Renders a form when readOnlyMode is false', async () => {
+    const { container } = render(
+      <BrowserRouter>
+        <Route
+          render={(routeProps) => {
+            return <GiveAwayPaint {...routeProps} readOnlyMode={false} />;
+          }}
+        />
+      </BrowserRouter>
+    );
+
+    expect(container.querySelector('form')).toBeTruthy();
+    expect(screen.queryByText(/Sorry, we're not/)).toBeNull();
   });
 });
