@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { ThirdColorContext } from "./ThirdColorContext";
-import Arrow from "./Arrow";
+import React, { useContext } from 'react';
+import { ThirdColorContext } from './ThirdColorContext';
+import Arrow from './Arrow';
 
 const ThirdColorControl = () => {
   const [blueValue, setBlueValue] = useContext(ThirdColorContext);
@@ -8,8 +8,7 @@ const ThirdColorControl = () => {
   const MAX_COLOR = 15;
   const upClick = (event) => {
     event.preventDefault();
-    setBlueValue(b => {
-      
+    setBlueValue((b) => {
       if (b.thirdColorLevel < MAX_COLOR) {
         const oldBlu = parseInt(b.selectedHexValue[2], 16);
         let newBlu = oldBlu + 1;
@@ -17,7 +16,9 @@ const ThirdColorControl = () => {
         return {
           ...blueValue,
           thirdColorLevel: b.thirdColorLevel + 1,
-          selectedHexValue: (b.selectedHexValue.substring(0,2) + newBlu.toString(16)).toUpperCase()
+          selectedHexValue: (
+            b.selectedHexValue.substring(0, 2) + newBlu.toString(16)
+          ).toUpperCase(),
         };
       }
       return { ...blueValue };
@@ -28,7 +29,7 @@ const ThirdColorControl = () => {
 
   const downClick = (event) => {
     event.preventDefault();
-    setBlueValue(b => {
+    setBlueValue((b) => {
       if (b.thirdColorLevel > 0) {
         const oldBlu = parseInt(b.selectedHexValue[2], 16);
         let newBlu = oldBlu - 1;
@@ -36,7 +37,9 @@ const ThirdColorControl = () => {
         return {
           ...blueValue,
           thirdColorLevel: b.thirdColorLevel - 1,
-          selectedHexValue: (b.selectedHexValue.substring(0,2) + newBlu.toString(16)).toUpperCase()
+          selectedHexValue: (
+            b.selectedHexValue.substring(0, 2) + newBlu.toString(16)
+          ).toUpperCase(),
         };
       }
       return { ...blueValue };
@@ -46,22 +49,26 @@ const ThirdColorControl = () => {
   };
 
   const sliderContainerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    marginLeft: "3px",
-    marginRight: "5px",
-    marginTop: "24px",
-    position: "relative"
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginLeft: '3px',
+    marginRight: '5px',
+    marginTop: '24px',
+    position: 'relative',
   };
 
   return (
     <div style={sliderContainerStyle}>
       <div title="increase blue" onMouseDown={upClick} onTouchStart={upClick}>
-        <Arrow direction="up"  />
+        <Arrow direction="up" />
       </div>
-      
-      <div title="decrease blue" onMouseDown={downClick} onTouchStart={downClick}>
+
+      <div
+        title="decrease blue"
+        onMouseDown={downClick}
+        onTouchStart={downClick}
+      >
         <Arrow direction="down" />
       </div>
     </div>

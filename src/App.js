@@ -63,7 +63,9 @@ function App() {
           <Route
             exact
             path="/confirm_email"
-            render={(props) => <ConfirmEmail {...props} />}
+            render={(props) => (
+              <ConfirmEmail {...props} readOnlyMode={chickenSwitchOn} />
+            )}
           />
           <Route
             exact
