@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { ToggleContent } from './ToggleContent';
 import { ThirdColorProvider } from './ThirdColor/ThirdColorContext';
 import SelectOtherInput from './select-other-input/SelectOtherInput';
+import Closed from './Closed';
 import ColorPicker from './ColorPicker';
 import Modal from './Modal';
 import { RgbDisplay } from './RgbDisplay';
@@ -52,12 +53,7 @@ const GiveAwayPaint = (props) => {
   };
   if (props.readOnlyMode) {
     return (
-      <>
-        <h1 data-testid="closed-heading">
-          Sorry, we're not accepting new paint right now.
-        </h1>
-        <img alt="closed sign" src="1lessCanClosedForCleaning.png" />
-      </>
+      <Closed message="Sorry, 1lesscan.us is not accepting new paints right now." />
     );
   }
 
