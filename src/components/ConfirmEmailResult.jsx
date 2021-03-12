@@ -3,7 +3,7 @@ import React from 'react';
 const ConfirmEmailResult = (props) => {
   return (
     <div>
-      <h1>Thanks so much for posting a paint! </h1>
+      <h1 data-testid="thanks4Post">Thanks so much for posting a paint! </h1>
       We'll start showing your paint on the site right away. If somebody is
       interested, we'll let you know via a relayed email.{' '}
       <p>
