@@ -15,7 +15,7 @@ import './App.css';
 import RedirectIfNoToken from './components/admin/RedirectIfNoToken';
 
 function App() {
-  const chickenSwitchOn = true;
+  const chickenSwitchOn = false;
   return (
     <Router>
       <div className="App">

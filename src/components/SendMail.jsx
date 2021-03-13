@@ -5,11 +5,19 @@ import UseForm from './UseForm';
 import ValidationRules from './SendMailValidationRules';
 import Axios from 'axios';
 
+import Closed from './Closed';
+
 const querystring = require('querystring');
 
 const SendMailForm = (props) => {
+  debugger;
   const [mailSent, setMailSent] = useState(false);
-  const [readOnlyMode] = useState(props.readOnlyMode);
+  if (props.readOnlyMode) {
+    return (
+      <Closed message="Sorry, we are not relaying mail while we're updating the site" />
+    );
+  }
+
   let paint = {};
   if (
     props &&
@@ -117,7 +125,7 @@ const SendMailForm = (props) => {
         </p>
       )}
 
-      {readOnlyMode ? (
+      {props.readOnlyMode ? (
         <p>
           Sorry, the site is undergoing some work right now. Check back later to
           contact the donor.
@@ -156,13 +164,7 @@ const SendMailForm = (props) => {
         </div>
       </header>
 
-      {readOnlyMode ? (
-        <div>
-          Sorry, we are not relaying mail while we're updating the site.
-        </div>
-      ) : (
-        formContent
-      )}
+      {formContent}
       <Link to="/browsePaint">Back to Paints</Link>
     </div>
   );
