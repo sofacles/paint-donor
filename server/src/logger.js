@@ -1,22 +1,23 @@
-const config = require('../config');
-const winston = require('winston');
+const pd_config = require('../config');
+const { createLogger, config, format, transports } = require('winston');
 
-const logger = winston.createLogger({
+require('winston-mongodb');
+
+const logger = createLogger({
   level: 'info',
-  levels: winston.config.npm.levels,
-  format: winston.format.json(),
-  //   defaultMeta: { service: "user-service" },
+  levels: config.npm.levels,
+  format: format.json(),
   transports: [
-    //
-    // - Write to all logs with level `info` and below to `combined.log`
-    // - Write all logs error (and below) to `error.log`.
-    //
-    new winston.transports.File({
-      filename: `${config.logFolder}/error.log`,
+    new transports.File({
+      filename: `${pd_config.logFolder}/error.log`,
       level: 'error',
     }),
-    new winston.transports.File({
-      filename: `${config.logFolder}/combined.log`,
+    new transports.MongoDB({
+      collection: 'log',
+      db: `mongodb://${pd_config.options.user}:${pd_config.options.pass}@localhost:27017/PaintChip`,
+      name: 'error-mongo',
+      handleExceptions: true,
+      level: 'info',
     }),
   ],
 });

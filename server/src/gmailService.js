@@ -72,7 +72,17 @@ function emailDonorToSignalInterest(donorEmail, brand, name) {
 
   try {
     smtpTransport.sendMail(mailOptions, (error, response) => {
-      error ? Logger.error(error) : Logger.info(response);
+      error
+        ? Logger.error(
+            `Errored out trying to smtpTransport.sendMail in emailDonorToSignalInterest!: ${JSON.stringify(
+              error
+            )}. response ${JSON.stringify(response)}`
+          )
+        : Logger.info(
+            `emailDonorToSignalInterest smtpTransport.sendMail success: ${JSON.stringify(
+              response
+            )}${brand} ${name}}`
+          );
       smtpTransport.close();
     });
   } catch (err) {

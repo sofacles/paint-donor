@@ -68,7 +68,7 @@ const SendMailForm = (props) => {
       fromEmail: fields,
       paint: paint,
     }).then((res) => {
-      if (res.data.fakeEmailSent === true) {
+      if (res.data.emailSent === true) {
         setMailSent(true);
       }
     });

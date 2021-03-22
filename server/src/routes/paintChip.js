@@ -29,7 +29,7 @@ const addPaintCan = async (req, res) => {
     let newPath = path
       .resolve(req.file.destination, 'resized', image)
       .replace('.jpg', '.png');
-    Logger.info(`resized photo upload path: ${newPath}`);
+    Logger.verbose(`resized photo upload path: ${newPath}`);
     //I should figure out how to offload this work to another service
     try {
       await sharp(req.file.path).resize(256).png().toFile(newPath);
@@ -45,7 +45,6 @@ const addPaintCan = async (req, res) => {
 
   let result = 'unset';
   try {
-    Logger.info(JSON.stringify(paintObj));
     let paintChip = new PaintCan(paintObj);
     result = await paintChip.save();
   } catch (error) {
@@ -53,7 +52,7 @@ const addPaintCan = async (req, res) => {
   }
 
   if (result.errors) {
-    Logger.info(
+    Logger.error(
       'Saved paint without throwing, but there are errors:',
       JSON.stringify(result.errors)
     );

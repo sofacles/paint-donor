@@ -1,10 +1,10 @@
-const { Logger } = require("../logger");
-const path = require("path");
+const { Logger } = require('../logger');
+const path = require('path');
 
 const pageView = async (req, res) => {
-  const knownUrls = ["home", "browse", "colorPicker", "donate"];
-  if (!req.query["pg"] || knownUrls.indexOf(req.query["pg"]) === -1) {
-    Logger.error(
+  const knownUrls = ['home', 'browse', 'colorPicker', 'donate'];
+  if (!req.query['pg'] || knownUrls.indexOf(req.query['pg']) === -1) {
+    Logger.warn(
       `Somebody is requesting something with a weird qs: ${JSON.stringify(
         req.query
       )}`
@@ -13,12 +13,12 @@ const pageView = async (req, res) => {
     return;
   }
 
-  const logMsg = `${req.query["pg"]} requested: ${new Date()} from: ${
+  const logMsg = `${req.query['pg']} requested: ${new Date()} from: ${
     req.connection.remoteAddress
-  } Fwd4: ${req.headers["x-forwarded-for"]}`;
-  Logger.info(logMsg);
-  res.setHeader("Content-Type", "image/png");
-  res.sendFile(path.join(__dirname, "../../images/1x1.png"));
+  } Fwd4: ${req.headers['x-forwarded-for']}`;
+  Logger.verbose(logMsg);
+  res.setHeader('Content-Type', 'image/png');
+  res.sendFile(path.join(__dirname, '../../images/1x1.png'));
 };
 
 module.exports = pageView;
