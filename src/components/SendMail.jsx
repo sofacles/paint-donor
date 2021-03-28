@@ -7,7 +7,7 @@ import Axios from 'axios';
 
 import Closed from './Closed';
 
-const querystring = require('querystring');
+import querystring from 'querystring';
 
 const SendMailForm = (props) => {
   debugger;

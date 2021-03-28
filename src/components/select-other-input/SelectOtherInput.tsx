@@ -58,7 +58,7 @@ const SelectOtherInput = ({
         onNewValue(customTextVal);
     };
 
-    let controlToShow = showCustomInput ? (
+    const controlToShow = showCustomInput ? (
         <div>
             <label style={spaceRight}>{label}</label>
             <input
@@ -82,7 +82,7 @@ const SelectOtherInput = ({
                 }}
             />
             <button
-                onClick={(e) => {
+                onClick={() => {
                     customTextHelper();
                 }}
             >

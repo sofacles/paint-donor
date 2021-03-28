@@ -13,8 +13,8 @@ import { RgbIcon } from './RgbIcon';
 import UseForm from './UseForm';
 import ValidationRulesObj from './PaintFormValidationRules';
 
-const uuid = require('uuid/v4');
-const querystring = require('querystring');
+import uuid from 'uuid/v4';
+import querystring from 'querystring';
 
 const GiveAwayPaint = (props) => {
   const onValidationSuccess = async (fields) => {
