@@ -3,6 +3,7 @@ module.exports = {
     extends: [
         'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
         'prettier',
+        //'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
     ],
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
@@ -16,15 +17,15 @@ module.exports = {
         // e.g. "@typescript-eslint/explicit-function-return-type": "off",
         '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
-    overrides: [
-        {
-            // enable the rule specifically for TypeScript files
-            files: ['*.ts', '*.tsx'],
-            rules: {
-                '@typescript-eslint/explicit-module-boundary-types': ['error'],
-            },
-        },
-    ],
+    // overrides: [
+    //     {
+    //         // enable the rule specifically for TypeScript files
+    //         files: ['*.ts', '*.tsx'],
+    //         rules: {
+    //             '@typescript-eslint/explicit-module-boundary-types': ['error'],
+    //         },
+    //     },
+    // ],
     settings: {
         react: {
             version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use

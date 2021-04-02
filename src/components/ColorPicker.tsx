@@ -6,18 +6,25 @@ import { ThirdColorContext } from './ThirdColor/ThirdColorContext';
 import { TwoDotAxisLabel } from './TwoDotAxisLabel';
 import OppositeColor from '../OppositeColor';
 
-const ColorPicker = (props) => {
+import CSS from 'csstype';
+
+interface ColorPickerProps {
+  onColorChosen: (color: string) => void
+}
+
+const ColorPicker: React.FC = (props: ColorPickerProps) => {
   const COLOR_MAX = 15;
   const [blueValue] = useContext(ThirdColorContext);
 
   // Each row will have all the possible values of green for the given value of red
-  const rows = [];
+  const rows: HTMLDivElement[] = [];
   const onNewValue = (color) => {
     props.onColorChosen(color);
   };
 
+
   for (let rValue = COLOR_MAX; rValue >= 0; rValue--) {
-    let cells = [];
+    const cells: typeof ColorPixel[] = [];
     for (let gValue = 0; gValue <= COLOR_MAX; gValue++) {
       cells.push(
         <ColorPixel
@@ -36,7 +43,7 @@ const ColorPicker = (props) => {
     );
   }
 
-  let selectedColorStyle = {
+  const selectedColorStyle: CSS.Properties = {
     backgroundColor: '#' + blueValue.selectedHexValue,
     color: '#' + OppositeColor(blueValue.selectedHexValue),
   };

@@ -38,10 +38,7 @@ const GiveAwayPaint = (props) => {
       });
   };
 
-  const { setField, blurField, errors, handleSubmit } = UseForm(
-    onValidationSuccess,
-    ValidationRulesObj
-  );
+  const { setField, blurField, errors, handleSubmit } = UseForm(onValidationSuccess, ValidationRulesObj);
   const [paintPosted, setPaintPosted] = useState(false);
   const onColorSelected = (color) => {
     setField({
@@ -52,9 +49,7 @@ const GiveAwayPaint = (props) => {
     });
   };
   if (props.readOnlyMode) {
-    return (
-      <Closed message="Sorry, 1lesscan.us is not accepting new paints right now." />
-    );
+    return <Closed message="Sorry, 1lesscan.us is not accepting new paints right now." />;
   }
 
   return paintPosted ? (
@@ -296,10 +291,7 @@ const GiveAwayPaint = (props) => {
 
         <div>
           Icons made by{' '}
-          <a
-            href="https://www.flaticon.com/authors/roundicons"
-            title="Roundicons"
-          >
+          <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">
             Roundicons
           </a>{' '}
           from{' '}
