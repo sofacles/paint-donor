@@ -16,7 +16,7 @@ interface mprops {
     id?: string;
     okText?: string;
 }
-const SelectOtherInput = ({
+const SelectOtherInput: React.FC = ({
     onNewValue,
     onBlur,
     initialValues,

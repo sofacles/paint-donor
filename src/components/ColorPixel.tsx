@@ -3,6 +3,8 @@ import '../App.css';
 import { ThirdColorContext } from './ThirdColor/ThirdColorContext';
 import OppositeColor from '../OppositeColor';
 
+import CSS from 'csstype';
+
 const HexValues = [
   '0',
   '1',
@@ -22,10 +24,15 @@ const HexValues = [
   'F',
 ];
 
-const ColorPixel = (props) => {
+type ColorPixelProps = {
+  r: string, g: string, b: string,
+  updateSelectedValue: (hexValue: string) => void
+}
+
+const ColorPixel: React.FC = (props: ColorPixelProps) => {
   const hexValue = HexValues[props.r] + HexValues[props.g] + HexValues[props.b];
   const [blueValue, blueValueSet] = useContext(ThirdColorContext);
-  let style = {
+  const style: CSS.Properties = {
     backgroundColor: '#' + hexValue,
     border: `1px solid #${hexValue}`,
   };
@@ -37,7 +44,7 @@ const ColorPixel = (props) => {
   return (
     <div
       className="color-pixel"
-      onClick={(evt) => {
+      onClick={() => {
         blueValueSet({ ...blueValue, selectedHexValue: hexValue });
         props.updateSelectedValue(hexValue);
       }}
