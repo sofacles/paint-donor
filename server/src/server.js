@@ -10,6 +10,7 @@ const pageViewRoute = require('./routes/pageView');
 const confirmEmailRoute = require('./routes/confirmEmail');
 const paintAdminRoute = require('./routes/admin/PaintCan');
 const withAuth = require('./routes/admin/authMiddleware');
+const pingRoute = require('./routes/ping');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -52,12 +53,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/healthcheck', healthCheckRoute.healthCheck);
 app.get('/api/paints/', paintChipRoute.getPaints);
-app.post(
-  '/api/paints/',
-  upload.single('imageData'),
-  paintChipRoute.addPaintCan
-);
+app.post('/api/paints/', upload.single('imageData'), paintChipRoute.addPaintCan);
 app.post('/api/mail', emailRoute.sendMail);
+app.post('/api/ping', pingRoute.postPing);
 app.post('/api/oauth2callback', oauthCallbackRoute.oauth2callback);
 app.get('/api/pageview', pageViewRoute);
 app.post('/api/confirm_email', confirmEmailRoute);

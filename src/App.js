@@ -10,65 +10,68 @@ import { ConfirmEmailResult } from './components/ConfirmEmailResult';
 import PaintChipAdmin from './components/admin/ActivePaints';
 import AdminLogin from './components/admin/Login';
 import SendMail from './components/SendMail';
+import SendPing from './components/SendPing';
 import 'normalize.css';
 import './App.css';
 import RedirectIfNoToken from './components/admin/RedirectIfNoToken';
 
 function App() {
-    const chickenSwitchOn = false;
-    return (
-        <Router>
-            <div className="App">
-                <Switch>
-                    <Route
-                        exact
-                        path="/"
-                        render={(routeProps) => <BrowsePaint {...routeProps} readOnlyMode={chickenSwitchOn} />}
-                    />
-                    <Route
-                        exact
-                        path="/browsePaint"
-                        render={(routeProps) => <BrowsePaint {...routeProps} readOnlyMode={chickenSwitchOn} />}
-                    />
-                    <Route exact path="/home">
-                        <Home />
-                    </Route>
-                    <Route
-                        exact
-                        path="/giveawaypaint"
-                        render={(routeProps) => {
-                            return <GiveAwayPaint {...routeProps} readOnlyMode={chickenSwitchOn} />;
-                        }}
-                    />
-                    <Route
-                        exact
-                        path="/sendMail"
-                        render={(routeProps) => <SendMail {...routeProps} readOnlyMode={chickenSwitchOn} />}
-                    />
+  const chickenSwitchOn = false;
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={(routeProps) => <BrowsePaint {...routeProps} readOnlyMode={chickenSwitchOn} />}
+          />
+          <Route
+            exact
+            path="/browsePaint"
+            render={(routeProps) => <BrowsePaint {...routeProps} readOnlyMode={chickenSwitchOn} />}
+          />
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route
+            exact
+            path="/giveawaypaint"
+            render={(routeProps) => {
+              return <GiveAwayPaint {...routeProps} readOnlyMode={chickenSwitchOn} />;
+            }}
+          />
+          <Route
+            exact
+            path="/sendMail"
+            render={(routeProps) => <SendMail {...routeProps} readOnlyMode={chickenSwitchOn} />}
+          />
 
-                    <Route exact path="/thankyou">
-                        <ThankYou />
-                    </Route>
-                    <Route exact path="/thanksForMail">
-                        <ThanksForMail />
-                    </Route>
-                    <Route
-                        exact
-                        path="/confirm_email"
-                        render={(props) => <ConfirmEmail {...props} readOnlyMode={chickenSwitchOn} />}
-                    />
-                    <Route exact path="/confirmEmailResult" render={(props) => <ConfirmEmailResult {...props} />} />
-                    <RedirectIfNoToken path="/admin/active-paints">
-                        <PaintChipAdmin />
-                    </RedirectIfNoToken>
-                    <Route exact path="/admin/login">
-                        <AdminLogin />
-                    </Route>
-                </Switch>
-            </div>
-            <div id="modal-root"></div>
-        </Router>
-    );
+          <Route exact path="/sendPost" render={(routeProps) => <SendPing {...routeProps} />} />
+
+          <Route exact path="/thankyou">
+            <ThankYou />
+          </Route>
+          <Route exact path="/thanksForMail">
+            <ThanksForMail />
+          </Route>
+          <Route
+            exact
+            path="/confirm_email"
+            render={(props) => <ConfirmEmail {...props} readOnlyMode={chickenSwitchOn} />}
+          />
+          <Route exact path="/confirmEmailResult" render={(props) => <ConfirmEmailResult {...props} />} />
+          <RedirectIfNoToken path="/admin/active-paints">
+            <PaintChipAdmin />
+          </RedirectIfNoToken>
+          <Route exact path="/admin/login">
+            <AdminLogin />
+          </Route>
+        </Switch>
+      </div>
+      <div id="modal-root"></div>
+    </Router>
+  );
 }
 
 export default App;

@@ -44,9 +44,7 @@ const UseForm = (submitCallback, validationRules) => {
       if (!atLeastOneItemExistsInOneOf) {
         errors = {
           ...errors,
-          atLeastOne: `Please provide at least one of ${validationMap.oneOf.join(
-            ', '
-          )}`,
+          atLeastOne: `Please provide at least one of ${validationMap.oneOf.join(', ')}`,
         };
       }
     }
@@ -59,17 +57,9 @@ const UseForm = (submitCallback, validationRules) => {
     if (validationMap.needToMatch) {
       let firstFieldThatNeedsToMatch = validationMap.needToMatch[0];
       //If they make changes in the confirmEmail field before the email field is touched, no error
-      if (
-        fields[firstFieldThatNeedsToMatch] &&
-        fields[firstFieldThatNeedsToMatch].length > 0
-      ) {
-        if (
-          fields[validationMap.needToMatch[1]] !==
-          fields[firstFieldThatNeedsToMatch]
-        ) {
-          errors[
-            validationMap.needToMatch[1]
-          ] = `email and confirm email need to match `;
+      if (fields[firstFieldThatNeedsToMatch] && fields[firstFieldThatNeedsToMatch].length > 0) {
+        if (fields[validationMap.needToMatch[1]] !== fields[firstFieldThatNeedsToMatch]) {
+          errors[validationMap.needToMatch[1]] = `email and confirm email need to match `;
         }
       }
     }
@@ -110,6 +100,7 @@ const UseForm = (submitCallback, validationRules) => {
     let formErrors = validateAll(fields);
     setErrors(formErrors);
     if (Object.keys(formErrors).length === 0) {
+      console.log('about to call the submitCallback **');
       await submitCallback(fields);
     }
   };
