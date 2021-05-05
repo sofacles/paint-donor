@@ -100,7 +100,6 @@ const UseForm = (submitCallback, validationRules) => {
     let formErrors = validateAll(fields);
     setErrors(formErrors);
     if (Object.keys(formErrors).length === 0) {
-      console.log('about to call the submitCallback **');
       await submitCallback(fields);
     }
   };

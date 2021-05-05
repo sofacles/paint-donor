@@ -18,16 +18,14 @@ function renderWithRouter(ui, { route = '/', history = createMemoryHistory({ ini
 }
 
 function renderWithBrowserRouter(ui, { route = '/' } = {}) {
-  return {
-    ...render(
-      <BrowserRouter>
-        <Route path={`/${route}`}>
-          <div data-testid="thankYou">The route you're redirected to</div>
-        </Route>
-        {ui}
-      </BrowserRouter>,
-    ),
-  };
+  return render(
+    <BrowserRouter>
+      <Route path={`/${route}`}>
+        <div data-testid={route}>The route you're redirected to</div>
+      </Route>
+      {ui}
+    </BrowserRouter>,
+  );
 
   //hat's off to: https://dev.to/iwazaru/how-to-test-react-router-redirection-with-testing-library-3i36
 }
