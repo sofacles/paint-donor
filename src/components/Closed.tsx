@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 interface ClosedProps {
-  message: string
+  message?: string
 }
 const Closed = (props: ClosedProps) => {
   return (

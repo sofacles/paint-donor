@@ -4,7 +4,12 @@ import { Redirect } from 'react-router-dom';
 
 import Closed from './Closed';
 
-const ConfirmEmail = (props) => {
+interface ConfirmEmailProps {
+  location: string,
+  search: string,
+  readOnlyMode: boolean,
+}
+const ConfirmEmail: React.FC<ConfirmEmailProps> = (props: ConfirmEmailProps) => {
   const loc = props.location;
   const [emailConfirmed, setEmailConfirmed] = useState(false);
   const [statusMessage, setStatusMessage] = useState('confirming...');
@@ -12,7 +17,6 @@ const ConfirmEmail = (props) => {
     axios
       .post(`/api/confirm_email${loc.search}`)
       .then((res) => {
-        console.log('inside the then of my axios post.. ******');
         if (res.data.confirmationResult === 'emailConfirmed') {
           setEmailConfirmed(true);
         } else {
