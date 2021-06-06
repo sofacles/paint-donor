@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { createElement, useContext } from 'react';
 import '../App.css';
-import { ColorPixel } from './ColorPixel';
+import { ColorPixel, ColorPixelProps } from './ColorPixel';
 import ThirdColorControl from './ThirdColor/ThirdColorControl';
 import { ThirdColorContext } from './ThirdColor/ThirdColorContext';
 import { TwoDotAxisLabel } from './TwoDotAxisLabel';
@@ -12,19 +12,19 @@ interface ColorPickerProps {
   onColorChosen: (color: string) => void
 }
 
-const ColorPicker: React.FC = (props: ColorPickerProps) => {
+const ColorPicker: React.FC<ColorPickerProps> = (props: ColorPickerProps) => {
   const COLOR_MAX = 15;
   const [blueValue] = useContext(ThirdColorContext);
 
   // Each row will have all the possible values of green for the given value of red
-  const rows: HTMLDivElement[] = [];
-  const onNewValue = (color) => {
+  const rows: React.ReactElement[] = [];
+  const onNewValue = (color: string) => {
     props.onColorChosen(color);
   };
 
 
   for (let rValue = COLOR_MAX; rValue >= 0; rValue--) {
-    const cells: typeof ColorPixel[] = [];
+    const cells: React.ReactElement<ColorPixelProps>[] = [];
     for (let gValue = 0; gValue <= COLOR_MAX; gValue++) {
       cells.push(
         <ColorPixel

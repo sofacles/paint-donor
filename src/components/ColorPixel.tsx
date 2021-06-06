@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import '../App.css';
 import { ThirdColorContext } from './ThirdColor/ThirdColorContext';
 import OppositeColor from '../OppositeColor';
 
 import CSS from 'csstype';
+import '../App.css';
 
 const HexValues = [
   '0',
@@ -24,12 +24,9 @@ const HexValues = [
   'F',
 ];
 
-type ColorPixelProps = {
-  r: string, g: string, b: string,
-  updateSelectedValue: (hexValue: string) => void
-}
 
-const ColorPixel: React.FC = (props: ColorPixelProps) => {
+
+const ColorPixel: React.FC<ColorPixelProps> = (props: ColorPixelProps) => {
   const hexValue = HexValues[props.r] + HexValues[props.g] + HexValues[props.b];
   const [blueValue, blueValueSet] = useContext(ThirdColorContext);
   const style: CSS.Properties = {
@@ -40,6 +37,8 @@ const ColorPixel: React.FC = (props: ColorPixelProps) => {
   if (blueValue.selectedHexValue === hexValue + '') {
     style.border = `1px solid #${OppositeColor(hexValue)}`;
   }
+
+
 
   return (
     <div
@@ -53,4 +52,9 @@ const ColorPixel: React.FC = (props: ColorPixelProps) => {
   );
 };
 
+
 export { ColorPixel };
+export type ColorPixelProps = {
+  r: number, g: number, b: number,
+  updateSelectedValue: (a: string) => void
+}
