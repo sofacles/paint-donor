@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import { getNodeText, getByTitle } from '@testing-library/dom';
-import ColorPicker from './ColorPicker.tsx.orig';
+import ColorPicker from './ColorPicker';
 import { ThirdColorProvider } from './ThirdColor/ThirdColorContext';
 
 afterEach(cleanup);
@@ -9,7 +9,7 @@ describe('Color Picker', () => {
   it('starts out on gray', () => {
     const { container } = render(
       <ThirdColorProvider>
-        <ColorPicker onColorChosen={(c) => {}} />
+        <ColorPicker onColorChosen={(c) => { }} />
       </ThirdColorProvider>,
     );
     const selectedColor = getNodeText(container.querySelector('.selected-color'));
@@ -69,7 +69,7 @@ describe('Color Picker', () => {
   it('updates the selected color just by clicking on the up arrow', () => {
     const { container } = render(
       <ThirdColorProvider>
-        <ColorPicker onColorChosen={(c) => {}} />
+        <ColorPicker onColorChosen={(c) => { }} />
       </ThirdColorProvider>,
     );
 

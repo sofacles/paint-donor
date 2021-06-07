@@ -6,22 +6,19 @@ const RgbDisplay = (props) => {
     marginLeft: '10px',
   };
 
-  const [thirdColorContext, setThirdColorContext] = useContext(
-    ThirdColorContext
-  );
+  const [thirdColorContext, setThirdColorContext] = useContext(ThirdColorContext);
 
   return (
     <span style={spanStyle}>
       <label htmlFor="rgbDisplay" className="hidden">
-        Enter your best guess for the red, blue, green values for your paint,
-        like #FF00000 for red. Or, you can skip ahead and take a picture of
-        something that you painted with this color
+        Enter your best guess for the red, blue, green values for your paint, like #FF00000 for red. Or, you can skip
+        ahead and take a picture of something that you painted with this color
       </label>
       <input
         data-testid="rgbDisplay"
         id="rgbDisplay"
         value={thirdColorContext.selectedHexValue}
-        onFocus={(e) => {
+        onFocus={() => {
           setThirdColorContext({ ...thirdColorContext, selectedHexValue: '' });
         }}
         onChange={(e) => {

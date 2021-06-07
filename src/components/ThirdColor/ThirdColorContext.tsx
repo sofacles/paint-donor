@@ -1,4 +1,4 @@
-import React, { createContext, useState, Dispatch, SetStateAction, PropsWithChildren } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction } from 'react';
 
 export type ThirdColorInfo = {
   thirdColorLevel: number;

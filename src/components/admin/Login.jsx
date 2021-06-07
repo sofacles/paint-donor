@@ -4,7 +4,7 @@ import UseForm from '../UseForm';
 import formRules from './AdminFormRules';
 const msecInHour = 60 * 60 * 1000;
 
-const AdminLogin = (props) => {
+const AdminLogin = () => {
   let history = useHistory();
   const [loginErrors, setLoginErrors] = useState(false);
   const sendLoginInfo = async (fields) => {
@@ -14,24 +14,18 @@ const AdminLogin = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(fields),
-    }).catch((e) => {
+    }).catch(() => {
       errors.loginFailed = true;
     });
 
     if (response.ok) {
-      localStorage.setItem(
-        'adminTokenExpires',
-        new Date().valueOf() + msecInHour
-      );
+      localStorage.setItem('adminTokenExpires', new Date().valueOf() + msecInHour);
       history.goBack();
     } else {
       setLoginErrors(true);
     }
   };
-  const { setField, blurField, errors, handleSubmit } = UseForm(
-    sendLoginInfo,
-    formRules
-  );
+  const { setField, blurField, errors, handleSubmit } = UseForm(sendLoginInfo, formRules);
 
   return (
     <form onSubmit={(e) => handleSubmit(e)} data-testid="redirect">
@@ -47,9 +41,7 @@ const AdminLogin = (props) => {
         <input type="submit" onSubmit={handleSubmit} value="log in" />
       </div>
       <div>
-        {errors.userName || errors.password
-          ? 'Username and password are required'
-          : ''}
+        {errors.userName || errors.password ? 'Username and password are required' : ''}
         {loginErrors ? 'Login failed, try again' : ''}
       </div>
     </form>

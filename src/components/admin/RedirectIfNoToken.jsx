@@ -5,20 +5,13 @@ const RedirectIfNoToken = ({ children, ...rest }) => {
   let history = useHistory();
   const tokenExpiry = localStorage.getItem('adminTokenExpires');
   const currentMsec = new Date().valueOf();
-  const probablyAuthorized =
-    tokenExpiry !== null && Number.parseInt(tokenExpiry) > currentMsec;
+  const probablyAuthorized = tokenExpiry !== null && Number.parseInt(tokenExpiry) > currentMsec;
 
   if (!probablyAuthorized) {
     history.push(rest.path);
   }
 
-  return (
-    <Route
-      render={({ location }) =>
-        probablyAuthorized ? children : <Redirect to="/admin/login" />
-      }
-    />
-  );
+  return <Route render={() => (probablyAuthorized ? children : <Redirect to="/admin/login" />)} />;
 };
 
 export default RedirectIfNoToken;

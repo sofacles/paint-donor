@@ -24,6 +24,7 @@ const ConfirmEmail: React.FC<ConfirmEmailProps> = (props: ConfirmEmailProps) => 
         }
       })
       .catch((err) => {
+        console.error(err);
         debugger;
       });
   }, [loc.search]);

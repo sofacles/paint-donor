@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import Axios from 'axios';
 
-const SendPing = (props) => {
+const SendPing = () => {
   debugger;
 
   const [responseReceived, setResponseReceived] = useState(false);
@@ -14,7 +14,7 @@ const SendPing = (props) => {
     <>
       <div
         data-testid="clicker"
-        onClick={(e) => {
+        onClick={() => {
           Axios.post(`/api/ping/?newThing=1`, {
             favoriteFruit: 'plum',
             age: 34,

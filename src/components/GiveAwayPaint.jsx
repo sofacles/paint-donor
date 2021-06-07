@@ -34,6 +34,7 @@ const GiveAwayPaint = (props) => {
         }
       })
       .catch((err) => {
+        console.error(err);
         debugger;
       });
   };
@@ -227,7 +228,7 @@ const GiveAwayPaint = (props) => {
               toggle={(show) => (
                 <span
                   className="emphasize-on-hover"
-                  onClick={(e) => {
+                  onClick={() => {
                     show();
                   }}
                 >
@@ -253,7 +254,7 @@ const GiveAwayPaint = (props) => {
             toggle={(show) => (
               <p>
                 <RgbIcon
-                  onClick={(e) => {
+                  onClick={() => {
                     show();
                   }}
                 ></RgbIcon>
