@@ -6,7 +6,7 @@ import { ToggleContent } from './ToggleContent';
 import { ThirdColorProvider } from './ThirdColor/ThirdColorContext';
 import SelectOtherInput from './select-other-input/SelectOtherInput';
 import Closed from './Closed';
-import ColorPicker from './ColorPicker.tsx';
+import ColorPicker from './ColorPicker';
 import Modal from './Modal';
 import { RgbDisplay } from './RgbDisplay';
 import { RgbIcon } from './RgbIcon';

@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
-const ArrowButton = ({ onClick, direction = 'up' }) => {
+export type ArrowButtonProps = {
+  direction: 'up' | 'down'
+};
+
+const ArrowButton: React.FC<ArrowButtonProps> = ({ direction = 'up' }) => {
   const arrowButtonStyle = {
     height: '35px',
     width: '12px',
   };
-
-  let rotation = 180.1;
-  if (direction === 'down') {
-    rotation = 0.1;
-  }
   // Adding .1 to rotation to workaround Safari rotation bug:  https://stackoverflow.com/questions/40363916/svg-transform-rotate-by-90-180-or-270-degrees-not-working-on-circle-in-safari-i
+  const rotation = direction === 'down' ? 0.1 : 180.1;
   return (
     <svg
       version="1.1"
@@ -24,8 +24,7 @@ const ArrowButton = ({ onClick, direction = 'up' }) => {
       fill="#00f"
       preserveAspectRatio="none"
       transform={`rotate(${rotation})`}
-      style={arrowButtonStyle}
-      onClick={onClick}
+      style={arrowButtonStyle as CSSProperties}
       xmlSpace="preserve"
     >
       <g>

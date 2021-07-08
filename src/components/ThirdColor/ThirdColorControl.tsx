@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React, { SyntheticEvent, useContext } from 'react';
 import { ThirdColorContext } from './ThirdColorContext';
 import Arrow from './Arrow';
 
-const ThirdColorControl = () => {
+const ThirdColorControl: React.FC = () => {
   const [blueValue, setBlueValue] = useContext(ThirdColorContext);
 
   const MAX_COLOR = 15;
-  const upClick = (event) => {
+  const upClick = (event: SyntheticEvent) => {
     event.preventDefault();
     setBlueValue((b) => {
       if (b.thirdColorLevel < MAX_COLOR) {
         const oldBlu = parseInt(b.selectedHexValue[2], 16);
-        let newBlu = oldBlu + 1;
+        const newBlu = oldBlu + 1;
 
         return {
           ...blueValue,
@@ -27,12 +27,12 @@ const ThirdColorControl = () => {
     return false;
   };
 
-  const downClick = (event) => {
+  const downClick = (event: SyntheticEvent) => {
     event.preventDefault();
     setBlueValue((b) => {
       if (b.thirdColorLevel > 0) {
         const oldBlu = parseInt(b.selectedHexValue[2], 16);
-        let newBlu = oldBlu - 1;
+        const newBlu = oldBlu - 1;
 
         return {
           ...blueValue,
@@ -59,7 +59,7 @@ const ThirdColorControl = () => {
   };
 
   return (
-    <div style={sliderContainerStyle}>
+    <div style={sliderContainerStyle as React.CSSProperties}>
       <div title="increase blue" onMouseDown={upClick} onTouchStart={upClick}>
         <Arrow direction="up" />
       </div>
