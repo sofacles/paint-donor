@@ -8,22 +8,23 @@ interface eventArgs {
     };
 }
 
-interface mprops {
-    onNewValue: (newValue: string) => void;
-    onBlur: (event: eventArgs) => void;
+interface SelectOtherInputProps {
+    id?: string;
     initialValues: string[];
     label: string;
-    id?: string;
     okText?: string;
+    onNewValue: (newValue: string) => void;
+    onBlur: (event: eventArgs) => void;
+
 }
-const SelectOtherInput: React.FC<mprops> = ({
+const SelectOtherInput: React.FC<SelectOtherInputProps> = ({
     onNewValue,
     onBlur,
     initialValues,
     label,
     id = 'gloriousControl',
-    okText = 'ok',
-}: mprops) => {
+    okText = 'OK',
+}: SelectOtherInputProps) => {
     const [showCustomInput, setShowCustomInput] = useState(false);
     const [customTextVal, setCustomTextVal] = useState('');
     const [
@@ -95,7 +96,6 @@ const SelectOtherInput: React.FC<mprops> = ({
                 {label}
             </label>
             <FlexSelect
-                stringsToShow={stringsImShowing}
                 selectedValue={desiredSelectedValueOfFlexSelect}
                 id={id}
                 onChange={(v: string) => {
@@ -110,7 +110,7 @@ const SelectOtherInput: React.FC<mprops> = ({
                     setShowCustomInput(showInputBox);
                     if (showInputBox === true) setCustomTextVal('');
                 }}
-                StringsToShow={stringsImShowing}
+                stringsToShow={stringsImShowing}
             />
         </>
     );
