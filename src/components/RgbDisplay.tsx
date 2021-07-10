@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
+import React, { CSSProperties, useContext } from 'react';
 import { ThirdColorContext } from './ThirdColor/ThirdColorContext';
 
-const RgbDisplay = (props) => {
-  let spanStyle = {
+export type RgbDisplayProps = {
+  onColorChosen: (a: string) => void
+}
+
+const RgbDisplay: React.FC<RgbDisplayProps> = (props: RgbDisplayProps) => {
+  const spanStyle: CSSProperties = {
     marginLeft: '10px',
   };
 

@@ -14,20 +14,23 @@ const ConfirmEmail: React.FC<ConfirmEmailProps> = (props: ConfirmEmailProps) => 
   const [emailConfirmed, setEmailConfirmed] = useState(false);
   const [statusMessage, setStatusMessage] = useState('confirming...');
   useEffect(() => {
-    axios
-      .post(`/api/confirm_email${loc.search}`)
-      .then((res) => {
-        if (res.data.confirmationResult === 'emailConfirmed') {
-          setEmailConfirmed(true);
-        } else {
-          setStatusMessage(res.data.confirmationResult);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        debugger;
-      });
-  }, [loc.search]);
+    if (!props.readOnlyMode) {
+      axios
+        .post(`/api/confirm_email${loc.search}`)
+        .then((res) => {
+          if (res.data.confirmationResult === 'emailConfirmed') {
+            setEmailConfirmed(true);
+          } else {
+            setStatusMessage(res.data.confirmationResult);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          debugger;
+        });
+    }
+
+  }, [loc.search, props.readOnlyMode]);
 
   if (props.readOnlyMode) {
     return <Closed />;

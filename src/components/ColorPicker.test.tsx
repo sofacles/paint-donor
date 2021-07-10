@@ -12,8 +12,11 @@ describe('Color Picker', () => {
         <ColorPicker onColorChosen={(c) => { }} />
       </ThirdColorProvider>,
     );
-    const selectedColor = getNodeText(container.querySelector('.selected-color'));
-    expect(selectedColor).toBe('#777');
+    if (container && container.querySelector('.selected-color')) {
+      const selectedColor = getNodeText(container.querySelector('.selected-color') as HTMLElement);
+      expect(selectedColor).toBe('#777');
+    }
+
   });
 
   it('updates the selected color', () => {
@@ -30,7 +33,7 @@ describe('Color Picker', () => {
     const selectedColorElement = container.querySelector('.selected-color');
     fireEvent.click(container.querySelectorAll('.color-pixel')[8]);
 
-    const selectedColor = getNodeText(selectedColorElement);
+    const selectedColor = getNodeText(selectedColorElement as HTMLElement);
     expect(selectedColor).toBe('#F87');
 
     expect(colorPassedToCallback).toBe('F87');
@@ -59,7 +62,7 @@ describe('Color Picker', () => {
 
     fireEvent.click(document.querySelectorAll('.color-pixel')[8]);
 
-    const selectedColor = getNodeText(selectedColorElement);
+    const selectedColor = getNodeText(selectedColorElement as HTMLElement);
     // expect the blue component to be half way to max (8)
     expect(selectedColor).toBe('#F8F');
 
@@ -73,8 +76,8 @@ describe('Color Picker', () => {
       </ThirdColorProvider>,
     );
 
-    fireEvent.mouseDown(container.querySelector("div [title='increase blue']"));
-    const selectedColor = getNodeText(container.querySelector('.selected-color'));
+    fireEvent.mouseDown(container.querySelector("div [title='increase blue']")!);
+    const selectedColor = getNodeText(container.querySelector('.selected-color') as HTMLElement);
 
     expect(selectedColor).toBe('#778');
   });

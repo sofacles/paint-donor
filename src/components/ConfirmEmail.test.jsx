@@ -23,8 +23,8 @@ describe('ConfirmEmail View', () => {
 
     render(
       <BrowserRouter>
-        <ConfirmEmail location={{ search: '' }} readOnlyMode={false} />;
-      </BrowserRouter>
+        <ConfirmEmail location={{ search: '' }} readOnlyMode={false} />
+      </BrowserRouter>,
     );
 
     expect(screen.queryByText(/confirming/)).toBeTruthy();
@@ -33,8 +33,8 @@ describe('ConfirmEmail View', () => {
   it('should not try to confirm email when readOnlyMode is true', async () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <ConfirmEmail location={{ search: '' }} readOnlyMode={true} />;
-      </BrowserRouter>
+        <ConfirmEmail location={{ search: '' }} readOnlyMode={true} />
+      </BrowserRouter>,
     );
 
     expect(getByTestId('closed-heading')).toBeTruthy();
